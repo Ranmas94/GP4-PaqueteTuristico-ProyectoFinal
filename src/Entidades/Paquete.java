@@ -17,6 +17,7 @@ public class Paquete {
     private Destino destino;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private int cantidadPasajeros;
     private double precioTotal;
     
     
@@ -27,7 +28,7 @@ public class Paquete {
     
     //Constructor con id
 
-    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin, double precioTotal) {
+    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, double precioTotal) {
         this.idPaquete = idPaquete;
         
         this.idEstadia = idEstadia;
@@ -37,12 +38,13 @@ public class Paquete {
         this.destino = destino;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.cantidadPasajeros = cantidadPasajeros;
         this.precioTotal = precioTotal;
     }
     
     //Constructor sin id
 
-    public Paquete( Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin, double precioTotal) {
+    public Paquete( Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, double precioTotal) {
        
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
@@ -51,6 +53,7 @@ public class Paquete {
         this.destino = destino;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.cantidadPasajeros = cantidadPasajeros;
         this.precioTotal = precioTotal;
     }
 
@@ -120,6 +123,17 @@ public class Paquete {
         this.fechaFin = fechaFin;
     }
 
+    public int getCantidadPasajeros() {
+        return cantidadPasajeros;
+    }
+
+    public void setCantidadPasajeros(int cantidadPasajeros) {
+        this.cantidadPasajeros = cantidadPasajeros;
+    }
+
+    
+    
+    
     public double getPrecioTotal() {
         return precioTotal;
     }
