@@ -15,15 +15,15 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String correo;
-    private List<String> telefonos;
+    private long telefono;
 
     // Constructor
-    public Cliente(int idCliente, String nombre, String apellido, String correo, List<String> telefonos) {
+    public Cliente(int idCliente, String nombre, String apellido, String correo, long telefono) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.telefonos = telefonos;
+        this.telefono = telefono;
     }
 
     // Getters y Setters
@@ -60,12 +60,12 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public List<String> getTelefonos() {
+    public long getTelefono() {
         return telefonos;
     }
 
-    public void setTelefonos(List<String> telefonos) {
-        this.telefonos = telefonos;
+    public void setTelefonos(long telefono) {
+        this.telefono = telefono;
     }
     
 
