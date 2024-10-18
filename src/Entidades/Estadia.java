@@ -15,7 +15,7 @@ public class Estadia {
     private Alojamiento idAlojamiento;
     private Date fechaCheckIn;
     private Date fechaCheckOut;
-    private double total; //dias
+    private double total; 
 
      // Constructor vacio
     public Estadia() {    
