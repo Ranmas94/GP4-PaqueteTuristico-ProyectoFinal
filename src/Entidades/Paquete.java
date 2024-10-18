@@ -2,8 +2,7 @@
 package Entidades;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -11,12 +10,11 @@ import java.util.List;
  */
 public class Paquete {
     private int idPaquete;
-    private List<Cliente> clientes;
     private Estadia idEstadia;
     private Pasaje idPasaje;
     private Menu idMenu;
-    private String origen;
-    private String destino;
+    private Destino origen;
+    private Destino destino;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private double precioTotal;
@@ -29,9 +27,9 @@ public class Paquete {
     
     //Constructor con id
 
-    public Paquete(int idPaquete, List<Cliente> clientes, Estadia idEstadia, Pasaje idPasaje, Menu idMenu, String origen, String destino, LocalDate fechaInicio, LocalDate fechaFin, double precioTotal) {
+    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin, double precioTotal) {
         this.idPaquete = idPaquete;
-        this.clientes = new ArrayList<>();
+        
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
         this.idMenu = idMenu;
@@ -44,8 +42,8 @@ public class Paquete {
     
     //Constructor sin id
 
-    public Paquete(List<Cliente> clientes, Estadia idEstadia, Pasaje idPasaje, Menu idMenu, String origen, String destino, LocalDate fechaInicio, LocalDate fechaFin, double precioTotal) {
-        this.clientes = new ArrayList<>();
+    public Paquete( Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin, double precioTotal) {
+       
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
         this.idMenu = idMenu;
@@ -65,13 +63,6 @@ public class Paquete {
         this.idPaquete = idPaquete;
     }
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
 
     public Estadia getIdEstadia() {
         return idEstadia;
@@ -97,19 +88,19 @@ public class Paquete {
         this.idMenu = idMenu;
     }
 
-    public String getOrigen() {
+    public Destino getOrigen() {
         return origen;
     }
 
-    public void setOrigen(String origen) {
+    public void setOrigen(Destino origen) {
         this.origen = origen;
     }
 
-    public String getDestino() {
+    public Destino getDestino() {
         return destino;
     }
 
-    public void setDestino(String destino) {
+    public void setDestino(Destino destino) {
         this.destino = destino;
     }
 
@@ -137,7 +128,7 @@ public class Paquete {
         this.precioTotal = precioTotal;
     }
 
-       //TO STRING SIN ARRAY DE CLIENTES, SOLO QUEREMOS LOS DETALLES CONCRETOS DEL PAQUETE
+       //TO STRING 
     @Override
     public String toString() {
         return "Paquete{" + "idPaquete=" + idPaquete + ", idEstadia=" + idEstadia + ", idPasaje=" + idPasaje + ", idMenu=" + idMenu + ", origen=" + origen + ", destino=" + destino + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioTotal=" + precioTotal + '}';

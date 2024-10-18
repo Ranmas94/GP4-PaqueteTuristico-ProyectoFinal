@@ -9,8 +9,16 @@ package Entidades;
  * @author Ranma
  */
 public class Menu {
+    
+    public enum tipoMenu{
+        SIN_PENSION, 
+        SOLO_DESAYUNO, 
+        MEDIA_PENSION, 
+        PENSION_COMPLETA;
+    };
+    
     private int idMenu;
-    private String tipo; // sin pension, solo desayuno, media pension, pension completa
+    private tipoMenu tipo; // sin pension, solo desayuno, media pension, pension completa
     private double porcentaje; // es el porcentaje que se le sumará a el precio final 
     //(sin pensión 0%, desayuno (+1%), media pensión (+2%))
 
@@ -20,14 +28,14 @@ public class Menu {
     }
 
     // Constructor
-    public Menu(int idMenu, String tipo, double porcentaje) {
+    public Menu(int idMenu, tipoMenu tipo, double porcentaje) {
         this.idMenu = idMenu;
         this.tipo = tipo;
     }
     
     //Constructor si id
 
-    public Menu(String tipo, double porcentaje) {
+    public Menu(tipoMenu tipo, double porcentaje) {
         this.tipo = tipo;
         this.porcentaje = porcentaje;
     }
@@ -42,11 +50,11 @@ public class Menu {
         this.idMenu = idMenu;
     }
 
-    public String getTipo() {
+    public tipoMenu getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(tipoMenu tipo) {
         this.tipo = tipo;
     }
 
