@@ -8,16 +8,31 @@ package Entidades;
  *
  * @author Ranma
  */
-public class Pasaje {
-    private int idPasaje;
-    private String tipo;
-    private double costo;
-    private String origen;
-    private String destino;
-    private String asiento;
 
+
+public class Pasaje {
+    
+    private enum tipoPasaje {
+    AVION,
+    COLECTIVO,
+    AUTO_COMPARTIDO,
+};
+    
+    private int idPasaje;
+    private tipoPasaje tipo;
+    private double costo;
+    private Destino origen;
+    private Destino destino;
+    private String asiento;
+    
+    //Constructor vacio
+
+    public Pasaje() {
+    }
+    
+    
     // Constructor
-    public Pasaje(int idPasaje, String tipo, double costo, String origen, String destino, String asiento) {
+    public Pasaje(int idPasaje, tipoPasaje tipo, double costo, Destino origen, Destino destino, String asiento) {
         this.idPasaje = idPasaje;
         this.tipo = tipo;
         this.costo = costo;
@@ -25,6 +40,17 @@ public class Pasaje {
         this.destino = destino;
         this.asiento = asiento;
     }
+    
+    //Constructor sin id
+
+    public Pasaje(tipoPasaje tipo, double costo, Destino origen, Destino destino, String asiento) {
+        this.tipo = tipo;
+        this.costo = costo;
+        this.origen = origen;
+        this.destino = destino;
+        this.asiento = asiento;
+    }
+    
 
     // Getters y Setters
 
@@ -36,11 +62,11 @@ public class Pasaje {
         this.idPasaje = idPasaje;
     }
 
-    public String getTipo() {
+    public tipoPasaje getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(tipoPasaje tipo) {
         this.tipo = tipo;
     }
 
@@ -52,19 +78,19 @@ public class Pasaje {
         this.costo = costo;
     }
 
-    public String getOrigen() {
+    public Destino getOrigen() {
         return origen;
     }
 
-    public void setOrigen(String origen) {
+    public void setOrigen(Destino origen) {
         this.origen = origen;
     }
 
-    public String getDestino() {
+    public Destino getDestino() {
         return destino;
     }
 
-    public void setDestino(String destino) {
+    public void setDestino(Destino destino) {
         this.destino = destino;
     }
 

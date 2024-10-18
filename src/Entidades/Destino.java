@@ -13,12 +13,26 @@ public class Destino {
     private String nombre;
     private String codigo; //Codigo SL san luis, BSAS buenos aires, etc
 
+       //Contructor vacio
+
+    public Destino() {
+    }
+    
+    
     // Constructor
     public Destino(int idDestino, String nombre, String codigo) {
         this.idDestino = idDestino;
         this.nombre = nombre;
         this.codigo = codigo;
     }
+    
+    //Contructor sin idDestino
+
+    public Destino(String nombre, String codigo) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+    }
+    
 
     // Getters y Setters
 

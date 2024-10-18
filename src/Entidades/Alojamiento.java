@@ -10,7 +10,7 @@ package Entidades;
  */
 public class Alojamiento {
     private int idAlojamiento;
-    private int idDestino;
+    private Destino idDestino;
     private String nombre;
     private String direccion;
     private int capacidad;
@@ -19,8 +19,14 @@ public class Alojamiento {
     private int banios;
     private double precioPorNoche;
 
+    //Constructor vacio
+
+    public Alojamiento() {
+    }
+    
+    
     // Constructor
-    public Alojamiento(int idAlojamiento, int idDestino, String nombre, String direccion, int capacidad,
+    public Alojamiento(int idAlojamiento, Destino idDestino, String nombre, String direccion, int capacidad,
                        int nroAmbientes, int camas, int banios, double precioPorNoche) {
         this.idAlojamiento = idAlojamiento;
         this.idDestino = idDestino;
@@ -32,6 +38,20 @@ public class Alojamiento {
         this.banios = banios;
         this.precioPorNoche = precioPorNoche;
     }
+    
+    //Constructor sin idAlojamiento
+    public Alojamiento(Destino idDestino, String nombre, String direccion, int capacidad, int nroAmbientes, int camas, int banios, double precioPorNoche) {
+        this.idDestino = idDestino;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.capacidad = capacidad;
+        this.nroAmbientes = nroAmbientes;
+        this.camas = camas;
+        this.banios = banios;
+        this.precioPorNoche = precioPorNoche;
+    }
+    
+    
 
     // Getters y Setters
 
@@ -43,11 +63,11 @@ public class Alojamiento {
         this.idAlojamiento = idAlojamiento;
     }
 
-    public int getIdDestino() {
+    public Destino getIdDestino() {
         return idDestino;
     }
 
-    public void setIdDestino(int idDestino) {
+    public void setIdDestino(Destino idDestino) {
         this.idDestino = idDestino;
     }
 
