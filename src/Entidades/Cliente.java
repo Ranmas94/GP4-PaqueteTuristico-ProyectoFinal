@@ -61,7 +61,7 @@ public class Cliente {
     }
 
     public long getTelefono() {
-        return telefonos;
+        return telefono;
     }
 
     public void setTelefonos(long telefono) {

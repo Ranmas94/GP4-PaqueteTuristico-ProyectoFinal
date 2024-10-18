@@ -12,6 +12,6 @@ public class ClienteData {
     //Guardar Cliente
     
     public void GuardarCliente(){
-        String sql = "INSERT INTO Cliente "
+        
     }
 }
