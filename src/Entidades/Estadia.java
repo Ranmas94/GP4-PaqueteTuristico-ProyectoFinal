@@ -12,19 +12,33 @@ import java.util.Date;
 
 public class Estadia {
     private int idEstadia;
-    private int idAlojamiento;
+    private Alojamiento idAlojamiento;
     private Date fechaCheckIn;
     private Date fechaCheckOut;
     private double total; //dias
 
+     // Constructor vacio
+    public Estadia() {    
+    }
+
     // Constructor
-    public Estadia(int idEstadia, int idAlojamiento, Date fechaCheckIn, Date fechaCheckOut) {
+    public Estadia(int idEstadia, Alojamiento idAlojamiento, Date fechaCheckIn, Date fechaCheckOut) {
         this.idEstadia = idEstadia;
         this.idAlojamiento = idAlojamiento;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
         this.total = calcularTotal();
     }
+    
+    //Contructor sin id
+
+    public Estadia(Alojamiento idAlojamiento, Date fechaCheckIn, Date fechaCheckOut, double total) {
+        this.idAlojamiento = idAlojamiento;
+        this.fechaCheckIn = fechaCheckIn;
+        this.fechaCheckOut = fechaCheckOut;
+        this.total = total;
+    }
+    
 
     // Metodo para calcular el total de dias que se queda
     private double calcularTotal() {
@@ -43,11 +57,11 @@ public class Estadia {
         this.idEstadia = idEstadia;
     }
 
-    public int getIdAlojamiento() {
+    public Alojamiento getIdAlojamiento() {
         return idAlojamiento;
     }
 
-    public void setIdAlojamiento(int idAlojamiento) {
+    public void setIdAlojamiento(Alojamiento idAlojamiento) {
         this.idAlojamiento = idAlojamiento;
     }
 

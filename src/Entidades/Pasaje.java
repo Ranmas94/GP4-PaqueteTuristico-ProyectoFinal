@@ -16,6 +16,12 @@ public class Pasaje {
     private String destino;
     private String asiento;
 
+    //Constructor vacio
+
+    public Pasaje() {
+    }
+    
+    
     // Constructor
     public Pasaje(int idPasaje, String tipo, double costo, String origen, String destino, String asiento) {
         this.idPasaje = idPasaje;
@@ -25,6 +31,17 @@ public class Pasaje {
         this.destino = destino;
         this.asiento = asiento;
     }
+    
+    //Constructor si id
+
+    public Pasaje(String tipo, double costo, String origen, String destino, String asiento) {
+        this.tipo = tipo;
+        this.costo = costo;
+        this.origen = origen;
+        this.destino = destino;
+        this.asiento = asiento;
+    }
+    
 
     // Getters y Setters
 

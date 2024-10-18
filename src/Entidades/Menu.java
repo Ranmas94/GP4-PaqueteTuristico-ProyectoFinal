@@ -14,12 +14,24 @@ public class Menu {
     private double porcentaje; // es el porcentaje que se le sumará a el precio final 
     //(sin pensión 0%, desayuno (+1%), media pensión (+2%))
 
+    
+     //Contructor vacio
+    public Menu() {
+    }
+
     // Constructor
     public Menu(int idMenu, String tipo, double porcentaje) {
         this.idMenu = idMenu;
         this.tipo = tipo;
-
     }
+    
+    //Constructor si id
+
+    public Menu(String tipo, double porcentaje) {
+        this.tipo = tipo;
+        this.porcentaje = porcentaje;
+    }
+    
     
     // Getters y Setters
     public int getIdMenu() {
