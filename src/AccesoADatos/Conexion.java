@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author Stefani Nair Escobar
  */
 public class Conexion {
-    private static final String URL="jdbc:mariadb://localhost:3306";
+    private static final String URL="jdbc:mariadb://localhost:3306/";
     private static final String DB="turismogp4.sql";
     private static final String USUARIO="root";
     private static final String PASSWORD="";
@@ -24,7 +24,7 @@ public class Conexion {
     if (connection == null) {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/turismogp4","root","" );
+            connection = DriverManager.getConnection(URL+DB,USUARIO,PASSWORD );
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse a la BD " + ex.getMessage());
         } catch (ClassNotFoundException ex) {

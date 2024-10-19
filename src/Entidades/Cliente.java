@@ -8,7 +8,6 @@ package Entidades;
  *
  * @author Ranma
  */
-import java.util.List;
 
 public class Cliente {
     private int idCliente;

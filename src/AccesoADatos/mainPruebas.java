@@ -8,7 +8,7 @@ import java.sql.Connection;
  *
  * @author Stefani Nair Escobar
  */
-public class GP4PaqueteTuristicoProyectoFinal {
+public class mainPruebas {
 
     
     public static void main(String[] args) {
