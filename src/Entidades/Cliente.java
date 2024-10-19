@@ -15,10 +15,14 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String correo;
-    private long telefono;
+    private String telefono;
 
     // Constructor
-    public Cliente(int idCliente, String nombre, String apellido, String correo, long telefono) {
+    
+    public Cliente() {
+    }
+
+    public Cliente(int idCliente, String nombre, String apellido, String correo, String telefono) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -60,11 +64,11 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefonos(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     
@@ -73,5 +77,11 @@ public class Cliente {
     public void mostrarInfo() {
         System.out.println("Cliente: " + nombre + " " + apellido + " - Correo: " + correo);
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", telefono=" + telefono + '}';
+    }
+    
 }
 
