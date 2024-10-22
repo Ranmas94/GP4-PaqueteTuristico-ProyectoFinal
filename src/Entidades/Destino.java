@@ -10,8 +10,8 @@ package Entidades;
  */
 public class Destino {
     private int idDestino;
-    private String nombre;
-    private String codigo; //Codigo SL san luis, BSAS buenos aires, etc
+    private String ciudad;
+    private String lugar; //Codigo SL san luis, BSAS buenos aires, etc
 
        //Contructor vacio
 
@@ -22,15 +22,15 @@ public class Destino {
     // Constructor
     public Destino(int idDestino, String nombre, String codigo) {
         this.idDestino = idDestino;
-        this.nombre = nombre;
-        this.codigo = codigo;
+        this.ciudad = nombre;
+        this.lugar = codigo;
     }
     
     //Contructor sin idDestino
 
     public Destino(String nombre, String codigo) {
-        this.nombre = nombre;
-        this.codigo = codigo;
+        this.ciudad = nombre;
+        this.lugar = codigo;
     }
     
 
@@ -44,26 +44,26 @@ public class Destino {
         this.idDestino = idDestino;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCiudad() {
+        return ciudad;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getLugar() {
+        return lugar;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
     
 
     // Motodo para mostrar info del destino
     public void mostrarInfo() {
-        System.out.println("Destino: " + nombre + " (Código: " + codigo + ")");
+        System.out.println("Destino: " + ciudad + " (Código: " + lugar + ")");
     }
 }
 
