@@ -15,7 +15,7 @@ public class Pasaje {
     private enum tipoPasaje {
     AVION,
     COLECTIVO,
-    AUTO_COMPARTIDO,
+    COMPARTIDO,
 };
     
     private int idPasaje;
@@ -23,7 +23,7 @@ public class Pasaje {
     private double costo;
     private Destino origen;
     private Destino destino;
-    private String asiento;
+    private int asiento;
     
     //Constructor vacio
 
@@ -32,7 +32,7 @@ public class Pasaje {
     
     
     // Constructor
-    public Pasaje(int idPasaje, tipoPasaje tipo, double costo, Destino origen, Destino destino, String asiento) {
+    public Pasaje(int idPasaje, tipoPasaje tipo, double costo, Destino origen, Destino destino, int asiento) {
         this.idPasaje = idPasaje;
         this.tipo = tipo;
         this.costo = costo;
@@ -43,7 +43,7 @@ public class Pasaje {
     
     //Constructor sin id
 
-    public Pasaje(tipoPasaje tipo, double costo, Destino origen, Destino destino, String asiento) {
+    public Pasaje(tipoPasaje tipo, double costo, Destino origen, Destino destino, int asiento) {
         this.tipo = tipo;
         this.costo = costo;
         this.origen = origen;
@@ -94,11 +94,11 @@ public class Pasaje {
         this.destino = destino;
     }
 
-    public String getAsiento() {
+    public int getAsiento() {
         return asiento;
     }
 
-    public void setAsiento(String asiento) {
+    public void setAsiento(int asiento) {
         this.asiento = asiento;
     }
     

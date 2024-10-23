@@ -62,8 +62,11 @@ public class Destino {
     
 
     // Motodo para mostrar info del destino
-    public void mostrarInfo() {
-        System.out.println("Destino: " + ciudad + " (Código: " + lugar + ")");
+
+    @Override
+    public String toString() {
+        return  "ciudad=" + ciudad + ", lugar=" + lugar ;
     }
+   
 }
 
