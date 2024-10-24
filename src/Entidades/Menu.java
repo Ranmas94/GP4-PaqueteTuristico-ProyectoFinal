@@ -31,6 +31,7 @@ public class Menu {
     public Menu(int idMenu, tipoMenu tipo, double porcentaje) {
         this.idMenu = idMenu;
         this.tipo = tipo;
+        this.porcentaje = porcentaje;
     }
     
     //Constructor si id

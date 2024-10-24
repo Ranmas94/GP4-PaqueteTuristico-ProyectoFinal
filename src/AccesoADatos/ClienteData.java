@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ public class ClienteData {
     private Connection con = null;
     
     public ClienteData(){
-       // con = Conexion.getConexion();
+       con = Conexion.getConexion();
     }
     
     
@@ -33,7 +35,7 @@ public class ClienteData {
             ps.setString(1, cliente.getNombre() );
             ps.setString(2, cliente.getApellido() );
             ps.setString(3, cliente.getCorreo() );
-            ps.setLong(4, cliente.getTelefono());
+            ps.setString(4, cliente.getTelefono());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -60,7 +62,7 @@ public class ClienteData {
             ps.setString(1, cliente.getNombre() );
             ps.setString(2, cliente.getApellido() );
             ps.setString(3, cliente.getCorreo() );
-            ps.setLong(4, cliente.getTelefono());
+            ps.setString(4, cliente.getTelefono());
             
            int exito = ps.executeUpdate();
            if(exito == 1){
@@ -92,4 +94,36 @@ public class ClienteData {
             JOptionPane.showMessageDialog(null,"Error al intentar eliminar cliente. " +ex);
         }
 }
+    
+    //listar Clientes
+      public List<Cliente> listarClientes(){
+          String sql = "SELECT idCliente, nombre, apellido, correo, telefono FROM cliente WHERE 1";
+                 
+          ArrayList<Cliente> clientes = new ArrayList<>();
+          
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery(); 
+             
+             while(rs.next()){
+                 Cliente cli = new Cliente();
+                 cli.setIdCliente(rs.getInt("idCliente"));
+                 cli.setNombre(rs.getString("nombre"));
+                 cli.setApellido(rs.getString("apellido"));
+                 cli.setCorreo(rs.getString("correo"));
+                 cli.setTelefono(rs.getString("telefono"));
+                 
+                  
+                  clientes.add(cli);
+             }
+             
+             ps.close();
+             rs.close();
+             
+         } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Cliente"+ ex);
+         }
+         return clientes;  
+      }
+      
 }
