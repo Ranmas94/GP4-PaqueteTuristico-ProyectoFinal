@@ -28,12 +28,12 @@ public class DestinoData {
 
     // Guardar Destino
     public void guardarDestino(Destino destino) {
-        String sql = "INSERT INTO destino(nombre, codigo) VALUES (?, ?)";
+        String sql = "INSERT INTO destino(ciudad, lugar) VALUES (?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, destino.getNombre());
-            ps.setString(2, destino.getCodigo());
+            ps.setString(1, destino.getCiudad());
+            ps.setString(2, destino.getLugar());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -51,12 +51,12 @@ public class DestinoData {
 
     // Actualizar Destino
     public void actualizarDestino(Destino destino) {
-        String sql = "UPDATE destino SET nombre = ?, codigo = ? WHERE idDestino = ?";
+        String sql = "UPDATE destino SET ciudad = ?, lugar = ? WHERE idDestino = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, destino.getNombre());
-            ps.setString(2, destino.getCodigo());
+            ps.setString(1, destino.getCiudad());
+            ps.setString(2, destino.getLugar());
             ps.setInt(3, destino.getIdDestino());
 
             int exito = ps.executeUpdate();
@@ -90,7 +90,7 @@ public class DestinoData {
 
     // Listar Destinos
     public List<Destino> listarDestinos() {
-        String sql = "SELECT idDestino, nombre, codigo FROM destino";
+        String sql = "SELECT idDestino, ciudad, lugar FROM destino";
         ArrayList<Destino> destinos = new ArrayList<>();
 
         try {
@@ -100,8 +100,8 @@ public class DestinoData {
             while (rs.next()) {
                 Destino dest = new Destino();
                 dest.setIdDestino(rs.getInt("idDestino"));
-                dest.setNombre(rs.getString("nombre"));
-                dest.setCodigo(rs.getString("codigo"));
+                dest.setCiudad(rs.getString("ciudad"));
+                dest.setLugar(rs.getString("lugar"));
                 destinos.add(dest);
             }
 
