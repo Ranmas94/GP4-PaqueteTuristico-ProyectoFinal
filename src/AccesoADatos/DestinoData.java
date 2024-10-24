@@ -28,7 +28,7 @@ public class DestinoData {
 
     // Guardar Destino
     public void guardarDestino(Destino destino) {
-        String sql = "INSERT INTO destino(nombre, codigo) VALUES (?, ?)";
+        String sql = "INSERT INTO destino(ciudad, lugar) VALUES (?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -51,7 +51,7 @@ public class DestinoData {
 
     // Actualizar Destino
     public void actualizarDestino(Destino destino) {
-        String sql = "UPDATE destino SET nombre = ?, codigo = ? WHERE idDestino = ?";
+        String sql = "UPDATE destino SET ciudad = ?, lugar = ? WHERE idDestino = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class DestinoData {
 
     // Listar Destinos
     public List<Destino> listarDestinos() {
-        String sql = "SELECT idDestino, nombre, codigo FROM destino";
+        String sql = "SELECT idDestino, ciudad, lugar FROM destino";
         ArrayList<Destino> destinos = new ArrayList<>();
 
         try {
