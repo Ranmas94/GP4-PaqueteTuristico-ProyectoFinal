@@ -32,8 +32,8 @@ public class DestinoData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, destino.getNombre());
-            ps.setString(2, destino.getCodigo());
+            ps.setString(1, destino.getCiudad());
+            ps.setString(2, destino.getLugar());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -55,8 +55,8 @@ public class DestinoData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, destino.getNombre());
-            ps.setString(2, destino.getCodigo());
+            ps.setString(1, destino.getCiudad());
+            ps.setString(2, destino.getLugar());
             ps.setInt(3, destino.getIdDestino());
 
             int exito = ps.executeUpdate();
@@ -100,8 +100,8 @@ public class DestinoData {
             while (rs.next()) {
                 Destino dest = new Destino();
                 dest.setIdDestino(rs.getInt("idDestino"));
-                dest.setNombre(rs.getString("nombre"));
-                dest.setCodigo(rs.getString("codigo"));
+                dest.setCiudad(rs.getString("ciudad"));
+                dest.setLugar(rs.getString("lugar"));
                 destinos.add(dest);
             }
 
