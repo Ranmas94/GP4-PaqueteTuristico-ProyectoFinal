@@ -31,8 +31,8 @@ public class AlojamientoData {
     
     //Guardar alojamiento
     public void guardarAlojamiento(Alojamiento alojamiento){
-        String sql = "INSERT INTO alojamiento(idDestino,nombre,direccion,capacidad,nroAmbiente,cama,banios,precioPorNoche) "
-                + "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO alojamiento(idDestino,nombre,direccion,capacidad,nroAmbiente,cama,banios,precioPorNoche,vigente) "
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -43,7 +43,8 @@ public class AlojamientoData {
             ps.setInt(5, alojamiento.getNroAmbientes());
             ps.setInt(6,alojamiento.getCamas());
             ps.setInt(7, alojamiento.getBanios());
-            ps.setDouble(9, alojamiento.getPrecioPorNoche());
+            ps.setDouble(8, alojamiento.getPrecioPorNoche());
+            ps.setBoolean(9,alojamiento.isVigente());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -58,10 +59,10 @@ public class AlojamientoData {
         }
     }
     
-    //modificar cliente
+    //modificar alojamiento
     public void modificarAlojamiento(Alojamiento alojamiento){
         String sql = "UPDATE alojamiento SET idDestino = ?, nombre = ?, direccion = ?, capacidad = ?, nroAmbiente = ?, camas = ?, banio = ?, precioPorNoche = ?"
-                + "WHERE = idAlojamiento = ?";
+                + "WHERE idAlojamiento = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -74,7 +75,6 @@ public class AlojamientoData {
             ps.setInt(6, alojamiento.getCamas());
             ps.setInt(7, alojamiento.getBanios());
             ps.setDouble(8, alojamiento.getPrecioPorNoche());
-            
             ps.setInt(9, alojamiento.getIdAlojamiento());
 
         // Ejecutar la actualización
@@ -93,12 +93,47 @@ public class AlojamientoData {
         }
     }
     
+    
+    public Alojamiento buscarAlojamientoID(int id){
+        String sql = "SELECT * FROM alojamiento WHERE alojamiento.idAlojamiento = ?";
+        Alojamiento alojamiento = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                alojamiento = new Alojamiento();
+                alojamiento.setIdAlojamiento(id);
+                alojamiento.setNombre(rs.getString("nombre"));
+                alojamiento.setDireccion(rs.getString("direccion"));
+                alojamiento.setCapacidad(rs.getInt("capacidad"));
+                alojamiento.setNroAmbientes(rs.getInt("nroAmbientes"));
+                alojamiento.setCamas(rs.getInt("cama"));
+                alojamiento.setBanios(rs.getInt("banios"));
+                alojamiento.setPrecioPorNoche(rs.getDouble("precioPorNoche"));
+                
+                Destino destino = new Destino();
+            destino.setIdDestino(rs.getInt("idDestino")); 
+            alojamiento.setIdDestino(destino); 
+            }
+            
+            
+            ps.close();
+            rs.close();
+            } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar alojamiento. "+ ex.getMessage());
+        }
+        
+        return alojamiento;
+    }
+    
     public List<Alojamiento> buscarAlojamientoCapacidad(int capacidad, int idDestino){
         List<Alojamiento> alojamientos = new ArrayList<>();
         
-        String sql = "SELECT nombre,direccion, nroAmbientes ,cama, banios, precioPorNoche"
-                + "FROM alojamiento"
-                + "WHERE alojamiento.idDestino = ? AND alojamiento.capacidad >= ? ";
+        String sql = "SELECT idAlojamiento, idDestino, nombre, direccion, capacidad, nroAmbientes ,cama, banios, precioPorNoche, vigente" +
+"                 FROM alojamiento" +
+"                 WHERE idDestino = ? AND capacidad >= ? AND vigente = 1 ";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
@@ -109,6 +144,7 @@ public class AlojamientoData {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                  Alojamiento alojamiento = new Alojamiento();
+                 
             alojamiento.setIdAlojamiento(rs.getInt("idAlojamiento"));
            
             Destino destino = new Destino();
@@ -119,7 +155,7 @@ public class AlojamientoData {
             alojamiento.setDireccion(rs.getString("direccion"));
             alojamiento.setCapacidad(rs.getInt("capacidad"));
             alojamiento.setNroAmbientes(rs.getInt("nroAmbientes"));
-            alojamiento.setCamas(rs.getInt("camas"));
+            alojamiento.setCamas(rs.getInt("cama"));
             alojamiento.setBanios(rs.getInt("banios"));
             alojamiento.setPrecioPorNoche(rs.getDouble("precioPorNoche"));
             
@@ -130,11 +166,31 @@ public class AlojamientoData {
             ps.close();
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null,"Error buscar alojamiento por capacidad. "+ ex.getMessage());
+             ex.printStackTrace(); // Imprimir el stack trace para más información
+             
         }
 
        
        return alojamientos;
     }
     
-    
+    public void darBajaAlojamiento (int id){
+        String sql = "UPDATE alojamiento SET vigente = 0"
+                + " WHERE idAlojamiento = ?";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1,id);
+            
+             int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente eliminado");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al dar de baja el alojamiento. "+ ex.getMessage());
+
+        }
+    }
 }

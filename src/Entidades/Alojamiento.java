@@ -141,6 +141,11 @@ public class Alojamiento {
     
 
     // Metodo para mostrar info del alojamiento
+    @Override
+    public String toString() {
+        return  nombre ;
+    }
+
     public void mostrarInfo() {
         System.out.println("Alojamiento: " + nombre + " - Direccion: " + direccion + " - Precio por noche: " + precioPorNoche + "vigente " + vigente);
     }
