@@ -112,4 +112,27 @@ public class DestinoData {
         }
         return destinos;
     }
+    
+    public Destino buscarDestino(int id){
+        String sql = "SELECT * FROM destino WHERE idDestino = ?";
+        Destino destino = null;
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                 destino = new Destino();
+                destino.setIdDestino(id);
+                destino.setCiudad(rs.getString("ciudad"));
+                destino.setLugar(rs.getString("lugar"));
+            }
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Destino: " + ex);
+        }
+        return destino;
+    }
+    
 }

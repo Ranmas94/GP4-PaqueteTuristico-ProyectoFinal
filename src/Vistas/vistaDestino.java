@@ -157,6 +157,7 @@ private DestinoData destData = new DestinoData();
        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
        
+   
      
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
