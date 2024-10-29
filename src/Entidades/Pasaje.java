@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Entidades;
 
 /**
@@ -12,18 +9,14 @@ package Entidades;
 
 public class Pasaje {
     
-    private enum tipoPasaje {
-    AVION,
-    COLECTIVO,
-    AUTO_COMPARTIDO,
-};
+
     
     private int idPasaje;
-    private tipoPasaje tipo;
+    private String tipo;
     private double costo;
     private Destino origen;
     private Destino destino;
-    private String asiento;
+    private int asiento;
     
     //Constructor vacio
 
@@ -32,7 +25,7 @@ public class Pasaje {
     
     
     // Constructor
-    public Pasaje(int idPasaje, tipoPasaje tipo, double costo, Destino origen, Destino destino, String asiento) {
+    public Pasaje(int idPasaje, String tipo, double costo, Destino origen, Destino destino, int asiento) {
         this.idPasaje = idPasaje;
         this.tipo = tipo;
         this.costo = costo;
@@ -43,7 +36,7 @@ public class Pasaje {
     
     //Constructor sin id
 
-    public Pasaje(tipoPasaje tipo, double costo, Destino origen, Destino destino, String asiento) {
+    public Pasaje(String tipo, double costo, Destino origen, Destino destino, int asiento) {
         this.tipo = tipo;
         this.costo = costo;
         this.origen = origen;
@@ -62,11 +55,11 @@ public class Pasaje {
         this.idPasaje = idPasaje;
     }
 
-    public tipoPasaje getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(tipoPasaje tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -94,11 +87,11 @@ public class Pasaje {
         this.destino = destino;
     }
 
-    public String getAsiento() {
+    public int getAsiento() {
         return asiento;
     }
 
-    public void setAsiento(String asiento) {
+    public void setAsiento(int asiento) {
         this.asiento = asiento;
     }
     

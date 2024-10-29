@@ -18,6 +18,7 @@ public class Alojamiento {
     private int camas;
     private int banios;
     private double precioPorNoche;
+    private boolean vigente;
 
     //Constructor vacio
 
@@ -27,7 +28,7 @@ public class Alojamiento {
     
     // Constructor
     public Alojamiento(int idAlojamiento, Destino idDestino, String nombre, String direccion, int capacidad,
-                       int nroAmbientes, int camas, int banios, double precioPorNoche) {
+                       int nroAmbientes, int camas, int banios, double precioPorNoche, boolean vigente) {
         this.idAlojamiento = idAlojamiento;
         this.idDestino = idDestino;
         this.nombre = nombre;
@@ -37,10 +38,11 @@ public class Alojamiento {
         this.camas = camas;
         this.banios = banios;
         this.precioPorNoche = precioPorNoche;
+        this.vigente = vigente;
     }
     
     //Constructor sin idAlojamiento
-    public Alojamiento(Destino idDestino, String nombre, String direccion, int capacidad, int nroAmbientes, int camas, int banios, double precioPorNoche) {
+    public Alojamiento(Destino idDestino, String nombre, String direccion, int capacidad, int nroAmbientes, int camas, int banios, double precioPorNoche, boolean vigente) {
         this.idDestino = idDestino;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -49,6 +51,7 @@ public class Alojamiento {
         this.camas = camas;
         this.banios = banios;
         this.precioPorNoche = precioPorNoche;
+        this.vigente = vigente;
     }
     
     
@@ -126,11 +129,25 @@ public class Alojamiento {
     public void setPrecioPorNoche(double precioPorNoche) {
         this.precioPorNoche = precioPorNoche;
     }
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
+    
     
 
     // Metodo para mostrar info del alojamiento
+    @Override
+    public String toString() {
+        return  nombre ;
+    }
+
     public void mostrarInfo() {
-        System.out.println("Alojamiento: " + nombre + " - Direccion: " + direccion + " - Precio por noche: " + precioPorNoche);
+        System.out.println("Alojamiento: " + nombre + " - Direccion: " + direccion + " - Precio por noche: " + precioPorNoche + "vigente " + vigente);
     }
 }
 

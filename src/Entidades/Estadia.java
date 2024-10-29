@@ -8,13 +8,14 @@ package Entidades;
  *
  * @author Ranma
  */
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Estadia {
     private int idEstadia;
     private Alojamiento idAlojamiento;
-    private Date fechaCheckIn;
-    private Date fechaCheckOut;
+    private LocalDate fechaCheckIn;
+    private LocalDate fechaCheckOut;
     private double total; 
 
      // Constructor vacio
@@ -22,30 +23,23 @@ public class Estadia {
     }
 
     // Constructor
-    public Estadia(int idEstadia, Alojamiento idAlojamiento, Date fechaCheckIn, Date fechaCheckOut) {
+    public Estadia(int idEstadia, Alojamiento idAlojamiento, LocalDate fechaCheckIn, LocalDate fechaCheckOut) {
         this.idEstadia = idEstadia;
         this.idAlojamiento = idAlojamiento;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
-        this.total = calcularTotal();
+
     }
     
     //Contructor sin id
 
-    public Estadia(Alojamiento idAlojamiento, Date fechaCheckIn, Date fechaCheckOut, double total) {
+    public Estadia(Alojamiento idAlojamiento, LocalDate fechaCheckIn, LocalDate fechaCheckOut, double total) {
         this.idAlojamiento = idAlojamiento;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
         this.total = total;
     }
     
-
-    // Metodo para calcular el total de dias que se queda
-    private double calcularTotal() {
-        long diff = fechaCheckOut.getTime() - fechaCheckIn.getTime();
-        long dias = diff / (1000 * 60 * 60 * 24); //si hay una forma mas simple modificar y avisar pls
-        return dias * total; // Total de dias de estadia
-    }
 
     // Getters y Setters
 
@@ -65,19 +59,19 @@ public class Estadia {
         this.idAlojamiento = idAlojamiento;
     }
 
-    public Date getFechaCheckIn() {
+    public LocalDate getFechaCheckIn() {
         return fechaCheckIn;
     }
 
-    public void setFechaCheckIn(Date fechaCheckIn) {
+    public void setFechaCheckIn(LocalDate fechaCheckIn) {
         this.fechaCheckIn = fechaCheckIn;
     }
 
-    public Date getFechaCheckOut() {
+    public LocalDate getFechaCheckOut() {
         return fechaCheckOut;
     }
 
-    public void setFechaCheckOut(Date fechaCheckOut) {
+    public void setFechaCheckOut(LocalDate fechaCheckOut) {
         this.fechaCheckOut = fechaCheckOut;
     }
 
