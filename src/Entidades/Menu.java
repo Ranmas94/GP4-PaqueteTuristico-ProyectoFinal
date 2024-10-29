@@ -4,18 +4,36 @@
  */
 package Entidades;
 
-/**
- *
- * @author Ranma
- */
 public class Menu {
     
-    public enum tipoMenu{
-        SIN_PENSION, 
-        SOLO_DESAYUNO, 
-        MEDIA_PENSION, 
-        PENSION_COMPLETA;
-    };
+// Enum para tipo de menú
+    public enum tipoMenu {
+        SIN_PENSION("Sin Pensión"),
+        DESAYUNO("Desayuno"),
+        MEDIA_PENSION("Media Pensión"),
+        PENSION_COMPLETA("Pensión Completa");
+
+        private final String descripcion;
+
+        tipoMenu(String descripcion) {
+            this.descripcion = descripcion;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        // Método para obtener el TipoMenu a partir de una cadena
+        public static tipoMenu fromString(String descripcion) {
+            for (tipoMenu tipo : tipoMenu.values()) {
+                if (tipo.descripcion.equalsIgnoreCase(descripcion)) {
+                    return tipo;
+                }
+            }
+            throw new IllegalArgumentException("Tipo de menú desconocido: " + descripcion);
+        }
+    }
+
     
     private int idMenu;
     private tipoMenu tipo; // sin pension, solo desayuno, media pension, pension completa
@@ -31,9 +49,10 @@ public class Menu {
     public Menu(int idMenu, tipoMenu tipo, double porcentaje) {
         this.idMenu = idMenu;
         this.tipo = tipo;
+        this.porcentaje = porcentaje;
     }
     
-    //Constructor si id
+    //Constructor sin id
 
     public Menu(tipoMenu tipo, double porcentaje) {
         this.tipo = tipo;
