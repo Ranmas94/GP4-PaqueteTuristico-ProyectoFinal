@@ -25,9 +25,9 @@ public class PasajeData {
         con = Conexion.getConexion();
     }
     
- // Método para agregar un pasaje
+    // Método para agregar un pasaje
     public void agregarPasaje(Pasaje pasaje) {
-        String sql = "INSERT INTO pasajes (tipo, costo, origen_id, destino_id, asiento) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pasajes (tipo, costo, origen, destino, asiento) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, pasaje.getTipo());
@@ -38,13 +38,13 @@ public class PasajeData {
 
             ps.executeUpdate();
             
-            
-            ResultSet rs = ps.getGeneratedKeys();
-            while (rs.next()) {
-                pasaje.setIdPasaje(rs.getInt(1));
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    pasaje.setIdPasaje(rs.getInt(1));
+                }
             }
             
-            System.out.println("Pasaje agregado con éxito");
+            JOptionPane.showMessageDialog(null, "Pasaje agregado con éxito");
         } catch (SQLException ex) {
             System.out.println("Error al agregar el pasaje: " + ex.getMessage());
         }
@@ -52,7 +52,7 @@ public class PasajeData {
 
     // Método para actualizar un pasaje
     public void actualizarPasaje(Pasaje pasaje) {
-        String sql = "UPDATE pasajes SET tipo = ?, costo = ?, origen_id = ?, destino_id = ?, asiento = ? WHERE idPasaje = ?";
+        String sql = "UPDATE pasajes SET tipo = ?, costo = ?, origen = ?, destino = ?, asiento = ? WHERE idPasaje = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, pasaje.getTipo());
@@ -62,8 +62,12 @@ public class PasajeData {
             ps.setInt(5, pasaje.getAsiento());
             ps.setInt(6, pasaje.getIdPasaje());
 
-            ps.executeUpdate();
-            System.out.println("Pasaje actualizado con éxito");
+            int filasActualizadas = ps.executeUpdate();
+            if (filasActualizadas > 0) {
+                JOptionPane.showMessageDialog(null, "Pasaje actualizado con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el pasaje con el ID especificado.");
+            }
         } catch (SQLException ex) {
             System.out.println("Error al actualizar el pasaje: " + ex.getMessage());
         }
@@ -76,33 +80,41 @@ public class PasajeData {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idPasaje);
 
-            ps.executeUpdate();
-            System.out.println("Pasaje eliminado con éxito");
+            int filasEliminadas = ps.executeUpdate();
+            if (filasEliminadas > 0) {
+                JOptionPane.showMessageDialog(null, "Pasaje eliminado con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el pasaje con el ID especificado.");
+            }
         } catch (SQLException ex) {
             System.out.println("Error al eliminar el pasaje: " + ex.getMessage());
         }
     }
-
-   
 
     // Método para obtener todos los pasajes
     public List<Pasaje> obtenerTodosLosPasajes() {
         List<Pasaje> pasajes = new ArrayList<>();
         String sql = "SELECT * FROM pasajes";
 
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Pasaje pasaje = new Pasaje();
                 pasaje.setIdPasaje(rs.getInt("idPasaje"));
                 pasaje.setTipo(rs.getString("tipo"));
                 pasaje.setCosto(rs.getDouble("costo"));
+                pasaje.setAsiento(rs.getInt("asiento"));
                 
-       
+                // Crear objetos `Destino` para origen y destino
+                Destino origen = new Destino();
+                origen.setIdDestino(rs.getInt("origen"));
+                pasaje.setOrigen(origen);
+                
+                Destino destino = new Destino();
+                destino.setIdDestino(rs.getInt("destino"));
+                pasaje.setDestino(destino);
+
                 pasajes.add(pasaje);
             }
-            ps.close();
-            rs.close();
         } catch (SQLException ex) {
             System.out.println("Error al obtener todos los pasajes: " + ex.getMessage());
         }

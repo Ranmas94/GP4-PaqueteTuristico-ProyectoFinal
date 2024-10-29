@@ -3,19 +3,23 @@ package Vistas;
 
 import AccesoADatos.AlojamientoData;
 import Entidades.Alojamiento;
+import static Vistas.vistaDestino.destinoSeleccionado;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 /**
  *
  * @author Lourdes
  */
 public class vistaEstadia extends javax.swing.JInternalFrame {
-private  Alojamiento al = null;
+public static  Alojamiento alojamientoSeleccionado ;
  private AlojamientoData alData = new AlojamientoData();
+
+ 
     /**
      * Creates new form vistaEstadia
      */
@@ -263,6 +267,8 @@ private  Alojamiento al = null;
 
     private void jcbCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCapacidadActionPerformed
        cargarComboBoxAlojamiento();
+      
+    
     }//GEN-LAST:event_jcbCapacidadActionPerformed
 
     private void jcbAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlojamientoActionPerformed
@@ -333,7 +339,7 @@ private void cargarComboBoxAlojamiento(){
      jcbAlojamiento.removeAllItems();
    int capacidad = (int) jcbCapacidad.getSelectedItem();
    
-   for(Alojamiento alo : alData.buscarAlojamientoCapacidad(capacidad,1)){ //el 1 se intercambia por getDestino.
+   for(Alojamiento alo : alData.buscarAlojamientoCapacidad(capacidad,destinoSeleccionado.getIdDestino())){ //el 1 se intercambia por getDestino.
        jcbAlojamiento.addItem(alo);
    } 
   
@@ -376,4 +382,6 @@ private void cargarComboBoxAlojamiento(){
         }
         return false; //devuelve false todos los campos estan llenos
     }
+  
+ 
 }

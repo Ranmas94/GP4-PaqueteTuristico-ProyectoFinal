@@ -1,6 +1,10 @@
 
 package Vistas;
 
+import static Vistas.vistaDestino.destinoSeleccionado;
+import static Vistas.vistaDestino.origenSeleccionado;
+import java.util.Random;
+
 /**
  *
  * @author Stefani
@@ -185,20 +189,17 @@ public class PasajeView extends javax.swing.JInternalFrame {
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
        String tipoSeleccionado = (String) comboTipo.getSelectedItem();
-
-        if (tipoSeleccionado != null && !tipoSeleccionado.equals("Seleccione")) {
-            // Habilitar campos de transporte y botón Agregar Paquete
-            txtOrigen.setEnabled(true);
-            txtDestino.setEnabled(true);
-            txtAsiento.setEnabled(true);
-            btnAgregarPaquete.setEnabled(true);
-        } else {
-            // Desactivar si no se selecciona un tipo de transporte válido
+       Random random = new Random();
+       txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
+       txtOrigen.setText(origenSeleccionado.toString());
+       txtDestino.setText(destinoSeleccionado.toString());
+     
+     
             txtOrigen.setEnabled(false);
             txtDestino.setEnabled(false);
             txtAsiento.setEnabled(false);
-            btnAgregarPaquete.setEnabled(false);
-        }
+            btnAgregarPaquete.setEnabled(true);
+        
     
     }//GEN-LAST:event_comboTipoActionPerformed
 
