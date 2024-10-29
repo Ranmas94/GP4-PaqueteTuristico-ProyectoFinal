@@ -4,17 +4,23 @@
  */
 package Vistas;
 
+import AccesoADatos.MenuData;
+import Entidades.MenuPension;
+
+
 /**
  *
  * @author I36100
  */
 public class seleccionarMenu extends javax.swing.JInternalFrame {
-
+public static MenuPension menuSeleccionado;
+private MenuData menuData;
     /**
      * Creates new form seleccionarMenu
      */
     public seleccionarMenu() {
         initComponents();
+        cargarComboBox();
     }
 
     /**
@@ -29,25 +35,46 @@ public class seleccionarMenu extends javax.swing.JInternalFrame {
         jlSeleccionar = new javax.swing.JLabel();
         jcbtipoMenu = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jcbCosto = new javax.swing.JComboBox<>();
+        jbAgregar = new javax.swing.JButton();
+        jbSiguiente = new javax.swing.JButton();
+
+        setClosable(true);
 
         jlSeleccionar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlSeleccionar.setText("Selecciona tu Menu");
 
-        jcbtipoMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbtipoMenu.setSelectedIndex(-1);
+        jcbtipoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbtipoMenuActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Costo");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setSelectedIndex(-1);
+        jcbCosto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCosto.setSelectedIndex(-1);
+        jcbCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbCostoActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Agregar al paquete");
+        jbAgregar.setText("Agregar al paquete");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Siguente ➡️");
+        jbSiguiente.setText("Siguente ➡️");
+        jbSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSiguienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,12 +88,12 @@ public class seleccionarMenu extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jButton1)
+                        .addComponent(jbAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(jbSiguiente))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -84,24 +111,52 @@ public class seleccionarMenu extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jbAgregar)
+                    .addComponent(jbSiguiente))
                 .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbtipoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbtipoMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbtipoMenuActionPerformed
+
+    private void jcbCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCostoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCostoActionPerformed
+
+    private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
+       PasajeView v = new PasajeView();
+       v.setVisible(true);
+       Menu.escritorio.add(v);
+       this.dispose();
+    }//GEN-LAST:event_jbSiguienteActionPerformed
+
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        String tipo =  (String) jcbtipoMenu.getSelectedItem();
+        double costo = (double) jcbCosto.getSelectedItem();
+        menuSeleccionado = new MenuPension(tipo,costo); 
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JComboBox<String> jcbtipoMenu;
+    private javax.swing.JButton jbAgregar;
+    private javax.swing.JButton jbSiguiente;
+    private javax.swing.JComboBox<String> jcbCosto;
+    private javax.swing.JComboBox<MenuPension> jcbtipoMenu;
     private javax.swing.JLabel jlSeleccionar;
     // End of variables declaration//GEN-END:variables
+
+public void cargarComboBox(){
+    
+    for(MenuPension m : menuData.listarMenus()){
+        jcbtipoMenu.addItem(m);
+    }    
+}
 }

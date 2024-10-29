@@ -12,7 +12,7 @@ public class Paquete {
     private int idPaquete;
     private Estadia idEstadia;
     private Pasaje idPasaje;
-    private Menu idMenu;
+    private MenuPension idMenu;
     private Destino origen;
     private Destino destino;
     private LocalDate fechaInicio;
@@ -28,7 +28,7 @@ public class Paquete {
     
     //Constructor con id
 
-    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, double precioTotal) {
+    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, double precioTotal) {
         this.idPaquete = idPaquete;
         
         this.idEstadia = idEstadia;
@@ -44,7 +44,7 @@ public class Paquete {
     
     //Constructor sin id
 
-    public Paquete( Estadia idEstadia, Pasaje idPasaje, Menu idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, double precioTotal) {
+    public Paquete( Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, double precioTotal) {
        
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
@@ -83,11 +83,11 @@ public class Paquete {
         this.idPasaje = idPasaje;
     }
 
-    public Menu getIdMenu() {
+    public MenuPension getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(Menu idMenu) {
+    public void setIdMenu(MenuPension idMenu) {
         this.idMenu = idMenu;
     }
 

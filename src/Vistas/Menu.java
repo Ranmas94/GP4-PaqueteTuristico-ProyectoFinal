@@ -16,10 +16,11 @@ import javax.swing.ImageIcon;
 public class Menu extends javax.swing.JFrame {
 
     /**
-     * Creates new form Menu
+     * Creates new form MenuPension
      */
     public Menu() {
         initComponents();
+        
     }
 
     /**
@@ -321,34 +322,38 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlojamientoActionPerformed
-        escritorio.removeAll();
+       
         escritorio.repaint();
         vistaAgregarAlojamiento v = new vistaAgregarAlojamiento();
         escritorio.add(v);
         v.setVisible(true);
         escritorio.moveToFront(v);
+       
+        
     }//GEN-LAST:event_itemAlojamientoActionPerformed
 
     private void itemDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDestinoActionPerformed
-        escritorio.removeAll();
+        
         escritorio.repaint();
         vistaAgregarDestino v = new vistaAgregarDestino();
         escritorio.add(v);
         v.setVisible(true);
         escritorio.moveToFront(v);
+         
     }//GEN-LAST:event_itemDestinoActionPerformed
 
     private void itemMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuActionPerformed
-        escritorio.removeAll();
+       
         escritorio.repaint();
         vistaModificarMenu v = new vistaModificarMenu();
         escritorio.add(v);
         v.setVisible(true);
         escritorio.moveToFront(v);
+        
     }//GEN-LAST:event_itemMenuActionPerformed
 
     private void jbCrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearPaqueteActionPerformed
-       escritorio.removeAll();
+       
         escritorio.repaint();
         vistaDestino v = new vistaDestino();
         escritorio.add(v);
@@ -427,7 +432,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem itemAlojamiento;
     private javax.swing.JMenuItem itemDestino;
     private javax.swing.JMenuItem itemMenu;

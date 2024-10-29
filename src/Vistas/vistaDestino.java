@@ -8,6 +8,7 @@ import AccesoADatos.DestinoData;
 import Entidades.Destino;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +21,9 @@ import javax.swing.JPanel;
 public class vistaDestino extends javax.swing.JInternalFrame {
 public static Destino origenSeleccionado;
 public static Destino destinoSeleccionado;
-public static int temporada;
+public static Date fechInicio;
+public static Date fechFin;
+public static String temporada;
 private DestinoData destData = new DestinoData();
     /**
      * Creates new form vistaDestino
@@ -157,7 +160,10 @@ private DestinoData destData = new DestinoData();
        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
        
-   
+       vistaEstadia v = new vistaEstadia();
+       v.setVisible(true);
+       Menu.escritorio.add(v);
+       this.dispose();
      
     }//GEN-LAST:event_jbSiguienteActionPerformed
 

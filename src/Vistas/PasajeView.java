@@ -1,6 +1,8 @@
 
 package Vistas;
 
+import Entidades.Destino;
+import Entidades.Pasaje;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.origenSeleccionado;
 import java.util.Random;
@@ -10,7 +12,7 @@ import java.util.Random;
  * @author Stefani
  */
 public class PasajeView extends javax.swing.JInternalFrame {
-
+public static Pasaje pasajeSeleccionado;
     /**
      * Creates new form Transporte
      */
@@ -47,6 +49,7 @@ public class PasajeView extends javax.swing.JInternalFrame {
         txtAsiento = new javax.swing.JTextField();
         btnAgregarPaquete = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        tfCosto = new javax.swing.JTextField();
 
         setTitle("Paquete Turístico");
 
@@ -100,6 +103,13 @@ public class PasajeView extends javax.swing.JInternalFrame {
 
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setEnabled(false);
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+
+        tfCosto.setText("Costo");
 
         javax.swing.GroupLayout PanelTransporteLayout = new javax.swing.GroupLayout(PanelTransporte);
         PanelTransporte.setLayout(PanelTransporteLayout);
@@ -108,14 +118,15 @@ public class PasajeView extends javax.swing.JInternalFrame {
             .addGroup(PanelTransporteLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelTransporteLayout.createSequentialGroup()
                         .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelTransporteLayout.createSequentialGroup()
                                 .addGap(40, 40, 40)
@@ -150,9 +161,11 @@ public class PasajeView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAgregarPaquete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSiguiente)
+                .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSiguiente)
+                    .addComponent(btnAgregarPaquete))
                 .addGap(21, 21, 21))
         );
 
@@ -220,8 +233,19 @@ public class PasajeView extends javax.swing.JInternalFrame {
     private void btnAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPaqueteActionPerformed
               // Habilitar botón Siguiente al agregar el paquete
         btnSiguiente.setEnabled(true);
+        
+        String tipo = (String) comboTipo.getSelectedItem();
+        double costo = Double.parseDouble( tfCosto.getText());
+        Destino origen = origenSeleccionado;
+        Destino destino = destinoSeleccionado;
+        int asiento = Integer.parseInt(txtAsiento.getText());
     
+        pasajeSeleccionado = new Pasaje(tipo,costo,origen,destino,asiento);
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -233,6 +257,7 @@ public class PasajeView extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField tfCosto;
     private javax.swing.JTextField txtAsiento;
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtOrigen;

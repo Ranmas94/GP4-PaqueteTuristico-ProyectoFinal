@@ -1,8 +1,7 @@
  
 package AccesoADatos;
 
-import Entidades.Menu;
-import Entidades.Menu.tipoMenu;
+import Entidades.MenuPension;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,14 +17,13 @@ public class MenuData {
     public MenuData() {
         con = Conexion.getConexion();
     }
-/*
     // Método para guardar un menú
-    public void guardarMenu(Menu menu) {
+    public void guardarMenu(MenuPension menu) {
         String sql = "INSERT INTO menu (tipo, porcentaje) VALUES (?, ?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, menu.getTipo().getDescripcion());
+            ps.setString(1, menu.getTipo());
             ps.setDouble(2, menu.getPorcentaje());
             
             ps.executeUpdate();
@@ -44,9 +42,9 @@ public class MenuData {
     }
 
     // Método para buscar un menú por id
-    public Menu buscarMenuPorId(int id) {
+    public MenuPension buscarMenuPorId(int id) {
         String sql = "SELECT * FROM menu WHERE idMenu = ?";
-        Menu menu = null;
+        MenuPension menu = null;
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -54,9 +52,9 @@ public class MenuData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                menu = new Menu();
+                menu = new MenuPension();
                 menu.setIdMenu(rs.getInt("idMenu"));
-                menu.setTipo(tipoMenu.fromString(rs.getString("tipo")));
+                menu.setTipo((rs.getString("tipo")));
                 menu.setPorcentaje(rs.getDouble("porcentaje"));
             }
 
@@ -69,18 +67,18 @@ public class MenuData {
     }
 
     // Método para listar todos los menús
-    public List<Menu> listarMenus() {
+    public List<MenuPension> listarMenus() {
         String sql = "SELECT * FROM menu";
-        List<Menu> menus = new ArrayList<>();
+        List<MenuPension> menus = new ArrayList<>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Menu menu = new Menu();
+                MenuPension menu = new MenuPension();
                 menu.setIdMenu(rs.getInt("idMenu"));
-                menu.setTipo(TipoMenu.fromString(rs.getString("tipo")));
+                menu.setTipo((rs.getString("tipo")));
                 menu.setPorcentaje(rs.getDouble("porcentaje"));
                 
                 menus.add(menu);
@@ -95,12 +93,12 @@ public class MenuData {
     }
 
     // Método para modificar un menú
-    public void modificarMenu(Menu menu) {
+    public void modificarMenu(MenuPension menu) {
         String sql = "UPDATE menu SET tipo = ?, porcentaje = ? WHERE idMenu = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, menu.getTipo().getDescripcion());
+            ps.setString(1, menu.getTipo());
             ps.setDouble(2, menu.getPorcentaje());
             ps.setInt(3, menu.getIdMenu());
             
@@ -133,7 +131,7 @@ public class MenuData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el menú: " + ex.getMessage());
         }
-    }*/
+    }
     
     public List<String> obtenerOpcionesEnumTipo() {
         List<String> opcionesEnum = new ArrayList<>();

@@ -3,9 +3,11 @@ package Vistas;
 
 import AccesoADatos.AlojamientoData;
 import Entidades.Alojamiento;
+import Entidades.Estadia;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,6 +19,7 @@ import javax.swing.JTextField;
  */
 public class vistaEstadia extends javax.swing.JInternalFrame {
 public static  Alojamiento alojamientoSeleccionado ;
+public static Estadia estadiaSeleccionada;
  private AlojamientoData alData = new AlojamientoData();
 
  
@@ -261,9 +264,21 @@ public static  Alojamiento alojamientoSeleccionado ;
         }else {
             jbSiguiente.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
-            //falta : crear un alojamiento
-            //guardar alojamiento en estadia
-            //guardar estadia en paquete
+            
+            alojamientoSeleccionado = (Alojamiento) jcbAlojamiento.getSelectedItem();
+            
+            Date fechaInit = CheckIn.getDate();
+            Date fechaFin = CheckOut.getDate();
+            double precioporNoche = alojamientoSeleccionado.getPrecioPorNoche();
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
         
         //validar si check in y check out están dentro de los parametros de fecha inicio, fecha fin
@@ -290,7 +305,10 @@ public static  Alojamiento alojamientoSeleccionado ;
     }//GEN-LAST:event_jcbAlojamientoActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-        // TODO add your handling code here:
+        seleccionarMenu v = new seleccionarMenu();
+        v.setVisible(true);
+       Menu.escritorio.add(v);
+       this.dispose();
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
 

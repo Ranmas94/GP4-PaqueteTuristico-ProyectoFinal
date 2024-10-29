@@ -43,7 +43,7 @@ public class Pasaje {
         this.destino = destino;
         this.asiento = asiento;
     }
-    
+
 
     // Getters y Setters
 
