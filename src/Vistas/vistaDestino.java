@@ -153,12 +153,7 @@ private DestinoData destData = new DestinoData();
            JOptionPane.showMessageDialog(this, "Debe seleccionar todos los campos");
            return;
        }
-      
-       PasajeView vd = new PasajeView();
-       prueba.escritorio.add(vd);
-       vd.setVisible(true);
-     
-       
+
        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
        
