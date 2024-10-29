@@ -65,7 +65,7 @@ public class Destino {
 
     @Override
     public String toString() {
-        return  "ciudad=" + ciudad + ", lugar=" + lugar ;
+        return  ciudad + ", "+ lugar ;
     }
    
 }

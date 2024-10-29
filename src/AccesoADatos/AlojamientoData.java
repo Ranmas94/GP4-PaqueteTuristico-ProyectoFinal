@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +29,7 @@ public class AlojamientoData {
     
     //Guardar alojamiento
     public void guardarAlojamiento(Alojamiento alojamiento){
-        String sql = "INSERT INTO alojamiento(idDestino,nombre,direccion,capacidad,nroAmbiente,cama,banios,precioPorNoche,vigente) "
+        String sql = "INSERT INTO alojamiento(idDestino,nombre,direccion,capacidad,nroAmbientes,cama,banios,precioPorNoche,vigente) "
                 + "VALUES (?,?,?,?,?,?,?,?,?)";
         
         try {
@@ -61,7 +59,7 @@ public class AlojamientoData {
     
     //modificar alojamiento
     public void modificarAlojamiento(Alojamiento alojamiento){
-        String sql = "UPDATE alojamiento SET idDestino = ?, nombre = ?, direccion = ?, capacidad = ?, nroAmbiente = ?, camas = ?, banio = ?, precioPorNoche = ?"
+        String sql = "UPDATE alojamiento SET idDestino = ?, nombre = ?, direccion = ?, capacidad = ?, nroAmbientes = ?, cama = ?, banios = ?, precioPorNoche = ?, vigente = ? "
                 + "WHERE idAlojamiento = ?";
         
         try {
@@ -75,15 +73,16 @@ public class AlojamientoData {
             ps.setInt(6, alojamiento.getCamas());
             ps.setInt(7, alojamiento.getBanios());
             ps.setDouble(8, alojamiento.getPrecioPorNoche());
-            ps.setInt(9, alojamiento.getIdAlojamiento());
-
+            ps.setBoolean(9,alojamiento.isVigente());
+            ps.setInt(10, alojamiento.getIdAlojamiento());
+            
         // Ejecutar la actualización
         int filasAfectadas = ps.executeUpdate();
         
         if (filasAfectadas > 0) {
-            System.out.println("Alojamiento actualizado correctamente.");
+            JOptionPane.showMessageDialog(null,"Alojamiento actualizado correctamente.");
         } else {
-            System.out.println("No se encontró un alojamiento con el ID especificado.");
+             JOptionPane.showMessageDialog(null,"No se encontró un alojamiento con el ID especificado.");
         }
         
         // Cerrar el PreparedStatement
@@ -112,6 +111,7 @@ public class AlojamientoData {
                 alojamiento.setCamas(rs.getInt("cama"));
                 alojamiento.setBanios(rs.getInt("banios"));
                 alojamiento.setPrecioPorNoche(rs.getDouble("precioPorNoche"));
+                alojamiento.setVigente(rs.getBoolean("vigente"));
                 
                 Destino destino = new Destino();
             destino.setIdDestino(rs.getInt("idDestino")); 
@@ -184,7 +184,7 @@ public class AlojamientoData {
             
              int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Cliente eliminado");
+                JOptionPane.showMessageDialog(null, "Alojamiento fue dado de baja.");
             }
 
             ps.close();

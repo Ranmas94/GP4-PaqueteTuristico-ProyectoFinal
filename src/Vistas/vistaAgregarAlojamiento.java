@@ -5,13 +5,16 @@
 package Vistas;
 
 import AccesoADatos.AlojamientoData;
+import AccesoADatos.DestinoData;
 import Entidades.Alojamiento;
 import Entidades.Destino;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**
@@ -20,11 +23,15 @@ import javax.swing.JTextField;
  */
 public class vistaAgregarAlojamiento extends javax.swing.JInternalFrame {
 AlojamientoData alojData = new AlojamientoData();
+DestinoData destData = new DestinoData();
     /**
      * Creates new form vistaAgregarAlojamiento
      */
     public vistaAgregarAlojamiento() {
         initComponents();
+        cargarComboBox();
+        jbModificar.setEnabled(false);
+        jbBaja.setEnabled(false);
     }
 
     /**
@@ -283,22 +290,48 @@ AlojamientoData alojData = new AlojamientoData();
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         mostrarDatos();
+        jbModificar.setEnabled(true);
+        jbBaja.setEnabled(true);
+        jbAgregar.setEnabled(false);
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        // TODO add your handling code here:
+        if(validarCamposVacios(contenedor)){
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+            return;
+        }else{
+             modificarAlojamiento();
+             limpiarCampos(contenedor);
+             tfID.setText("");
+             jbModificar.setEnabled(false);
+             jbAgregar.setEnabled(true);
+        jbBaja.setEnabled(false);
+        }
+       
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaActionPerformed
-        // TODO add your handling code here:
+       int id = Integer.parseInt(tfID.getText());
+       alojData.darBajaAlojamiento(id);
+       limpiarCampos(contenedor);
+       tfID.setText("");
+       jbModificar.setEnabled(false);
+        jbBaja.setEnabled(false);
+        jbAgregar.setEnabled(true);
     }//GEN-LAST:event_jbBajaActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        // TODO add your handling code here:
+         if(validarCamposVacios(contenedor)){
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+            return;
+        }else{
+             guardar();
+             limpiarCampos(contenedor);
+        }
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void cbDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDestinoActionPerformed
@@ -340,19 +373,26 @@ AlojamientoData alojData = new AlojamientoData();
     // End of variables declaration//GEN-END:variables
 
 private void mostrarDatos(){
+    try{
     int id = Integer.parseInt(tfID.getText());
     Alojamiento al = new Alojamiento();
     
     al = alojData.buscarAlojamientoID(id);
-    cbDestino.addItem(al.getIdDestino());
+    cbDestino.setSelectedIndex(al.getIdDestino().getIdDestino() -1);
     tfNombre.setText(al.getNombre());
     tfDireccion.setText(al.getDireccion());
     tfCapacidad.setText(String.valueOf(al.getCapacidad()));
     jsAmbiente.setValue(al.getNroAmbientes());
     jsCamas.setValue(al.getCamas());
     jsBanios.setValue(al.getBanios());
+    tfPrecio.setText(String.valueOf(al.getPrecioPorNoche()));
     checkVigente.setSelected(al.isVigente());
-    
+    }catch(NullPointerException ex){
+        JOptionPane.showMessageDialog(this, "Ingrese un ID existente");
+        limpiarCampos(contenedor);
+    }catch(NumberFormatException ex){
+       JOptionPane.showMessageDialog(this, "LLene el campo ID.");
+   }
 }
 
  private void limpiarCampos(JPanel jpanel) {
@@ -367,12 +407,16 @@ private void mostrarDatos(){
                 t.setSelected(false);
             }
             
-            if(c instanceof JCheckBox){
+            if(c instanceof JComboBox){
                 JComboBox t = (JComboBox) c;
                 t.setSelectedIndex(-1);
                 t.setSelectedItem(null);
             }
             
+            if(c instanceof JSpinner ){
+                JSpinner t = (JSpinner) c;
+                t.setValue(1);
+            } 
         }
     }
  
@@ -414,5 +458,56 @@ private boolean validarCamposVacios(JPanel jpanel) {
         }
     }
 }
-
+ 
+ private void modificarAlojamiento(){
+   try{
+   
+     Destino dest = (Destino) cbDestino.getSelectedItem();
+     
+    int id = Integer.parseInt(tfID.getText());
+    String nombre = tfNombre.getText();
+    String direccion = tfDireccion.getText();
+    int capacidad = Integer.parseInt(tfCapacidad.getText());
+    int ambientes = (int) jsAmbiente.getValue();
+    int camas = (int) jsCamas.getValue();
+    int banios = (int) jsBanios.getValue();
+    double precio = Double.parseDouble(tfPrecio.getText());
+    boolean vigente = checkVigente.isSelected();
+      Alojamiento aloj = new Alojamiento(id,dest,nombre,direccion,capacidad,ambientes,camas,banios,precio,vigente);
+      alojData.modificarAlojamiento(aloj);
+   
+   }catch(NumberFormatException ex){
+       JOptionPane.showMessageDialog(this, "Ingrese un ID para buscar un alojamiento existente y modificarlo.");
+   }
+ }
+ 
+ private void cargarComboBox(){
+     for (Destino dest : destData.listarDestinos() ) {
+         cbDestino.addItem(dest);
+     }
+     
+     
+ }
+ 
+    private void guardar() {
+        
+            try{
+            Destino dest = (Destino) cbDestino.getSelectedItem();
+            String nombre = tfNombre.getText();
+            String direccion = tfDireccion.getText();
+            int capacidad = Integer.parseInt(tfCapacidad.getText());
+            int ambientes = (int) jsAmbiente.getValue();
+            int camas = (int) jsCamas.getValue();
+            int banios = (int) jsBanios.getValue();
+            double precio = Double.parseDouble(tfPrecio.getText());
+            boolean vigente = checkVigente.isSelected();
+            Alojamiento aloj = new Alojamiento(dest, nombre, direccion, capacidad, ambientes, camas, banios, precio, vigente);
+            alojData.guardarAlojamiento(aloj);
+        
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Ingrese datos válidos.");
+            }
+        
+       
+    }
 }
