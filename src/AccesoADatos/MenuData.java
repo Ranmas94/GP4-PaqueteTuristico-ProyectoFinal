@@ -92,8 +92,7 @@ public class MenuData {
         return menus;
     }
 
-    // Método para modificar un menú
-    public void modificarMenu(MenuPension menu) {
+   public void modificarMenu(MenuPension menu) {
         String sql = "UPDATE menu SET tipo = ?, porcentaje = ? WHERE idMenu = ?";
         
         try {
@@ -101,38 +100,38 @@ public class MenuData {
             ps.setString(1, menu.getTipo());
             ps.setDouble(2, menu.getPorcentaje());
             ps.setInt(3, menu.getIdMenu());
-            
-            int rowsUpdated = ps.executeUpdate();
-            
-             if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Menú modificado correctamente");
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Menú modificado con éxito");
             }
-            
+
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al modificar el menú: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al modificar menú: " + ex.getMessage());
         }
     }
 
-    // Método para eliminar un menú por id
-    public void eliminarMenu(int id) {
+     // Método para eliminar un menú
+    public void eliminarMenu(int idMenu) {
         String sql = "DELETE FROM menu WHERE idMenu = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idMenu);
             
-            int rowsDeleted = ps.executeUpdate();
-            if (rowsDeleted > 0) {
-                JOptionPane.showMessageDialog(null, "Menú eliminado correctamente");
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Menú eliminado con éxito");
             }
-            
+
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el menú: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al eliminar menú: " + ex.getMessage());
         }
     }
-    
+
+    /*
     public List<String> obtenerOpcionesEnumTipo() {
         List<String> opcionesEnum = new ArrayList<>();
         String sql = "SHOW COLUMNS FROM Menu LIKE 'tipo'";
@@ -159,6 +158,26 @@ public class MenuData {
         }
 
         return opcionesEnum;
+    }*/
+    // Método para obtener solo los tipos de menú
+public List<String> obtenerTiposMenu() {
+    String sql = "SELECT tipo FROM menu";
+    List<String> tiposMenu = new ArrayList<>();
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            tiposMenu.add(rs.getString("tipo"));
+        }
+
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener tipos de menú: " + ex.getMessage());
     }
+    return tiposMenu;
+}
 }
     
