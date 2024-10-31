@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
+
 /**
  *
  * @author Lourdes
@@ -152,13 +153,25 @@ private DestinoData destData = new DestinoData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
+      Date fechainicio = fechaInicio.getDate();
+       Date fechafin = fechaFin.getDate();
        if(validarCamposVacios(contenedor)){
            JOptionPane.showMessageDialog(this, "Debe seleccionar todos los campos");
            return;
-       }
-
+       }else  if(fechainicio.after(fechafin)){
+           JOptionPane.showMessageDialog(this, "Debe seleccionar fechas válidas.");
+           return;
+       }else{
        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
+       fechInicio = fechainicio;
+       fechFin = fechafin;
+       }
+       
+       
+       origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
+       destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
+       
        
        vistaEstadia v = new vistaEstadia();
        v.setVisible(true);

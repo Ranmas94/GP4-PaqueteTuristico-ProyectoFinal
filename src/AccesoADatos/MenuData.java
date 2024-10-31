@@ -131,6 +131,30 @@ public class MenuData {
         }
     }
 
+    public MenuPension buscarMenuPorTipo(String tipo) {
+    String sql = "SELECT * FROM menu WHERE tipo = ?";
+    MenuPension menu = null;
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, tipo);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            menu = new MenuPension();
+            menu.setIdMenu(rs.getInt("idMenu"));
+            menu.setTipo(rs.getString("tipo"));
+            menu.setPorcentaje(rs.getDouble("porcentaje"));
+        }
+
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al buscar el menú por tipo: " + ex.getMessage());
+    }
+    return menu;
+}
+    
     /*
     public List<String> obtenerOpcionesEnumTipo() {
         List<String> opcionesEnum = new ArrayList<>();

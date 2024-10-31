@@ -6,6 +6,7 @@ package Vistas;
 
 import AccesoADatos.MenuData;
 import Entidades.MenuPension;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -14,13 +15,14 @@ import Entidades.MenuPension;
  */
 public class seleccionarMenu extends javax.swing.JInternalFrame {
 public static MenuPension menuSeleccionado;
-private MenuData menuData = new MenuData();
+MenuData menuData = new MenuData();
     /**
      * Creates new form seleccionarMenu
      */
     public seleccionarMenu() {
         initComponents();
         cargarComboBox();
+       tfCosto.setEditable(false);
     }
 
     /**
@@ -35,15 +37,20 @@ private MenuData menuData = new MenuData();
         jlSeleccionar = new javax.swing.JLabel();
         jcbtipoMenu = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jcbCosto = new javax.swing.JComboBox<>();
         jbAgregar = new javax.swing.JButton();
         jbSiguiente = new javax.swing.JButton();
+        tfCosto = new javax.swing.JTextField();
 
         setClosable(true);
 
         jlSeleccionar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlSeleccionar.setText("Selecciona tu Menu");
 
+        jcbtipoMenu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbtipoMenuItemStateChanged(evt);
+            }
+        });
         jcbtipoMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbtipoMenuActionPerformed(evt);
@@ -52,14 +59,6 @@ private MenuData menuData = new MenuData();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Costo");
-
-        jcbCosto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbCosto.setSelectedIndex(-1);
-        jcbCosto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbCostoActionPerformed(evt);
-            }
-        });
 
         jbAgregar.setText("Agregar al paquete");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +86,7 @@ private MenuData menuData = new MenuData();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jcbCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jbAgregar)
@@ -109,9 +108,9 @@ private MenuData menuData = new MenuData();
                 .addComponent(jcbtipoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregar)
                     .addComponent(jbSiguiente))
@@ -122,12 +121,8 @@ private MenuData menuData = new MenuData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbtipoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbtipoMenuActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jcbtipoMenuActionPerformed
-
-    private void jcbCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCostoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbCostoActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
        PasajeView v = new PasajeView();
@@ -138,24 +133,42 @@ private MenuData menuData = new MenuData();
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         String tipo =  (String) jcbtipoMenu.getSelectedItem();
-        double costo = (double) jcbCosto.getSelectedItem();
+        double costo = Double.parseDouble(tfCosto.getText());
         menuSeleccionado = new MenuPension(tipo,costo); 
+        if(menuSeleccionado !=null){
+            JOptionPane.showMessageDialog(this, "Menu agregado al paquete");
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al intentar agregar al paquete.");
+            return;
+        }
     }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jcbtipoMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbtipoMenuItemStateChanged
+ if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        String tipo = (String) jcbtipoMenu.getSelectedItem();
+        MenuPension menu = menuData.buscarMenuPorTipo(tipo);
+        if (menu != null) {
+            tfCosto.setText(String.valueOf(menu.getPorcentaje()));
+        }
+    }
+    }//GEN-LAST:event_jcbtipoMenuItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbSiguiente;
-    private javax.swing.JComboBox<Double> jcbCosto;
     private javax.swing.JComboBox<String> jcbtipoMenu;
     private javax.swing.JLabel jlSeleccionar;
+    private javax.swing.JTextField tfCosto;
     // End of variables declaration//GEN-END:variables
 
 public void cargarComboBox(){
-    
+     jcbtipoMenu.removeAllItems();
+    tfCosto.setText("");
     for(MenuPension m : menuData.listarMenus()){
-        jcbtipoMenu.addItem(m);
+        jcbtipoMenu.addItem(m.getTipo());
+
     }    
 }
 

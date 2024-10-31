@@ -5,8 +5,13 @@ import AccesoADatos.AlojamientoData;
 import Entidades.Alojamiento;
 import Entidades.Estadia;
 import static Vistas.vistaDestino.destinoSeleccionado;
+import static Vistas.vistaDestino.fechFin;
+import static Vistas.vistaDestino.fechInicio;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -258,28 +263,36 @@ public static Estadia estadiaSeleccionada;
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         
-        if(validarCamposVacios(contenedor)){
+        Date fechaCheckIn = CheckIn.getDate();
+        Date fechaCheckOut = CheckOut.getDate();
+        
+        
+        if(validarCamposVacios(contenedor) ){
             JOptionPane.showMessageDialog(this,"Todos los campos deben estar llenos.");
             return;
-        }else {
-            jbSiguiente.setEnabled(true);
+        }else if(fechInicio.after(fechaCheckIn) || fechFin.before(fechaCheckOut)){
+             JOptionPane.showMessageDialog(this,"Ingrese una fecha valida.");
+            return;
+  
+}           else{
+                   jbSiguiente.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
             
             alojamientoSeleccionado = (Alojamiento) jcbAlojamiento.getSelectedItem();
             
-            Date fechaInit = CheckIn.getDate();
-            Date fechaFin = CheckOut.getDate();
+            
             double precioporNoche = alojamientoSeleccionado.getPrecioPorNoche();
             
+           LocalDate inicio = fechaCheckIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           LocalDate fin = fechaCheckOut.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           long diasEntre = ChronoUnit.DAYS.between(inicio, fin);
             
+            double Total = precioporNoche * diasEntre;
             
-            
-            
-            
-            
-            
-            
-        }
+            estadiaSeleccionada = new Estadia(alojamientoSeleccionado,inicio, fin, Total); 
+          }
+        
+        
         
         //validar si check in y check out están dentro de los parametros de fecha inicio, fecha fin
     }//GEN-LAST:event_jbAgregarActionPerformed

@@ -135,7 +135,7 @@ public class vistaModificarMenu extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
 

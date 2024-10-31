@@ -1,6 +1,7 @@
 
 package Vistas;
 
+import AccesoADatos.PasajeData;
 import Entidades.Destino;
 import Entidades.Pasaje;
 import static Vistas.vistaDestino.destinoSeleccionado;
@@ -13,6 +14,7 @@ import java.util.Random;
  */
 public class PasajeView extends javax.swing.JInternalFrame {
 public static Pasaje pasajeSeleccionado;
+PasajeData pasajeData = new PasajeData();
     /**
      * Creates new form Transporte
      */
@@ -73,6 +75,11 @@ public static Pasaje pasajeSeleccionado;
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Colectivo", "Avión", "Compartido" }));
         comboTipo.setEnabled(false);
+        comboTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTipoItemStateChanged(evt);
+            }
+        });
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoActionPerformed(evt);
@@ -206,6 +213,7 @@ public static Pasaje pasajeSeleccionado;
        txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
        txtOrigen.setText(origenSeleccionado.toString());
        txtDestino.setText(destinoSeleccionado.toString());
+       
      
      
             txtOrigen.setEnabled(false);
@@ -225,6 +233,7 @@ public static Pasaje pasajeSeleccionado;
         txtDestino.setEnabled(false);
         txtAsiento.setEnabled(false);
         btnAgregarPaquete.setEnabled(false);
+        tfCosto.setEnabled(false);
 
         // Habilitar botón Siguiente ya que no se necesita transporte
         btnSiguiente.setEnabled(true);
@@ -246,6 +255,17 @@ public static Pasaje pasajeSeleccionado;
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
+        String tipo = (String) comboTipo.getSelectedItem();   
+        if(tipo.equalsIgnoreCase("colectivo")){
+            tfCosto.setText("10000.0");
+        }else if(tipo.equalsIgnoreCase("avión")){
+             tfCosto.setText("20000.0");
+        }else{
+             tfCosto.setText("80000.0");
+        }
+    }//GEN-LAST:event_comboTipoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
