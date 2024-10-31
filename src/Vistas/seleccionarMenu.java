@@ -44,7 +44,6 @@ private MenuData menuData;
         jlSeleccionar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlSeleccionar.setText("Selecciona tu Menu");
 
-        jcbtipoMenu.setSelectedIndex(-1);
         jcbtipoMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbtipoMenuActionPerformed(evt);
@@ -148,8 +147,8 @@ private MenuData menuData;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbSiguiente;
-    private javax.swing.JComboBox<String> jcbCosto;
-    private javax.swing.JComboBox<MenuPension> jcbtipoMenu;
+    private javax.swing.JComboBox<Double> jcbCosto;
+    private javax.swing.JComboBox<String> jcbtipoMenu;
     private javax.swing.JLabel jlSeleccionar;
     // End of variables declaration//GEN-END:variables
 
@@ -159,4 +158,5 @@ public void cargarComboBox(){
         jcbtipoMenu.addItem(m);
     }    
 }
+
 }
