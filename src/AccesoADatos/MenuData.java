@@ -155,6 +155,26 @@ public class MenuData {
     return menu;
 }
     
+    public void modificarMenuPorcentaje(double porcentaje, int id) {
+        String sql = "UPDATE menu SET porcentaje = ? WHERE idMenu = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, porcentaje);
+            ps.setInt(2, id);
+          
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Menú modificado con éxito");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar menú: " + ex.getMessage());
+        }
+    }
+    
     /*
     public List<String> obtenerOpcionesEnumTipo() {
         List<String> opcionesEnum = new ArrayList<>();

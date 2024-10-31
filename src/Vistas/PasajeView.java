@@ -7,13 +7,14 @@ import Entidades.Pasaje;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.origenSeleccionado;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Stefani
  */
 public class PasajeView extends javax.swing.JInternalFrame {
-public static Pasaje pasajeSeleccionado;
+public static Pasaje pasajeSeleccionado = null;
 PasajeData pasajeData = new PasajeData();
     /**
      * Creates new form Transporte
@@ -250,6 +251,10 @@ PasajeData pasajeData = new PasajeData();
         int asiento = Integer.parseInt(txtAsiento.getText());
     
         pasajeSeleccionado = new Pasaje(tipo,costo,origen,destino,asiento);
+        
+        if(pasajeSeleccionado != null){
+            JOptionPane.showMessageDialog(this, "Pasaje agregado correctamente al paquete.");
+        }
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed

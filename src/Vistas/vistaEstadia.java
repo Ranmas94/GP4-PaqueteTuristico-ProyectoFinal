@@ -3,6 +3,7 @@ package Vistas;
 
 import AccesoADatos.AlojamientoData;
 import Entidades.Alojamiento;
+import Entidades.Destino;
 import Entidades.Estadia;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.fechFin;
@@ -12,7 +13,9 @@ import java.awt.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -362,9 +365,16 @@ private void cargarComboBoxAlojamiento(){
      jcbAlojamiento.removeAllItems();
    int capacidad = (int) jcbCapacidad.getSelectedItem();
    
-   for(Alojamiento alo : alData.buscarAlojamientoCapacidad(capacidad,destinoSeleccionado.getIdDestino())){ //el 1 se intercambia por getDestino.
+   List<Alojamiento> lista = alData.buscarAlojamientoCapacidad(capacidad,destinoSeleccionado.getIdDestino());
+   
+   if(lista.isEmpty()){
+       JOptionPane.showMessageDialog(this, "No hay alojamientos disponibles.");
+   }else{
+   for(Alojamiento alo : lista){ //el 1 se intercambia por getDestino.
        jcbAlojamiento.addItem(alo);
    } 
+   
+   }
   
 }
 
