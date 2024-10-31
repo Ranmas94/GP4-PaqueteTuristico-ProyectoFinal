@@ -14,7 +14,7 @@ import Entidades.MenuPension;
  */
 public class seleccionarMenu extends javax.swing.JInternalFrame {
 public static MenuPension menuSeleccionado;
-private MenuData menuData;
+private MenuData menuData = new MenuData();
     /**
      * Creates new form seleccionarMenu
      */

@@ -104,7 +104,7 @@ public class MenuData {
             
             int rowsUpdated = ps.executeUpdate();
             
-             if (rowsUpdated == 0) {
+             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(null, "Menú modificado correctamente");
             }
             

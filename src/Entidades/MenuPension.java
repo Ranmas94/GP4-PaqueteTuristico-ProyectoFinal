@@ -55,4 +55,11 @@ public class MenuPension {
     public void setPorcentaje(double porcentaje) {
         this.porcentaje = porcentaje;
     }
+
+    @Override
+    public String toString() {
+        return tipo + porcentaje ;
+    }
+    
+    
 }
