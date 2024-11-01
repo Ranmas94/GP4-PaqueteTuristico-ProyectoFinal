@@ -221,8 +221,6 @@ private boolean validarCamposVacios(JPanel jpanel) {
     return false; // No hay campos vacíos
 }
 
-private boolean controlFecha(){
-    return true;
-}
+
 
 }

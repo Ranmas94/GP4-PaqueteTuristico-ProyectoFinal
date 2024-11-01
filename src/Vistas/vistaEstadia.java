@@ -2,6 +2,7 @@
 package Vistas;
 
 import AccesoADatos.AlojamientoData;
+import AccesoADatos.EstadiaData;
 import Entidades.Alojamiento;
 import Entidades.Destino;
 import Entidades.Estadia;
@@ -28,7 +29,8 @@ import javax.swing.JTextField;
 public class vistaEstadia extends javax.swing.JInternalFrame {
 public static  Alojamiento alojamientoSeleccionado ;
 public static Estadia estadiaSeleccionada;
- private AlojamientoData alData = new AlojamientoData();
+ private final AlojamientoData alData = new AlojamientoData();
+ private final EstadiaData estData = new EstadiaData();
 
  
     /**
@@ -293,6 +295,8 @@ public static Estadia estadiaSeleccionada;
             double Total = precioporNoche * diasEntre;
             
             estadiaSeleccionada = new Estadia(alojamientoSeleccionado,inicio, fin, Total); 
+            estData.guardarEstadia(estadiaSeleccionada);
+            jbAgregar.setEnabled(false);
           }
         
         

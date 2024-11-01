@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,15 +25,16 @@ public class ClienteData {
     //Guardar Cliente
     
     public void guardarCliente(Cliente cliente){
-        String sql = "INSERT INTO cliente(nombre, apellido, correo, telefono) "
-                + "VALUES (?, ? , ? , ? )";
+        String sql = "INSERT INTO cliente(nombre, apellido, documento ,correo, telefono) "
+                + "VALUES (?, ? , ? , ?, ?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNombre() );
-            ps.setString(2, cliente.getApellido() );
-            ps.setString(3, cliente.getCorreo() );
-            ps.setString(4, cliente.getTelefono());
+            ps.setString(2, cliente.getApellido());
+            ps.setLong(3, cliente.getDocumento());
+            ps.setString(4, cliente.getCorreo() );
+            ps.setString(5, cliente.getTelefono());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -53,7 +52,7 @@ public class ClienteData {
     }
     
     public void actualizarCliente(Cliente cliente){
-        String sql = "UPDATE cliente SET nombre = ?, apellido = ?, correo = ?, telefono = ?"
+        String sql = "UPDATE cliente SET nombre = ?, apellido = ?, documento = ?, correo = ?, telefono = ?"
                 + "WHERE idCliente = ?";
         
         try {
@@ -61,8 +60,9 @@ public class ClienteData {
             
             ps.setString(1, cliente.getNombre() );
             ps.setString(2, cliente.getApellido() );
-            ps.setString(3, cliente.getCorreo() );
-            ps.setString(4, cliente.getTelefono());
+            ps.setLong(3, cliente.getDocumento());
+            ps.setString(4, cliente.getCorreo() );
+            ps.setString(5, cliente.getTelefono());
             
            int exito = ps.executeUpdate();
            if(exito == 1){
@@ -97,7 +97,7 @@ public class ClienteData {
     
     //listar Clientes
       public List<Cliente> listarClientes(){
-          String sql = "SELECT idCliente, nombre, apellido, correo, telefono FROM cliente WHERE 1";
+          String sql = "SELECT idCliente, nombre, apellido, documento, correo, telefono FROM cliente WHERE 1";
                  
           ArrayList<Cliente> clientes = new ArrayList<>();
           
@@ -110,6 +110,7 @@ public class ClienteData {
                  cli.setIdCliente(rs.getInt("idCliente"));
                  cli.setNombre(rs.getString("nombre"));
                  cli.setApellido(rs.getString("apellido"));
+                 cli.setDocumento(rs.getLong("documento"));
                  cli.setCorreo(rs.getString("correo"));
                  cli.setTelefono(rs.getString("telefono"));
                  

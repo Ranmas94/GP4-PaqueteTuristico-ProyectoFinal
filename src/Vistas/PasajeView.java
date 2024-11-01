@@ -2,7 +2,6 @@
 package Vistas;
 
 import AccesoADatos.PasajeData;
-import Entidades.Destino;
 import Entidades.Pasaje;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.origenSeleccionado;
@@ -26,6 +25,7 @@ PasajeData pasajeData = new PasajeData();
         txtOrigen.setEnabled(false);
         txtDestino.setEnabled(false);
         txtAsiento.setEnabled(false);
+        tfCosto.setEnabled(false);
         btnAgregarPaquete.setEnabled(false);
         btnSiguiente.setEnabled(false);
     }
@@ -75,6 +75,7 @@ PasajeData pasajeData = new PasajeData();
         jLabel2.setText("¿Tipo de transporte en el que desea viajar?");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Colectivo", "Avión", "Compartido" }));
+        comboTipo.setSelectedIndex(-1);
         comboTipo.setEnabled(false);
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -118,6 +119,7 @@ PasajeData pasajeData = new PasajeData();
         });
 
         tfCosto.setText("Costo");
+        tfCosto.setEnabled(false);
 
         javax.swing.GroupLayout PanelTransporteLayout = new javax.swing.GroupLayout(PanelTransporte);
         PanelTransporte.setLayout(PanelTransporteLayout);
@@ -209,7 +211,7 @@ PasajeData pasajeData = new PasajeData();
     }//GEN-LAST:event_txtAsientoActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-       String tipoSeleccionado = (String) comboTipo.getSelectedItem();
+
        Random random = new Random();
        txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
        txtOrigen.setText(origenSeleccionado.toString());
@@ -243,22 +245,27 @@ PasajeData pasajeData = new PasajeData();
     private void btnAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPaqueteActionPerformed
               // Habilitar botón Siguiente al agregar el paquete
         btnSiguiente.setEnabled(true);
-        
+        try{
         String tipo = (String) comboTipo.getSelectedItem();
         double costo = Double.parseDouble( tfCosto.getText());
-        Destino origen = origenSeleccionado;
-        Destino destino = destinoSeleccionado;
         int asiento = Integer.parseInt(txtAsiento.getText());
-    
-        pasajeSeleccionado = new Pasaje(tipo,costo,origen,destino,asiento);
-        
+        pasajeSeleccionado = new Pasaje(tipo,costo,asiento);
+        btnAgregarPaquete.setEnabled(false);
         if(pasajeSeleccionado != null){
             JOptionPane.showMessageDialog(this, "Pasaje agregado correctamente al paquete.");
+        }else{
+            pasajeData.agregarPasaje(pasajeSeleccionado);
         }
+        }catch(NumberFormatException ex){
+         
+    }
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        // TODO add your handling code here:
+       vistaCliente v = new vistaCliente();
+        v.setVisible(true);
+       Menu.escritorio.add(v);
+       this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged

@@ -23,6 +23,7 @@ MenuData menuData = new MenuData();
         initComponents();
         cargarComboBox();
        tfCosto.setEditable(false);
+       jbSiguiente.setEnabled(false);
     }
 
     /**
@@ -137,6 +138,8 @@ MenuData menuData = new MenuData();
         menuSeleccionado = new MenuPension(tipo,costo); 
         if(menuSeleccionado !=null){
             JOptionPane.showMessageDialog(this, "Menu agregado al paquete");
+             jbSiguiente.setEnabled(true);
+             jbAgregar.setEnabled(false);
         }else{
             JOptionPane.showMessageDialog(this, "Error al intentar agregar al paquete.");
             return;
@@ -163,7 +166,7 @@ MenuData menuData = new MenuData();
     private javax.swing.JTextField tfCosto;
     // End of variables declaration//GEN-END:variables
 
-public void cargarComboBox(){
+private void cargarComboBox(){
      jcbtipoMenu.removeAllItems();
     tfCosto.setText("");
     for(MenuPension m : menuData.listarMenus()){

@@ -13,6 +13,7 @@ public class Cliente {
     private int idCliente;
     private String nombre;
     private String apellido;
+    private Long documento;
     private String correo;
     private String telefono;
 
@@ -21,13 +22,24 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String apellido, String correo, String telefono) {
+    public Cliente(int idCliente, String nombre, String apellido,Long documento, String correo, String telefono) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.documento = documento;
         this.correo = correo;
         this.telefono = telefono;
     }
+
+    public Cliente(String nombre, String apellido, Long documento, String correo, String telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = documento;
+        this.correo = correo;
+        this.telefono = telefono;
+    }
+    
+    
 
     // Getters y Setters
 
@@ -70,17 +82,23 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
 
-    // Metodo para mostrar info del cliente
-    public void mostrarInfo() {
-        System.out.println("Cliente: " + nombre + " " + apellido + " - Correo: " + correo);
+    public Long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Long documento) {
+        this.documento = documento;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", telefono=" + telefono + '}';
+        return "Cliente{" + "nombre=" + nombre + ", apellido=" + apellido + ", documento=" + documento + ", correo=" + correo + ", telefono=" + telefono + '}';
     }
+    
+    
+    
+  
     
 }
 

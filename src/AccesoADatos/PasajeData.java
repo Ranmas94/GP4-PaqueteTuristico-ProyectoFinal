@@ -27,14 +27,12 @@ public class PasajeData {
     
     // Método para agregar un pasaje
     public void agregarPasaje(Pasaje pasaje) {
-        String sql = "INSERT INTO pasajes (tipo, costo, origen, destino, asiento) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pasajes (tipo, costo, asiento) VALUES (?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, pasaje.getTipo());
             ps.setDouble(2, pasaje.getCosto());
-            ps.setInt(3, pasaje.getOrigen().getIdDestino()); 
-            ps.setInt(4, pasaje.getDestino().getIdDestino());
-            ps.setInt(5, pasaje.getAsiento());
+            ps.setInt(3, pasaje.getAsiento());
 
             ps.executeUpdate();
             
@@ -52,15 +50,13 @@ public class PasajeData {
 
     // Método para actualizar un pasaje
     public void actualizarPasaje(Pasaje pasaje) {
-        String sql = "UPDATE pasajes SET tipo = ?, costo = ?, origen = ?, destino = ?, asiento = ? WHERE idPasaje = ?";
+        String sql = "UPDATE pasajes SET tipo = ?, costo = ?,asiento = ? WHERE idPasaje = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, pasaje.getTipo());
             ps.setDouble(2, pasaje.getCosto());
-            ps.setInt(3, pasaje.getOrigen().getIdDestino());
-            ps.setInt(4, pasaje.getDestino().getIdDestino());
-            ps.setInt(5, pasaje.getAsiento());
-            ps.setInt(6, pasaje.getIdPasaje());
+            ps.setInt(3, pasaje.getAsiento());
+            ps.setInt(4, pasaje.getIdPasaje());
 
             int filasActualizadas = ps.executeUpdate();
             if (filasActualizadas > 0) {
@@ -103,16 +99,6 @@ public class PasajeData {
                 pasaje.setTipo(rs.getString("tipo"));
                 pasaje.setCosto(rs.getDouble("costo"));
                 pasaje.setAsiento(rs.getInt("asiento"));
-                
-                // Crear objetos `Destino` para origen y destino
-                Destino origen = new Destino();
-                origen.setIdDestino(rs.getInt("origen"));
-                pasaje.setOrigen(origen);
-                
-                Destino destino = new Destino();
-                destino.setIdDestino(rs.getInt("destino"));
-                pasaje.setDestino(destino);
-
                 pasajes.add(pasaje);
             }
         } catch (SQLException ex) {
