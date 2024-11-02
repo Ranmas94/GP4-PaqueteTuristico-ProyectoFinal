@@ -237,6 +237,7 @@ CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
+  `documento` bignit(11) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `telefono` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -245,13 +246,13 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`, `correo`, `telefono`) VALUES
-(1, 'Lourdes', 'Escudero', 'lourdesescudero@gmail.com', '26640000'),
-(2, 'Victor', 'Aguilera', 'victoraguilera@gmail.com', '2664111111'),
-(3, 'Stefani', 'Escobar', 'stefaniescobar@gmail.com', '2664222222'),
-(4, 'Dante', 'Poblete', 'dantepoblete@gmail.com', '2664333333'),
-(5, 'Federico', 'Grippo', 'federicogrippo@gmail.com', '2664444444'),
-(6, 'Maximiliano', 'Matilla', 'maximilianomatilla@gmail.com', '2664555555');
+INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`,`documento`, `correo`, `telefono`) VALUES
+(1, 'Lourdes', 'Escudero',111, 'lourdesescudero@gmail.com', '26640000'),
+(2, 'Victor', 'Aguilera',222, 'victoraguilera@gmail.com', '2664111111'),
+(3, 'Stefani', 'Escobar',333, 'stefaniescobar@gmail.com', '2664222222'),
+(4, 'Dante', 'Poblete',444, 'dantepoblete@gmail.com', '2664333333'),
+(5, 'Federico', 'Grippo',555, 'federicogrippo@gmail.com', '2664444444'),
+(6, 'Maximiliano', 'Matilla',666, 'maximilianomatilla@gmail.com', '2664555555');
 
 -- --------------------------------------------------------
 
@@ -309,7 +310,7 @@ CREATE TABLE `estadia` (
 
 CREATE TABLE `menu` (
   `idMenu` int(11) NOT NULL,
-  `tipo` enum('Sin_Pension','Desayuno','Media_Pension','Pension_Completa') NOT NULL,
+  `tipo` varchar(100) NOT NULL,
   `porcentaje` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -339,6 +340,7 @@ CREATE TABLE `paquete` (
   `fechaInicio` date NOT NULL,
   `fechaFin` date NOT NULL,
   `cantidadPasajeros` int(11) NOT NULL,
+  `medio_Pago` varchar(100) NOT NULL,
   `precioTotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -365,8 +367,6 @@ CREATE TABLE `pasaje` (
   `idPasaje` int(11) NOT NULL,
   `tipo` varchar(100) NOT NULL,
   `costo` decimal(10,2) NOT NULL,
-  `origen` int(11) DEFAULT NULL,
-  `destino` int(11) DEFAULT NULL,
   `asiento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -430,8 +430,6 @@ ALTER TABLE `paquetecliente`
 --
 ALTER TABLE `pasaje`
   ADD PRIMARY KEY (`idPasaje`),
-  ADD KEY `origen` (`origen`),
-  ADD KEY `destino` (`destino`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
