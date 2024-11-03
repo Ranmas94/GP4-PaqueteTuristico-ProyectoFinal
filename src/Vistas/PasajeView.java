@@ -1,12 +1,20 @@
 
 package Vistas;
 
-import AccesoADatos.PasajeData;
+
+import AccesoADatos.TransporteData;
 import Entidades.Pasaje;
+import Entidades.Transporte;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.origenSeleccionado;
+import java.awt.Component;
 import java.util.Random;
-import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
+
+import javax.swing.JComboBox;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -14,20 +22,17 @@ import javax.swing.JOptionPane;
  */
 public class PasajeView extends javax.swing.JInternalFrame {
 public static Pasaje pasajeSeleccionado = null;
-PasajeData pasajeData = new PasajeData();
+TransporteData tranData = new TransporteData();
     /**
      * Creates new form Transporte
      */
     public PasajeView() {
         initComponents();
         // Desactivar componentes al inicio
-        comboTipo.setEnabled(false);
-        txtOrigen.setEnabled(false);
-        txtDestino.setEnabled(false);
-        txtAsiento.setEnabled(false);
-        tfCosto.setEnabled(false);
+        bloquearCampos(PanelTransporte);
         btnAgregarPaquete.setEnabled(false);
         btnSiguiente.setEnabled(false);
+        cargarComboBox();
     }
    
     // Configuración inicial de botones y campos
@@ -74,7 +79,6 @@ PasajeData pasajeData = new PasajeData();
 
         jLabel2.setText("¿Tipo de transporte en el que desea viajar?");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Colectivo", "Avión", "Compartido" }));
         comboTipo.setSelectedIndex(-1);
         comboTipo.setEnabled(false);
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -96,11 +100,6 @@ PasajeData pasajeData = new PasajeData();
 
         txtAsiento.setText("Número de asiento");
         txtAsiento.setEnabled(false);
-        txtAsiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAsientoActionPerformed(evt);
-            }
-        });
 
         btnAgregarPaquete.setText("Agregar al Paquete");
         btnAgregarPaquete.setEnabled(false);
@@ -206,24 +205,14 @@ PasajeData pasajeData = new PasajeData();
         btnSiguiente.setEnabled(false);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void txtAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAsientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAsientoActionPerformed
-
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
 
-       Random random = new Random();
-       txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
-       txtOrigen.setText(origenSeleccionado.toString());
-       txtDestino.setText(destinoSeleccionado.toString());
-       
-     
-     
-            txtOrigen.setEnabled(false);
-            txtDestino.setEnabled(false);
-            txtAsiento.setEnabled(false);
-            btnAgregarPaquete.setEnabled(true);
-        
+        Random random = new Random();
+        txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
+        txtOrigen.setText(origenSeleccionado.toString());
+        txtDestino.setText(destinoSeleccionado.toString());
+        btnAgregarPaquete.setEnabled(true);
+
     
     }//GEN-LAST:event_comboTipoActionPerformed
 
@@ -231,34 +220,22 @@ PasajeData pasajeData = new PasajeData();
        jCheckBox1.setSelected(false); // Desmarcar el checkbox "Sí"
 
         // Desactivar campos de tipo de transporte y botón Agregar Paquete
-        comboTipo.setEnabled(false);
-        txtOrigen.setEnabled(false);
-        txtDestino.setEnabled(false);
-        txtAsiento.setEnabled(false);
+         bloquearCampos(PanelTransporte);
         btnAgregarPaquete.setEnabled(false);
-        tfCosto.setEnabled(false);
+       
 
         // Habilitar botón Siguiente ya que no se necesita transporte
         btnSiguiente.setEnabled(true);
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void btnAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPaqueteActionPerformed
-              // Habilitar botón Siguiente al agregar el paquete
-        btnSiguiente.setEnabled(true);
-        try{
-        String tipo = (String) comboTipo.getSelectedItem();
-        double costo = Double.parseDouble( tfCosto.getText());
-        int asiento = Integer.parseInt(txtAsiento.getText());
-        pasajeSeleccionado = new Pasaje(tipo,costo,asiento);
-        btnAgregarPaquete.setEnabled(false);
-        if(pasajeSeleccionado != null){
-            JOptionPane.showMessageDialog(this, "Pasaje agregado correctamente al paquete.");
-        }else{
-            pasajeData.agregarPasaje(pasajeSeleccionado);
-        }
-        }catch(NumberFormatException ex){
-         
-    }
+       String tipo = (String) comboTipo.getSelectedItem();
+       int asiento = Integer.parseInt(txtAsiento.getText());
+        Transporte tran = tranData.obtenerTransportePorTipo(tipo);
+        pasajeSeleccionado = new Pasaje(tran,origenSeleccionado,destinoSeleccionado,asiento);
+         btnAgregarPaquete.setEnabled(false);
+          btnSiguiente.setEnabled(true);
+          bloquearTodosCampos(PanelTransporte);
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -269,14 +246,8 @@ PasajeData pasajeData = new PasajeData();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
-        String tipo = (String) comboTipo.getSelectedItem();   
-        if(tipo.equalsIgnoreCase("colectivo")){
-            tfCosto.setText("10000.0");
-        }else if(tipo.equalsIgnoreCase("avión")){
-             tfCosto.setText("20000.0");
-        }else{
-             tfCosto.setText("80000.0");
-        }
+      String tipo = (String) comboTipo.getSelectedItem();
+      actualizarCosto(tipo);
     }//GEN-LAST:event_comboTipoItemStateChanged
 
 
@@ -294,4 +265,50 @@ PasajeData pasajeData = new PasajeData();
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtOrigen;
     // End of variables declaration//GEN-END:variables
+private void cargarComboBox(){
+    for(String t : tranData.obtenerTodosLosTipos()){
+        comboTipo.addItem(t);
+    }
+}
+
+ private void bloquearTodosCampos(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        if (c instanceof JTextField) {
+            JTextField t = (JTextField) c;
+            t.setEnabled(false); // Deshabilita el JTextField
+        }
+        
+        if (c instanceof JComboBox) {
+            JComboBox<?> combo = (JComboBox<?>) c;
+            combo.setEnabled(false); // Deshabilita el JComboBox
+        }
+        
+        if (c instanceof JCheckBox) {
+            JCheckBox checkBox = (JCheckBox) c;
+            checkBox.setEnabled(false); // Deshabilita el JCheckBox
+        }
+    }
+}
+
+
+ private void bloquearCampos(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        if (c instanceof JTextField) {
+            JTextField t = (JTextField) c;
+            t.setEnabled(false); // Deshabilita el JTextField
+        }
+        
+        if (c instanceof JComboBox) {
+            JComboBox<?> combo = (JComboBox<?>) c;
+            combo.setEnabled(false); // Deshabilita el JComboBox
+        }
+        
+    }
+ 
+ }
+ 
+private void actualizarCosto(String tipo){
+    tfCosto.setText(String.valueOf(tranData.obtenerCostoPorTipo(tipo)));
+    
+}
 }

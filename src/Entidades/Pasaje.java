@@ -9,37 +9,29 @@ package Entidades;
 
 public class Pasaje {
     
-
-    
-    private int idPasaje;
-    private String tipo;
-    private double costo;
-    private int asiento;
-    
-    //Constructor vacio
+private int idPasaje;
+private Transporte idTransporte;
+private Destino origen;
+private Destino destino;
+private int asiento;
 
     public Pasaje() {
     }
-    
-    
-    // Constructor
-    public Pasaje(int idPasaje, String tipo, double costo, int asiento) {
+
+    public Pasaje(int idPasaje, Transporte idTransporte, Destino origen, Destino destino, int asiento) {
         this.idPasaje = idPasaje;
-        this.tipo = tipo;
-        this.costo = costo;
-        this.asiento = asiento;
-    }
-    
-    //Constructor sin id
-
-    public Pasaje(String tipo, double costo, int asiento) {
-        this.tipo = tipo;
-        this.costo = costo;
+        this.idTransporte = idTransporte;
+        this.origen = origen;
+        this.destino = destino;
         this.asiento = asiento;
     }
 
-
-    // Getters y Setters
+    public Pasaje(Transporte idTransporte, Destino origen, Destino destino, int asiento) {
+        this.idTransporte = idTransporte;
+        this.origen = origen;
+        this.destino = destino;
+        this.asiento = asiento;
+    }
 
     public int getIdPasaje() {
         return idPasaje;
@@ -49,20 +41,28 @@ public class Pasaje {
         this.idPasaje = idPasaje;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Transporte getIdTransporte() {
+        return idTransporte;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setIdTransporte(Transporte idTransporte) {
+        this.idTransporte = idTransporte;
     }
 
-    public double getCosto() {
-        return costo;
+    public Destino getOrigen() {
+        return origen;
     }
 
-    public void setCosto(double costo) {
-        this.costo = costo;
+    public void setOrigen(Destino origen) {
+        this.origen = origen;
+    }
+
+    public Destino getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Destino destino) {
+        this.destino = destino;
     }
 
     public int getAsiento() {
@@ -72,11 +72,13 @@ public class Pasaje {
     public void setAsiento(int asiento) {
         this.asiento = asiento;
     }
-    
 
-    // Metodo para mostrar info del pasaje
-    public void mostrarInfo() {
-        System.out.println("Pasaje: " + tipo + " - Costo: " + costo + " - Asiento: " + asiento);
+    @Override
+    public String toString() {
+        return "Pasaje{" + "idTransporte=" + idTransporte + ", origen=" + origen + ", destino=" + destino + ", asiento=" + asiento + '}';
     }
+
+
+
 }
 

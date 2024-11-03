@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2024 a las 19:44:55
+-- Tiempo de generación: 03-11-2024 a las 21:00:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -308,7 +308,9 @@ CREATE TABLE `estadia` (
 --
 
 INSERT INTO `estadia` (`idEstadia`, `idAlojamiento`, `fechaCheckIn`, `fechaCheckOut`, `total`) VALUES
-(0, 1, '2024-11-08', '2024-11-10', 20200.00);
+(1, 1, '2024-11-02', '2024-11-05', 30300.00),
+(3, 101, '2024-11-09', '2024-11-10', 23000.00),
+(4, 100, '2024-11-02', '2024-11-27', 750000.00);
 
 -- --------------------------------------------------------
 
@@ -374,7 +376,9 @@ CREATE TABLE `paquetecliente` (
 CREATE TABLE `pasaje` (
   `idPasaje` int(11) NOT NULL,
   `asiento` int(11) DEFAULT NULL,
-  `idTransporte` int(11) NOT NULL
+  `idTransporte` int(11) NOT NULL,
+  `origen` int(11) NOT NULL,
+  `destino` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -386,14 +390,14 @@ CREATE TABLE `pasaje` (
 CREATE TABLE `transporte` (
   `idTransporte` int(11) NOT NULL,
   `tipo` varchar(100) NOT NULL,
-  `precio` decimal(10,2) NOT NULL
+  `costo` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `transporte`
 --
 
-INSERT INTO `transporte` (`idTransporte`, `tipo`, `precio`) VALUES
+INSERT INTO `transporte` (`idTransporte`, `tipo`, `costo`) VALUES
 (1, 'Avión', 20000.00),
 (2, 'Colectivo', 10000.00),
 (3, 'Compartido', 8000.00);
@@ -458,7 +462,9 @@ ALTER TABLE `paquetecliente`
 --
 ALTER TABLE `pasaje`
   ADD PRIMARY KEY (`idPasaje`),
-  ADD KEY `fk_transporte` (`idTransporte`);
+  ADD KEY `fk_transporte` (`idTransporte`),
+  ADD KEY `fk_origen` (`origen`),
+  ADD KEY `fk_destino_pqt` (`destino`);
 
 --
 -- Indices de la tabla `transporte`
@@ -471,6 +477,54 @@ ALTER TABLE `transporte`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alojamiento`
+--
+ALTER TABLE `alojamiento`
+  MODIFY `idAlojamiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `destino`
+--
+ALTER TABLE `destino`
+  MODIFY `idDestino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `estadia`
+--
+ALTER TABLE `estadia`
+  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `idMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `paquete`
+--
+ALTER TABLE `paquete`
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `paquetecliente`
+--
+ALTER TABLE `paquetecliente`
+  MODIFY `idPaqueteCliente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pasaje`
+--
+ALTER TABLE `pasaje`
+  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `transporte`
 --
 ALTER TABLE `transporte`
@@ -481,9 +535,33 @@ ALTER TABLE `transporte`
 --
 
 --
+-- Filtros para la tabla `alojamiento`
+--
+ALTER TABLE `alojamiento`
+  ADD CONSTRAINT `fk_destino_aloj` FOREIGN KEY (`idDestino`) REFERENCES `destino` (`idDestino`);
+
+--
+-- Filtros para la tabla `estadia`
+--
+ALTER TABLE `estadia`
+  ADD CONSTRAINT `fk_alojamiento` FOREIGN KEY (`idAlojamiento`) REFERENCES `alojamiento` (`idAlojamiento`);
+
+--
+-- Filtros para la tabla `paquete`
+--
+ALTER TABLE `paquete`
+  ADD CONSTRAINT `fk_estadia_pqt` FOREIGN KEY (`idEstadia`) REFERENCES `estadia` (`idEstadia`),
+  ADD CONSTRAINT `fk_menu_pqt` FOREIGN KEY (`idMenu`) REFERENCES `menu` (`idMenu`),
+  ADD CONSTRAINT `fk_origen_pqt` FOREIGN KEY (`origen`) REFERENCES `destino` (`idDestino`),
+  ADD CONSTRAINT `fk_pasaje_pqt` FOREIGN KEY (`idPasaje`) REFERENCES `pasaje` (`idPasaje`);
+
+--
 -- Filtros para la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
+  ADD CONSTRAINT `fk_destino` FOREIGN KEY (`destino`) REFERENCES `destino` (`idDestino`),
+  ADD CONSTRAINT `fk_destino_pqt` FOREIGN KEY (`destino`) REFERENCES `destino` (`idDestino`),
+  ADD CONSTRAINT `fk_origen` FOREIGN KEY (`origen`) REFERENCES `destino` (`idDestino`),
   ADD CONSTRAINT `fk_transporte` FOREIGN KEY (`idTransporte`) REFERENCES `transporte` (`idTransporte`);
 COMMIT;
 
