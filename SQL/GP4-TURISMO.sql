@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2024 a las 21:00:49
+-- Tiempo de generación: 04-11-2024 a las 14:42:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -351,20 +351,8 @@ CREATE TABLE `paquete` (
   `fechaFin` date NOT NULL,
   `cantidadPasajeros` int(11) NOT NULL,
   `medio_Pago` varchar(100) NOT NULL,
+  `pagado` tinyint(1) NOT NULL,
   `precioTotal` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `paquetecliente`
---
-
-CREATE TABLE `paquetecliente` (
-  `idPaqueteCliente` int(11) NOT NULL,
-  `idCliente` int(11) NOT NULL,
-  `idPaquete` int(11) NOT NULL,
-  `pagado` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -450,14 +438,6 @@ ALTER TABLE `paquete`
   ADD KEY `destino` (`destino`);
 
 --
--- Indices de la tabla `paquetecliente`
---
-ALTER TABLE `paquetecliente`
-  ADD PRIMARY KEY (`idPaqueteCliente`),
-  ADD KEY `idCliente` (`idCliente`),
-  ADD KEY `idPaquete` (`idPaquete`);
-
---
 -- Indices de la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
@@ -511,12 +491,6 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `paquete`
   MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `paquetecliente`
---
-ALTER TABLE `paquetecliente`
-  MODIFY `idPaqueteCliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
