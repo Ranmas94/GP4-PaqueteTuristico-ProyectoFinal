@@ -187,6 +187,7 @@ TransporteData transData = new TransporteData();
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
         jbActualizar.setEnabled(true);
+        jbGuardar.setEnabled(false);
         buscar();
       
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -212,7 +213,7 @@ TransporteData transData = new TransporteData();
            guardar();
            limpiarCampos(contenedor);
            tfID.setText("");
-           jbActualizar.setEnabled(false);
+           
        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
