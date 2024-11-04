@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2024 a las 14:42:50
+-- Tiempo de generación: 04-11-2024 a las 19:14:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -342,18 +342,36 @@ INSERT INTO `menu` (`idMenu`, `tipo`, `porcentaje`) VALUES
 
 CREATE TABLE `paquete` (
   `idPaquete` int(11) NOT NULL,
-  `idEstadia` int(11) NOT NULL,
+  `idEstadia` int(11) DEFAULT NULL,
   `idPasaje` int(11) DEFAULT NULL,
   `idMenu` int(11) NOT NULL,
   `origen` int(11) DEFAULT NULL,
   `destino` int(11) DEFAULT NULL,
   `fechaInicio` date NOT NULL,
   `fechaFin` date NOT NULL,
+  `temporada` varchar(100) NOT NULL,
   `cantidadPasajeros` int(11) NOT NULL,
-  `medio_Pago` varchar(100) NOT NULL,
+  `medioPago` varchar(100) NOT NULL,
   `pagado` tinyint(1) NOT NULL,
+  `cancelado` tinyint(1) NOT NULL,
   `precioTotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `paquete`
+--
+
+INSERT INTO `paquete` (`idPaquete`, `idEstadia`, `idPasaje`, `idMenu`, `origen`, `destino`, `fechaInicio`, `fechaFin`, `temporada`, `cantidadPasajeros`, `medioPago`, `pagado`, `cancelado`, `precioTotal`) VALUES
+(11, NULL, NULL, 1, 1, 5, '2024-11-15', '2024-11-20', 'temporada_alta', 2, 'Tarjeta', 1, 0, 1500.00),
+(12, NULL, NULL, 2, 2, 6, '2024-12-01', '2024-12-10', 'temporada_media', 3, 'Efectivo', 0, 0, 2000.00),
+(13, NULL, NULL, 1, 1, 7, '2024-08-05', '2024-08-10', 'temporada_baja', 1, 'Transferencia', 1, 1, 800.00),
+(14, NULL, NULL, 2, 3, 8, '2024-09-15', '2024-09-20', 'temporada_alta', 2, 'Tarjeta', 0, 0, 1200.00),
+(15, NULL, NULL, 3, 4, 9, '2025-01-05', '2025-01-15', 'temporada_media', 4, 'Transferencia', 1, 0, 2500.00),
+(16, NULL, NULL, 2, 5, 10, '2025-02-20', '2025-02-28', 'temporada_baja', 2, 'Efectivo', 1, 0, 900.00),
+(17, NULL, NULL, 1, 2, 11, '2025-03-15', '2025-03-20', 'temporada_alta', 3, 'Tarjeta', 0, 0, 1800.00),
+(18, NULL, NULL, 3, 1, 12, '2025-04-01', '2025-04-07', 'temporada_media', 2, 'Efectivo', 1, 1, 1000.00),
+(19, NULL, NULL, 3, 4, 13, '2025-05-10', '2025-05-15', 'temporada_baja', 1, 'Transferencia', 1, 0, 700.00),
+(20, NULL, NULL, 3, 3, 14, '2025-06-20', '2025-06-27', 'temporada_alta', 5, 'Tarjeta', 0, 0, 3000.00);
 
 -- --------------------------------------------------------
 
@@ -387,7 +405,7 @@ CREATE TABLE `transporte` (
 
 INSERT INTO `transporte` (`idTransporte`, `tipo`, `costo`) VALUES
 (1, 'Avión', 20000.00),
-(2, 'Colectivo', 10000.00),
+(2, 'Colectivo', 13000.00),
 (3, 'Compartido', 8000.00);
 
 --
@@ -490,7 +508,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
@@ -502,7 +520,7 @@ ALTER TABLE `pasaje`
 -- AUTO_INCREMENT de la tabla `transporte`
 --
 ALTER TABLE `transporte`
-  MODIFY `idTransporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTransporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
