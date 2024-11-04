@@ -19,6 +19,8 @@ public class Paquete {
     private LocalDate fechaFin;
     private int cantidadPasajeros;
     private String medioPago;
+    private boolean pagado;
+    private boolean cancelado;
     private double precioTotal;
     
     
@@ -29,7 +31,7 @@ public class Paquete {
     
     //Constructor con id
 
-    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, String medioPago, double precioTotal) {
+    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, String medioPago,boolean pagado,boolean cancelado, double precioTotal) {
         this.idPaquete = idPaquete;
         
         this.idEstadia = idEstadia;
@@ -41,12 +43,14 @@ public class Paquete {
         this.fechaFin = fechaFin;
         this.cantidadPasajeros = cantidadPasajeros;
         this.medioPago = medioPago;
+        this.pagado = pagado;
+        this.cancelado = cancelado;
         this.precioTotal = precioTotal;
     }
     
     //Constructor sin id
 
-    public Paquete( Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, String medioPago,double precioTotal) {
+    public Paquete( Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, LocalDate fechaInicio, LocalDate fechaFin,int cantidadPasajeros, String medioPago,boolean pagado,boolean cancelado,double precioTotal) {
        
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
@@ -57,6 +61,8 @@ public class Paquete {
         this.fechaFin = fechaFin;
         this.cantidadPasajeros = cantidadPasajeros;
         this.medioPago = medioPago;
+        this.pagado = pagado;
+        this.cancelado = cancelado;
         this.precioTotal = precioTotal;
     }
 
@@ -150,12 +156,33 @@ public class Paquete {
     public void setMedioPago(String medioPago) {
         this.medioPago = medioPago;
     }
+
+    public boolean isPagado() {
+        return pagado;
+    }
+
+    public void setPagado(boolean pagado) {
+        this.pagado = pagado;
+    }
+
+    public boolean isCancelado() {
+        return cancelado;
+    }
+
+    public void setCancelado(boolean cancelado) {
+        this.cancelado = cancelado;
+    }
+    
+    
     
        //TO STRING 
 
     @Override
     public String toString() {
-        return "Paquete{" + "idPaquete=" + idPaquete + ", idEstadia=" + idEstadia + ", idPasaje=" + idPasaje + ", idMenu=" + idMenu + ", origen=" + origen + ", destino=" + destino + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cantidadPasajeros=" + cantidadPasajeros + ", medioPago=" + medioPago + ", precioTotal=" + precioTotal + '}';
+        return "Paquete{" + "idEstadia=" + idEstadia + ", idPasaje=" + idPasaje + ", idMenu=" + idMenu + ", origen=" + origen + ", destino=" + destino + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cantidadPasajeros=" + cantidadPasajeros + ", medioPago=" + medioPago + ", pagado=" + pagado + ", cancelado=" + cancelado + ", precioTotal=" + precioTotal + '}';
     }
+
+    
+   
 
 }
