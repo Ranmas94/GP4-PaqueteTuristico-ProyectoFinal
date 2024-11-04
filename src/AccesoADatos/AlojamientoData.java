@@ -166,7 +166,7 @@ public class AlojamientoData {
             ps.close();
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null,"Error buscar alojamiento por capacidad. "+ ex.getMessage());
-             ex.printStackTrace(); // Imprimir el stack trace para más información
+          
              
         }
 
