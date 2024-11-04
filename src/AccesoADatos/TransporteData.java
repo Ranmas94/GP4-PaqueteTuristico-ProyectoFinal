@@ -144,5 +144,30 @@ public Transporte obtenerTransportePorTipo(String tipo) {
     return transporte;
 }
 
+// Método para obtener un objeto Transporte a partir de su ID
+public Transporte obtenerTransportePorId(int idTransporte) {
+    String sql = "SELECT * FROM transporte WHERE idTransporte = ?";
+    Transporte transporte = null;
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idTransporte);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                transporte = new Transporte();
+                transporte.setIdTransporte(rs.getInt("idTransporte"));
+                transporte.setTipo(rs.getString("tipo"));
+                transporte.setCosto(rs.getDouble("costo"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el transporte con el ID especificado.");
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error al obtener el transporte por ID: " + ex.getMessage());
+    }
+
+    return transporte;
+}
+
 }
 

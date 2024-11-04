@@ -6,7 +6,7 @@ package Vistas;
 
 import AccesoADatos.MenuData;
 import Entidades.MenuPension;
-import com.toedter.calendar.JDateChooser;
+
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

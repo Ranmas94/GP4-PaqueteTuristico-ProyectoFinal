@@ -60,6 +60,7 @@ public class Menu extends javax.swing.JFrame {
         itemAlojamiento = new javax.swing.JMenuItem();
         itemDestino = new javax.swing.JMenuItem();
         itemMenu = new javax.swing.JMenuItem();
+        itemTransporte = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -295,6 +296,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(itemMenu);
 
+        itemTransporte.setText("Transporte");
+        itemTransporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTransporteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemTransporte);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -393,6 +402,14 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbBuenosAiresActionPerformed
 
+    private void itemTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTransporteActionPerformed
+        escritorio.repaint();
+        vistaAgregarTransporte v = new vistaAgregarTransporte();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
+    }//GEN-LAST:event_itemTransporteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,6 +453,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAlojamiento;
     private javax.swing.JMenuItem itemDestino;
     private javax.swing.JMenuItem itemMenu;
+    private javax.swing.JMenuItem itemTransporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
