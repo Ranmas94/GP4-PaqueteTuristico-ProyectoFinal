@@ -6,6 +6,7 @@ package AccesoADatos;
 
 
 import Entidades.Destino;
+import Entidades.DestinoEstadistica;
 import Entidades.Estadia;
 import Entidades.MenuPension;
 import Entidades.Paquete;
@@ -310,6 +311,61 @@ public class PaqueteData {
     return detallesPaquetes;
 }
   
-  
+  public List<DestinoEstadistica> obtenerEstadisticasPorTemporada(String temporada) {
+    List<DestinoEstadistica> estadisticas = new ArrayList<>();
+    String sql = "SELECT d.ciudad, d.lugar, SUM(p.cantidadPasajeros) AS totalPersonas " +
+"                 FROM paquete p " +
+"                 JOIN destino d ON d.idDestino = p.destino " +
+"                WHERE p.cancelado = false AND p.temporada = ? " +
+"                 GROUP BY d.ciudad, d.lugar " + 
+"                 ORDER BY totalPersonas DESC;";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, temporada);
+
+        
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            DestinoEstadistica estadistica = new DestinoEstadistica(
+                rs.getString("ciudad"),
+                rs.getString("lugar"),
+                rs.getInt("totalPersonas")
+            );
+            estadisticas.add(estadistica);
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener estadísticas por temporada y mes: " + ex.getMessage());
+    }
+    return estadisticas;
+}
     
+    public List<DestinoEstadistica> obtenerEstadisticasPorMes(int mes) {
+    List<DestinoEstadistica> estadisticas = new ArrayList<>();
+        String sql = "SELECT d.ciudad, d.lugar, SUM(p.cantidadPasajeros) AS totalPersonas "
+                + "FROM paquete p "
+                + "JOIN destino d ON d.idDestino = p.destino "
+                + "WHERE p.cancelado = false "
+                + " AND MONTH(p.fechaInicio) = ?"
+                + "GROUP BY d.ciudad, d.lugar "
+                + "ORDER BY totalPersonas DESC;";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, mes);
+
+        
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            DestinoEstadistica estadistica = new DestinoEstadistica(
+                rs.getString("ciudad"),
+                rs.getString("lugar"),
+                rs.getInt("totalPersonas")
+            );
+            estadisticas.add(estadistica);
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener estadísticas por mes: " + ex.getMessage());
+    }
+    return estadisticas;
+}
+  
 }
