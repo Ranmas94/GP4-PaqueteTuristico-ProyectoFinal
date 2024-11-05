@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2024 a las 19:14:28
+-- Tiempo de generación: 05-11-2024 a las 07:47:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -48,7 +48,7 @@ CREATE TABLE `alojamiento` (
 
 INSERT INTO `alojamiento` (`idAlojamiento`, `idDestino`, `nombre`, `direccion`, `capacidad`, `nroAmbientes`, `cama`, `banios`, `precioPorNoche`, `vigente`) VALUES
 (1, 1, 'Hotel Carsson', 'Maipú y Viamonte 543', 5, 4, 4, 2, 10100.00, 1),
-(2, 1, 'Hostal Circus', 'Carlos Calvo y Chacabuco 212', 5, 4, 2, 3, 9000.00, 1),
+(2, 1, 'Hostal Circus', 'Carlos Calvo y Chacabuco 212', 5, 4, 2, 3, 22000.00, 1),
 (3, 1, 'Hotel Gran King', 'Lavalle y Florida 8891', 2, 1, 1, 1, 12000.00, 1),
 (4, 2, 'La Boca B&B.Posada', 'Falucho 999', 3, 3, 3, 2, 8000.00, 1),
 (5, 2, 'Hostal Ledezma', 'Caseros y Vicente 100', 4, 2, 3, 2, 10500.00, 1),
@@ -226,7 +226,12 @@ INSERT INTO `alojamiento` (`idAlojamiento`, `idDestino`, `nombre`, `direccion`, 
 (177, 13, 'Posada Refugio del Viento', 'Avenida del Viento 40', 4, 2, 2, 1, 20000.00, 1),
 (178, 14, 'Cabañas del Atardecer', 'Calle del Atardecer 20', 6, 3, 3, 2, 25000.00, 1),
 (179, 15, 'Hostal Estrella del Norte', 'Calle del Norte 24', 5, 2, 2, 1, 19000.00, 1),
-(180, 16, 'Hotel Rayo de Sol', 'Avenida del Sol 11', 8, 4, 4, 3, 36000.00, 1);
+(180, 16, 'Hotel Rayo de Sol', 'Avenida del Sol 11', 8, 4, 4, 3, 36000.00, 1),
+(181, 17, ' Pousada Louse', 'Centro, Balneário Camboriú', 8, 3, 8, 3, 20000.00, 1),
+(183, 18, 'Cabañas Las Marías', 'Brachieri 50, A4427 Cafayate', 5, 4, 4, 2, 30700.00, 1),
+(184, 21, 'Hotel Bagu Playa Grande', 'Leandro N. Alem 3528, B7600 Mar del Plata, Provincia de Buenos Aires', 6, 4, 6, 3, 42280.00, 1),
+(185, 19, 'Posada El Viñedo', 'Centro de Mendoza, en Paseo Alameda y las Ruinas de San Francisco', 2, 2, 2, 2, 34500.00, 1),
+(186, 20, 'Hotel Sky Gramado', 'Av. das Hortensias, 680 - Planalto, Gramado', 12, 12, 12, 5, 31900.00, 1);
 
 -- --------------------------------------------------------
 
@@ -287,7 +292,12 @@ INSERT INTO `destino` (`idDestino`, `ciudad`, `lugar`) VALUES
 (13, 'Jujuy', 'La Quebrada de Humahuaca'),
 (14, 'Jujuy', 'El Cerro de los Siete Colores'),
 (15, 'Misiones', 'Las Cataratas del Iguazú'),
-(16, 'Misiones', 'Parque Nacional Iguazú');
+(16, 'Misiones', 'Parque Nacional Iguazú'),
+(17, 'Santa Catarina - Brasil', 'Camboriú'),
+(18, 'Jujuy', 'Cafayate'),
+(19, 'Mendoza', 'Parque provincial Aconcagua'),
+(20, 'Río Grande del Sur - Brasil', 'Gramado y Canela'),
+(21, 'Buenos Aires', 'Mar del Plata');
 
 -- --------------------------------------------------------
 
@@ -310,7 +320,24 @@ CREATE TABLE `estadia` (
 INSERT INTO `estadia` (`idEstadia`, `idAlojamiento`, `fechaCheckIn`, `fechaCheckOut`, `total`) VALUES
 (1, 1, '2024-11-02', '2024-11-05', 30300.00),
 (3, 101, '2024-11-09', '2024-11-10', 23000.00),
-(4, 100, '2024-11-02', '2024-11-27', 750000.00);
+(4, 100, '2024-11-02', '2024-11-07', 150000.00),
+(5, 1, '2024-11-01', '2024-11-23', 222200.00),
+(6, 2, '2024-11-10', '2024-11-15', 45000.00),
+(9, 4, '2024-11-26', '2024-11-29', 24000.00),
+(10, 5, '2024-12-01', '2024-12-10', 105000.00),
+(11, 6, '2024-12-17', '2024-12-20', 35700.00),
+(12, 170, '2025-01-02', '2025-01-07', 95000.00),
+(13, 111, '2025-01-10', '2025-01-13', 69000.00),
+(14, 123, '2025-02-01', '2025-02-08', 245000.00),
+(15, 87, '2024-11-15', '2024-11-20', 155000.00),
+(16, 181, '2025-01-02', '2024-11-12', 200000.00),
+(17, 29, '2024-11-01', '2024-11-05', 180000.00),
+(18, 183, '2025-03-27', '2025-04-02', 214900.00),
+(19, 48, '2025-07-23', '2025-07-28', 138000.00),
+(20, 184, '2025-01-05', '2025-01-15', 428800.00),
+(21, 185, '2025-05-15', '2025-07-23', 276000.00),
+(22, 186, '2025-03-27', '2025-04-03', 191400.00),
+(23, 2, '2025-06-19', '2024-11-24', 110000.00);
 
 -- --------------------------------------------------------
 
@@ -362,16 +389,26 @@ CREATE TABLE `paquete` (
 --
 
 INSERT INTO `paquete` (`idPaquete`, `idEstadia`, `idPasaje`, `idMenu`, `origen`, `destino`, `fechaInicio`, `fechaFin`, `temporada`, `cantidadPasajeros`, `medioPago`, `pagado`, `cancelado`, `precioTotal`) VALUES
-(11, NULL, NULL, 1, 1, 5, '2024-11-15', '2024-11-20', 'temporada_alta', 2, 'Tarjeta', 1, 0, 1500.00),
-(12, NULL, NULL, 2, 2, 6, '2024-12-01', '2024-12-10', 'temporada_media', 3, 'Efectivo', 0, 0, 2000.00),
-(13, NULL, NULL, 1, 1, 7, '2024-08-05', '2024-08-10', 'temporada_baja', 1, 'Transferencia', 1, 1, 800.00),
-(14, NULL, NULL, 2, 3, 8, '2024-09-15', '2024-09-20', 'temporada_alta', 2, 'Tarjeta', 0, 0, 1200.00),
-(15, NULL, NULL, 3, 4, 9, '2025-01-05', '2025-01-15', 'temporada_media', 4, 'Transferencia', 1, 0, 2500.00),
-(16, NULL, NULL, 2, 5, 10, '2025-02-20', '2025-02-28', 'temporada_baja', 2, 'Efectivo', 1, 0, 900.00),
-(17, NULL, NULL, 1, 2, 11, '2025-03-15', '2025-03-20', 'temporada_alta', 3, 'Tarjeta', 0, 0, 1800.00),
-(18, NULL, NULL, 3, 1, 12, '2025-04-01', '2025-04-07', 'temporada_media', 2, 'Efectivo', 1, 1, 1000.00),
-(19, NULL, NULL, 3, 4, 13, '2025-05-10', '2025-05-15', 'temporada_baja', 1, 'Transferencia', 1, 0, 700.00),
-(20, NULL, NULL, 3, 3, 14, '2025-06-20', '2025-06-27', 'temporada_alta', 5, 'Tarjeta', 0, 0, 3000.00);
+(11, 1, 1, 1, 1, 1, '2024-11-01', '2024-11-06', 'temporada_alta', 2, 'Tarjeta', 1, 0, 50300.00),
+(12, 3, 2, 2, 1, 1, '2024-11-09', '2024-11-10', 'temporada_media', 3, 'Efectivo', 0, 0, 36720.00),
+(13, 4, 3, 2, 1, 16, '2024-11-03', '2024-11-08', 'temporada_baja', 1, 'Transferencia', 1, 0, 173400.00),
+(14, 5, 4, 1, 13, 1, '2024-10-31', '2024-11-24', 'temporada_alta', 2, 'Tarjeta', 0, 0, 235200.00),
+(15, 6, NULL, 3, 4, 1, '2025-11-10', '2025-11-15', 'temporada_media', 4, 'Transferencia', 1, 0, 47250.00),
+(16, 9, NULL, 2, 5, 2, '2024-11-25', '2024-11-30', 'temporada_baja', 2, 'Efectivo', 1, 0, 24480.00),
+(17, 10, 5, 1, 16, 2, '2024-11-30', '2024-12-11', 'temporada_alta', 3, 'Tarjeta', 0, 0, 125000.00),
+(18, 11, 6, 3, 12, 2, '2024-12-16', '2024-12-21', 'temporada_media', 2, 'Efectivo', 1, 0, 51135.00),
+(19, 12, 7, 3, 13, 6, '2025-01-01', '2025-01-08', 'temporada_baja', 1, 'Transferencia', 1, 0, 120750.00),
+(20, 13, 8, 1, 10, 11, '2025-01-09', '2025-01-14', 'temporada_alta', 5, 'Tarjeta', 0, 0, 77000.00),
+(23, 14, 9, 4, 6, 7, '2025-01-31', '2025-02-09', '', 2, 'Tarjeta', 0, 0, 48950.00),
+(24, 15, 10, 4, 2, 3, '2024-11-14', '2024-11-21', '', 2, 'Tarjeta', 0, 0, 291500.00),
+(25, 16, 11, 4, 4, 17, '2025-01-02', '2024-11-12', '', 2, 'Transferencia', 1, 1, 1500000.00),
+(26, 17, 16, 4, 1, 8, '2024-11-01', '2024-11-05', '', 3, 'Transferencia', 0, 0, 670000.00),
+(27, 18, 12, 4, 1, 18, '2025-03-27', '2025-04-02', '', 4, '', 0, 0, 280000.00),
+(28, 19, 17, 4, 10, 15, '2025-07-23', '2025-07-28', '', 4, 'Transferencia', 0, 0, 160000.00),
+(29, 22, 14, 4, 3, 20, '2025-03-27', '2025-04-03', '', 6, 'Transferencia', 0, 0, 800000.00),
+(30, 20, 15, 4, 13, 21, '2025-01-05', '2025-01-15', '', 6, 'Transferencia', 0, 0, 53900.00),
+(31, 21, 13, 4, 3, 19, '2025-05-15', '2025-07-23', '', 6, 'Transferencia', 0, 0, 445000.00),
+(32, 23, 18, 4, 13, 1, '2025-06-19', '2024-11-24', '', 5, 'Transferencia', 1, 1, 200000.00);
 
 -- --------------------------------------------------------
 
@@ -386,6 +423,30 @@ CREATE TABLE `pasaje` (
   `origen` int(11) NOT NULL,
   `destino` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pasaje`
+--
+
+INSERT INTO `pasaje` (`idPasaje`, `asiento`, `idTransporte`, `origen`, `destino`) VALUES
+(1, 2, 1, 1, 1),
+(2, 33, 2, 1, 1),
+(3, 12, 1, 1, 16),
+(4, 11, 2, 13, 1),
+(5, 23, 1, 16, 2),
+(6, 1, 2, 12, 2),
+(7, 32, 1, 13, 6),
+(8, 22, 3, 10, 11),
+(9, 4, 1, 6, 7),
+(10, 6, 1, 2, 3),
+(11, 33, 1, 4, 17),
+(12, 2, 1, 1, 18),
+(13, 11, 1, 3, 19),
+(14, 31, 1, 3, 20),
+(15, 22, 1, 13, 21),
+(16, 9, 1, 19, 8),
+(17, 23, 1, 10, 15),
+(18, 8, 1, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -453,7 +514,7 @@ ALTER TABLE `paquete`
   ADD KEY `idPasaje` (`idPasaje`),
   ADD KEY `idMenu` (`idMenu`),
   ADD KEY `origen` (`origen`),
-  ADD KEY `destino` (`destino`);
+  ADD KEY `fk_destino_paqt` (`destino`);
 
 --
 -- Indices de la tabla `pasaje`
@@ -478,7 +539,7 @@ ALTER TABLE `transporte`
 -- AUTO_INCREMENT de la tabla `alojamiento`
 --
 ALTER TABLE `alojamiento`
-  MODIFY `idAlojamiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `idAlojamiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -490,13 +551,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `destino`
 --
 ALTER TABLE `destino`
-  MODIFY `idDestino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idDestino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `estadia`
 --
 ALTER TABLE `estadia`
-  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -508,13 +569,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
-  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `transporte`
@@ -542,6 +603,7 @@ ALTER TABLE `estadia`
 -- Filtros para la tabla `paquete`
 --
 ALTER TABLE `paquete`
+  ADD CONSTRAINT `fk_destino_paqt` FOREIGN KEY (`destino`) REFERENCES `destino` (`idDestino`),
   ADD CONSTRAINT `fk_estadia_pqt` FOREIGN KEY (`idEstadia`) REFERENCES `estadia` (`idEstadia`),
   ADD CONSTRAINT `fk_menu_pqt` FOREIGN KEY (`idMenu`) REFERENCES `menu` (`idMenu`),
   ADD CONSTRAINT `fk_origen_pqt` FOREIGN KEY (`origen`) REFERENCES `destino` (`idDestino`),

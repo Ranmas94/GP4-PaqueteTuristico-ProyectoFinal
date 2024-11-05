@@ -9,6 +9,7 @@ import Entidades.Destino;
 import Entidades.Estadia;
 import Entidades.MenuPension;
 import Entidades.Paquete;
+import Entidades.PaqueteDetalle;
 import Entidades.Pasaje;
 
 import java.sql.Connection;
@@ -22,6 +23,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -71,6 +73,7 @@ public class PaqueteData {
          }
     }
     
+    //MODIFICAR PAQUETE
     public void modificarPaquete(Paquete paquete){
         String sql = "UPDATE paquete SET idEstadia = ?, idPasaje = ?, idMenu = ?, origen = ?, destino = ?, fechaInicio = ?, fechaFin = ?, cantidadPasajeros = ?, medioPago = ?"
                 + ", pagado = ?, cancelado = ?, precioTotal = ? WHERE idPaquete = ?";
@@ -107,8 +110,8 @@ public class PaqueteData {
          }
     }
     
-    //cancelar paquete
     
+    //cancelar paquete
   public void cancelarPaquetePorId(int idPaquete) {
     LocalDate fechaActual = LocalDate.now();
     LocalDate fechaInicioViaje = null;
@@ -154,9 +157,63 @@ public class PaqueteData {
     }
 }
   
+  
+  //METODO QUE MUESTRA TODOS LOS PAQUETES. USAR DE BASE SI SE REQUIERE AGREGAR UNA CONDICION.
+  public ArrayList<Paquete> mostrarPaquetes(){
+      ArrayList<Paquete> paquetes = new ArrayList<>();
+     
+      String sql = "SELECT * FROM paquete ";
+      
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+     
+             ResultSet rs = ps.executeQuery();
+             while(rs.next()){
+                 Paquete paquete = new Paquete();
+                 
+                 Estadia estadia = new Estadia();
+                 Pasaje pasaje = new Pasaje();
+                 MenuPension menu = new MenuPension();
+                 Destino origen = new Destino();
+                 Destino destino = new Destino();
+                 
+                 estadia.setIdEstadia(rs.getInt("idEstadia"));
+                 pasaje.setIdPasaje(rs.getInt("idPasaje"));
+                 menu.setIdMenu(rs.getInt("idMenu"));
+                 origen.setIdDestino(rs.getInt("origen"));
+                 destino.setIdDestino(rs.getInt("destino"));
+                 
+                 paquete.setIdPaquete(rs.getInt("idPaquete"));
+                 paquete.setIdEstadia(estadia);
+                 paquete.setIdPasaje(pasaje);
+                 paquete.setIdMenu(menu);
+                 paquete.setOrigen(origen);
+                 paquete.setDestino(destino);
+                 paquete.setFechaInicio(rs.getDate("fechaInicio"));
+                 paquete.setFechaFin(rs.getDate("fechaFin"));
+                 paquete.setTemporada(rs.getString("temporada"));
+                 paquete.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+                 paquete.setMedioPago(rs.getString("medioPago"));
+                 paquete.setPagado(rs.getBoolean("pagado"));
+                 paquete.setCancelado(rs.getBoolean("cancelado"));
+                 paquete.setPrecioTotal(rs.getDouble("precioTotal"));
+                 
+                 paquetes.add(paquete);
+             }
+             ps.close();
+             rs.close();
+             
+         } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias." + ex.getMessage());
+         }
+         return paquetes;
+  }
+  
+  //METODO QUE MUESTRA LOS PAQUETES QUE FUERON COMPRADOS LOS ULTIMOS DOS MESES
+  
   public ArrayList<Paquete> resumenPaquetesComprados(){
       ArrayList<Paquete> resumen = new ArrayList<>();
-     LocalDate fecha = LocalDate.now().minusMonths(2);
+     LocalDate fecha = LocalDate.now().minusMonths(2); //le restamos dos meses a la fecha actual
       String sql = "SELECT * FROM paquete WHERE paquete.fechaFin > ? AND paquete.cancelado = false";
       
          try {
@@ -204,5 +261,55 @@ public class PaqueteData {
          }
          return resumen;
   }
+  
+  //metodo para obtener el paquete con detalles especificos. SE PUEDE MODIFICAR PARA MOSTRAR SOLO LOS PAGADOS O CANCELADOS EM WHERE
+  public ArrayList<PaqueteDetalle> obtenerDetallePaquetes() {
+    ArrayList<PaqueteDetalle> detallesPaquetes = new ArrayList<>();
+    String sql = """
+        SELECT p.idPaquete,o.ciudad AS ciudadOrigen,d.ciudad AS ciudadDestino, p.fechaInicio, p.fechaFin, a.nombre AS nombreAlojamiento, a.direccion AS direccionAlojamiento,
+               t.tipo as tipoTransporte, p.cantidadPasajeros,p.medioPago,p.precioTotal, p.pagado, p.cancelado    
+        FROM paquete p
+        LEFT JOIN estadia e ON e.idEstadia = p.idEstadia
+        LEFT JOIN alojamiento a ON a.idAlojamiento = e.idAlojamiento
+        LEFT JOIN pasaje pa ON pa.idPasaje = p.idPasaje
+        LEFT JOIN transporte t ON t.idTransporte = pa.idTransporte
+        LEFT JOIN menu m ON m.idMenu = p.idMenu
+        LEFT JOIN destino o ON o.idDestino = p.origen
+        LEFT JOIN destino d ON d.idDestino = p.destino;
+    """;
+
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            PaqueteDetalle detalle = new PaqueteDetalle();
+            Paquete paquete = new Paquete();
+            paquete.setIdPaquete(rs.getInt("idPaquete"));
+            // Asignación de datos al objeto PaqueteDetalle
+            detalle.setIdPaquete(paquete); // Constructor que recibe idPaquete en Paquete
+            detalle.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+            detalle.setMedioPago(rs.getString("medioPago"));
+            detalle.setPrecioTotal(rs.getDouble("precioTotal"));
+            detalle.setPagado(rs.getBoolean("pagado"));
+            detalle.setCancelado(rs.getBoolean("cancelado"));
+            detalle.setFechaInicio(rs.getDate("fechaInicio"));
+            detalle.setFechaFin(rs.getDate("fechaFin"));
+            detalle.setCiudadOrigen(rs.getString("ciudadOrigen"));
+            detalle.setCiudadDestino(rs.getString("ciudadDestino"));
+            detalle.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
+            detalle.setDireccionAlojamiento(rs.getString("direccionAlojamiento"));
+            detalle.setTipoMenu(rs.getString("tipoMenu"));
+            detalle.setTipoTransporte(rs.getString("tipoTransporte"));
+            
+            detallesPaquetes.add(detalle);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error al obtener detalles de paquetes: " + ex.getMessage());
+    }
+    
+    return detallesPaquetes;
+}
+  
+  
     
 }
