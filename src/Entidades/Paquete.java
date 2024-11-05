@@ -11,6 +11,7 @@ import java.sql.Date;
  */
 public class Paquete {
     private int idPaquete;
+    private Cliente idCliente;
     private Estadia idEstadia;
     private Pasaje idPasaje;
     private MenuPension idMenu;
@@ -33,9 +34,9 @@ public class Paquete {
     
     //Constructor con id
 
-    public Paquete(int idPaquete, Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, Date fechaInicio, Date fechaFin, String temporada,int cantidadPasajeros, String medioPago,boolean pagado,boolean cancelado, double precioTotal) {
+    public Paquete(int idPaquete,Cliente idCliente, Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, Date fechaInicio, Date fechaFin, String temporada,int cantidadPasajeros, String medioPago,boolean pagado,boolean cancelado, double precioTotal) {
         this.idPaquete = idPaquete;
-        
+        this.idCliente = idCliente;
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
         this.idMenu = idMenu;
@@ -53,8 +54,8 @@ public class Paquete {
     
     //Constructor sin id
 
-    public Paquete( Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, Date fechaInicio, Date fechaFin, String temporada,int cantidadPasajeros, String medioPago,boolean pagado,boolean cancelado,double precioTotal) {
-       
+    public Paquete(Cliente idCliente, Estadia idEstadia, Pasaje idPasaje, MenuPension idMenu, Destino origen, Destino destino, Date fechaInicio, Date fechaFin, String temporada,int cantidadPasajeros, String medioPago,boolean pagado,boolean cancelado,double precioTotal) {
+       this.idCliente = idCliente;
         this.idEstadia = idEstadia;
         this.idPasaje = idPasaje;
         this.idMenu = idMenu;
@@ -79,6 +80,15 @@ public class Paquete {
         this.idPaquete = idPaquete;
     }
 
+    public Cliente getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    
 
     public Estadia getIdEstadia() {
         return idEstadia;
@@ -190,7 +200,9 @@ public class Paquete {
 
     @Override
     public String toString() {
-        return "Paquete{" + "idEstadia=" + idEstadia + ", idPasaje=" + idPasaje + ", idMenu=" + idMenu + ", origen=" + origen + ", destino=" + destino + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", temporada=" + temporada + ", cantidadPasajeros=" + cantidadPasajeros + ", medioPago=" + medioPago + ", pagado=" + pagado + ", cancelado=" + cancelado + ", precioTotal=" + precioTotal + '}';
+        return "Paquete{" + "idPaquete=" + idPaquete + ", idCliente=" + idCliente + ", idEstadia=" + idEstadia + ", idPasaje=" + idPasaje + ", idMenu=" + idMenu + ", origen=" + origen + ", destino=" + destino + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", temporada=" + temporada + ", cantidadPasajeros=" + cantidadPasajeros + ", medioPago=" + medioPago + ", pagado=" + pagado + ", cancelado=" + cancelado + ", precioTotal=" + precioTotal + '}';
     }
+
+   
 
 }

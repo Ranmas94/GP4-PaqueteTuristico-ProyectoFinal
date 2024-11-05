@@ -9,20 +9,33 @@ package Entidades;
  * @author Lourdes
  */
 public class DestinoEstadistica {
-    private Destino destino;
+    private String ciudad;
+    private String lugar;
     private int cantidad;
 
-    public DestinoEstadistica(Destino destino, int cantidad) {
-        this.destino = destino;
+    public DestinoEstadistica() {
+    }
+
+    public DestinoEstadistica(String ciudad, String lugar, int cantidad) {
+        this.ciudad = ciudad;
+        this.lugar = lugar;
         this.cantidad = cantidad;
     }
 
-    public Destino getDestino() {
-        return destino;
+    public String getCiudad() {
+        return ciudad;
     }
 
-    public void setDestino(Destino destino) {
-        this.destino = destino;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     public int getCantidad() {
@@ -35,9 +48,10 @@ public class DestinoEstadistica {
 
     @Override
     public String toString() {
-        return "DestinoEstadistica{" + "destino=" + destino + ", cantidad=" + cantidad + '}';
+        return "DestinoEstadistica{" + "ciudad=" + ciudad + ", lugar=" + lugar + ", cantidad=" + cantidad + '}';
     }
-    
+
+   
     
     
 }
