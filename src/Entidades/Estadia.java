@@ -9,13 +9,14 @@ package Entidades;
  * @author Ranma
  */
 import java.time.LocalDate;
+import java.util.Date;
 
 
 public class Estadia {
     private int idEstadia;
     private Alojamiento idAlojamiento;
-    private LocalDate fechaCheckIn;
-    private LocalDate fechaCheckOut;
+    private Date fechaCheckIn;
+    private Date fechaCheckOut;
     private double total; 
 
      // Constructor vacio
@@ -23,7 +24,7 @@ public class Estadia {
     }
 
     // Constructor
-    public Estadia(int idEstadia, Alojamiento idAlojamiento, LocalDate fechaCheckIn, LocalDate fechaCheckOut) {
+    public Estadia(int idEstadia, Alojamiento idAlojamiento, Date fechaCheckIn, Date fechaCheckOut) {
         this.idEstadia = idEstadia;
         this.idAlojamiento = idAlojamiento;
         this.fechaCheckIn = fechaCheckIn;
@@ -33,7 +34,7 @@ public class Estadia {
     
     //Contructor sin id
 
-    public Estadia(Alojamiento idAlojamiento, LocalDate fechaCheckIn, LocalDate fechaCheckOut, double total) {
+    public Estadia(Alojamiento idAlojamiento, Date fechaCheckIn, Date fechaCheckOut, double total) {
         this.idAlojamiento = idAlojamiento;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
@@ -59,19 +60,19 @@ public class Estadia {
         this.idAlojamiento = idAlojamiento;
     }
 
-    public LocalDate getFechaCheckIn() {
+    public Date getFechaCheckIn() {
         return fechaCheckIn;
     }
 
-    public void setFechaCheckIn(LocalDate fechaCheckIn) {
+    public void setFechaCheckIn(Date fechaCheckIn) {
         this.fechaCheckIn = fechaCheckIn;
     }
 
-    public LocalDate getFechaCheckOut() {
+    public Date getFechaCheckOut() {
         return fechaCheckOut;
     }
 
-    public void setFechaCheckOut(LocalDate fechaCheckOut) {
+    public void setFechaCheckOut(Date fechaCheckOut) {
         this.fechaCheckOut = fechaCheckOut;
     }
 

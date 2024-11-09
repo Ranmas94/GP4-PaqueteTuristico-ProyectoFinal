@@ -294,7 +294,7 @@ public static Estadia estadiaSeleccionada;
             
             double Total = precioporNoche * diasEntre;
             
-            estadiaSeleccionada = new Estadia(alojamientoSeleccionado,inicio, fin, Total); 
+            estadiaSeleccionada = new Estadia(alojamientoSeleccionado,fechaCheckIn, fechaCheckOut, Total); 
             estData.guardarEstadia(estadiaSeleccionada);
             jbAgregar.setEnabled(false);
           }
@@ -366,7 +366,7 @@ private void cargarComboBoxCapacidad(){
 }
 
 private void cargarComboBoxAlojamiento(){
-     jcbAlojamiento.removeAllItems();
+   jcbAlojamiento.removeAllItems();
    int capacidad = (int) jcbCapacidad.getSelectedItem();
    
    List<Alojamiento> lista = alData.buscarAlojamientoCapacidad(capacidad,destinoSeleccionado.getIdDestino());
