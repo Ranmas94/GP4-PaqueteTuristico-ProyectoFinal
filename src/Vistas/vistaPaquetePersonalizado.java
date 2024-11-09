@@ -34,6 +34,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.swing.ButtonGroup;
 
 /**
  *
@@ -46,6 +47,15 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
      */
     public vistaPaquetePersonalizado() {
         initComponents();
+        ButtonGroup grupoIndividual = new ButtonGroup();
+        grupoIndividual.add(jrbIndividualSI);
+        grupoIndividual.add(jrbIndividualNo);
+        
+        ButtonGroup grupoNinios = new ButtonGroup();
+        grupoNinios.add(jrbMenoresNo);
+        grupoNinios.add(jrbMenoresSi);
+        
+        
     }
 
     /**
@@ -863,5 +873,7 @@ private boolean validarCamposVacios(JPanel jpanel) {
          JOptionPane.showMessageDialog(this, "Error al actualizar datos. " +ex);
      }
   }
+  
+  
 
 }
