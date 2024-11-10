@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 public class vistaCliente extends javax.swing.JInternalFrame {
 public static String medioPago;
 public ClienteData cliData = new ClienteData();
+public static Cliente clienteSeleccionado;
 
     /**
      * Creates new form vistaCliente
@@ -199,6 +200,7 @@ public ClienteData cliData = new ClienteData();
         medioPago = (String) jcbMedioPago.getSelectedItem();
         
         Cliente cli = new Cliente(nombre,apellido,dni,telefono,correo);
+        clienteSeleccionado = cli;
         cliData.guardarCliente(cli);
         jbResumen.setEnabled(true);
         jbGuardar.setEnabled(false);
@@ -212,7 +214,10 @@ public ClienteData cliData = new ClienteData();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResumenActionPerformed
-        // TODO add your handling code here:
+        vistaPaquetePersonalizado v = new  vistaPaquetePersonalizado();
+       v.setVisible(true);
+       Menu.escritorio.add(v);
+       this.dispose();
     }//GEN-LAST:event_jbResumenActionPerformed
 
 

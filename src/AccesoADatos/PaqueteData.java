@@ -13,17 +13,14 @@ import Entidades.MenuPension;
 import Entidades.Paquete;
 import Entidades.PaqueteDetalle;
 import Entidades.Pasaje;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,7 +156,7 @@ public ArrayList<Paquete> mostrarPaquetes() {
     }
     return paquetes;
 }
-  
+  //estadistica por temporada
   public List<DestinoEstadistica> obtenerEstadisticasPorTemporada(String temporada) {
     List<DestinoEstadistica> estadisticas = new ArrayList<>();
     String sql = "SELECT d.ciudad, d.lugar, SUM(p.cantidadPasajeros) AS totalPersonas " +
@@ -187,7 +184,7 @@ public ArrayList<Paquete> mostrarPaquetes() {
     }
     return estadisticas;
 }
-    
+    //estadistica por mes
     public List<DestinoEstadistica> obtenerEstadisticasPorMes(int mes) {
     List<DestinoEstadistica> estadisticas = new ArrayList<>();
         String sql = "SELECT d.ciudad, d.lugar, SUM(p.cantidadPasajeros) AS totalPersonas "
@@ -216,5 +213,105 @@ public ArrayList<Paquete> mostrarPaquetes() {
     }
     return estadisticas;
 }
+    //paquetes comprados los ultimos dos meses
+    public ArrayList<Paquete> resumenPaquetesComprados(){
+      ArrayList<Paquete> resumen = new ArrayList<>();
+     LocalDate fecha = LocalDate.now().minusMonths(2); //le restamos dos meses a la fecha actual
+      String sql = "SELECT * FROM paquete WHERE paquete.fechaFin > ? AND paquete.cancelado = false";
+      
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+             ps.setDate(1, Date.valueOf(fecha));
+             
+             ResultSet rs = ps.executeQuery();
+             while(rs.next()){
+                 Paquete paquete = new Paquete();
+                 
+                 Estadia estadia = new Estadia();
+                 Pasaje pasaje = new Pasaje();
+                 MenuPension menu = new MenuPension();
+                 Destino origen = new Destino();
+                 Destino destino = new Destino();
+                 
+                 estadia.setIdEstadia(rs.getInt("idEstadia"));
+                 pasaje.setIdPasaje(rs.getInt("idPasaje"));
+                 menu.setIdMenu(rs.getInt("idMenu"));
+                 origen.setIdDestino(rs.getInt("origen"));
+                 destino.setIdDestino(rs.getInt("destino"));
+                 
+                 paquete.setIdPaquete(rs.getInt("idPaquete"));
+                 paquete.setIdEstadia(estadia);
+                 paquete.setIdPasaje(pasaje);
+                 paquete.setIdMenu(menu);
+                 paquete.setOrigen(origen);
+                 paquete.setDestino(destino);
+                 paquete.setFechaInicio(rs.getDate("fechaInicio"));
+                 paquete.setFechaFin(rs.getDate("fechaFin"));
+                 paquete.setTemporada(rs.getString("temporada"));
+                 paquete.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+                 paquete.setMedioPago(rs.getString("medioPago"));
+                 paquete.setPagado(rs.getBoolean("pagado"));
+                 paquete.setCancelado(rs.getBoolean("cancelado"));
+                 paquete.setPrecioTotal(rs.getDouble("precioTotal"));
+                 
+                 resumen.add(paquete);
+             }
+             ps.close();
+             rs.close();
+             
+         } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias." + ex.getMessage());
+         }
+         return resumen;
+  }
   
+      public ArrayList<PaqueteDetalle> obtenerDetallePaquetes() {
+    ArrayList<PaqueteDetalle> detallesPaquetes = new ArrayList<>();
+    String sql = "SELECT p.idPaquete,o.ciudad AS ciudadOrigen,d.ciudad AS ciudadDestino, p.fechaInicio, p.fechaFin, a.nombre AS nombreAlojamiento, a.direccion AS direccionAlojamiento,"
+        + "t.tipo as tipoTransporte, p.cantidadPasajeros,p.medioPago,p.precioTotal, p.pagado, p.cancelado   " 
+        + "FROM paquete p"
+        + "LEFT JOIN estadia e ON e.idEstadia = p.idEstadia"
+        + "LEFT JOIN alojamiento a ON a.idAlojamiento = e.idAlojamiento"
+        + "LEFT JOIN pasaje pa ON pa.idPasaje = p.idPasaje"
+        + "LEFT JOIN transporte t ON t.idTransporte = pa.idTransporte"
+        + "LEFT JOIN menu m ON m.idMenu = p.idMenu"
+        + "LEFT JOIN destino o ON o.idDestino = p.origen"
+        + "LEFT JOIN destino d ON d.idDestino = p.destino;"
+    ;
+
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()){
+          while (rs.next()) {
+            PaqueteDetalle detalle = new PaqueteDetalle();
+             Paquete paquete = new Paquete();
+              paquete.setIdPaquete(rs.getInt("idPaquete"));
+             
+             // Asignación de datos al objeto PaqueteDetalle
+            detalle.setIdPaquete(paquete); // Constructor que recibe idPaquete en Paquete
+            detalle.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+            detalle.setMedioPago(rs.getString("medioPago"));
+            detalle.setPrecioTotal(rs.getDouble("precioTotal"));
+            detalle.setPagado(rs.getBoolean("pagado"));
+            detalle.setCancelado(rs.getBoolean("cancelado"));
+            detalle.setFechaInicio(rs.getDate("fechaInicio"));
+            detalle.setFechaFin(rs.getDate("fechaFin"));
+            detalle.setCiudadOrigen(rs.getString("ciudadOrigen"));
+            detalle.setCiudadDestino(rs.getString("ciudadDestino"));
+            detalle.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
+            detalle.setDireccionAlojamiento(rs.getString("direccionAlojamiento"));
+            detalle.setTipoMenu(rs.getString("tipoMenu"));
+            detalle.setTipoTransporte(rs.getString("tipoTransporte"));
+            
+            detallesPaquetes.add(detalle);
+             }
+        ps.close();
+        rs.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias." + ex.getMessage());
+    }
+    
+    return detallesPaquetes;
+    
+        
+    }
 }

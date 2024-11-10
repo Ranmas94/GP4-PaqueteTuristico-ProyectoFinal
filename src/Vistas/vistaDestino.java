@@ -8,7 +8,9 @@ import AccesoADatos.DestinoData;
 import Entidades.Destino;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.sql.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -153,8 +155,8 @@ private DestinoData destData = new DestinoData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-      Date fechainicio = fechaInicio.getDate();
-       Date fechafin = fechaFin.getDate();
+      Date fechainicio = (Date) fechaInicio.getDate();
+       Date fechafin = (Date) fechaFin.getDate();
        if(validarCamposVacios(contenedor)){
            JOptionPane.showMessageDialog(this, "Debe seleccionar todos los campos");
            return;
@@ -166,6 +168,7 @@ private DestinoData destData = new DestinoData();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
        fechInicio = fechainicio;
        fechFin = fechafin;
+       temporada();
        }
        
        
@@ -221,6 +224,32 @@ private boolean validarCamposVacios(JPanel jpanel) {
     return false; // No hay campos vacíos
 }
 
+private void temporada() {
+    // Convertimos Date a LocalDate
+    LocalDate inicio = fechInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
+    // Definición de fechas para temporadas
+    LocalDate inicioTemporadaAltaInvierno = LocalDate.of(inicio.getYear(), 12, 15);
+    LocalDate finTemporadaAltaInvierno = LocalDate.of(inicio.getYear() + 1, 2, 28);
+    LocalDate inicioTemporadaAltaJulio = LocalDate.of(inicio.getYear(), 7, 1);
+    LocalDate finTemporadaAltaJulio = LocalDate.of(inicio.getYear(), 7, 31);
+
+    LocalDate inicioPrimavera = LocalDate.of(inicio.getYear(), 9, 21);
+    LocalDate finPrimavera = LocalDate.of(inicio.getYear(), 12, 20);
+
+    LocalDate semanaSantaInicio = LocalDate.of(inicio.getYear(), 3, 24);
+    LocalDate semanaSantaFin = LocalDate.of(inicio.getYear(), 3, 31);
+
+    // Determinación de la temporada
+    if ((inicio.isAfter(inicioTemporadaAltaInvierno) && inicio.isBefore(finTemporadaAltaInvierno))
+        || (inicio.isAfter(inicioTemporadaAltaJulio) && inicio.isBefore(finTemporadaAltaJulio))) {
+        temporada = "temporada_Alta";
+    } else if (inicio.isAfter(inicioPrimavera) && inicio.isBefore(finPrimavera)
+        || (inicio.isAfter(semanaSantaInicio) && inicio.isBefore(semanaSantaFin))) {
+        temporada = "temporada_Media";
+    } else {
+        temporada = "temporada_Baja";
+    }
+}
 
 }

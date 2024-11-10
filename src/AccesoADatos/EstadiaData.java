@@ -32,8 +32,8 @@ public class EstadiaData {
              PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
              
              ps.setInt(1, estadia.getIdAlojamiento().getIdAlojamiento());
-            ps.setDate(2, Date.valueOf(estadia.getFechaCheckIn()));
-            ps.setDate(3, Date.valueOf(estadia.getFechaCheckOut()));
+            ps.setDate(2, (Date) estadia.getFechaCheckIn());
+            ps.setDate(3, (Date) estadia.getFechaCheckOut());
             ps.setDouble(4, estadia.getTotal());
              
              ps.executeUpdate();
@@ -56,8 +56,8 @@ public class EstadiaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, estadia.getIdAlojamiento().getIdAlojamiento());
-            ps.setDate(2, Date.valueOf(estadia.getFechaCheckIn()));
-            ps.setDate(3, Date.valueOf(estadia.getFechaCheckOut()));
+            ps.setDate(2, (Date) estadia.getFechaCheckIn());
+            ps.setDate(3, (Date) estadia.getFechaCheckOut());
             ps.setDouble(4, estadia.getTotal());
             ps.setInt(5, estadia.getIdEstadia());
 
@@ -88,8 +88,8 @@ public class EstadiaData {
                 if (resultSet.next()) {
                     estadia = new Estadia();
                     estadia.setIdEstadia(resultSet.getInt("idEstadia"));
-                    estadia.setFechaCheckIn(resultSet.getDate("fechaCheckIn").toLocalDate());
-                    estadia.setFechaCheckOut(resultSet.getDate("fechaCheckOut").toLocalDate());
+                    estadia.setFechaCheckIn(resultSet.getDate("fechaCheckIn"));
+                    estadia.setFechaCheckOut(resultSet.getDate("fechaCheckOut"));
                     estadia.setTotal(resultSet.getDouble("total"));
                     
                     Alojamiento alojamiento = new Alojamiento();

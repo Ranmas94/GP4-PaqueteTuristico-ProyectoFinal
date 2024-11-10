@@ -22,6 +22,7 @@ import javax.swing.JTextField;
  */
 public class PasajeView extends javax.swing.JInternalFrame {
 public static Pasaje pasajeSeleccionado = null;
+public static Transporte transporteSeleccionado = null;
 TransporteData tranData = new TransporteData();
     /**
      * Creates new form Transporte
@@ -231,8 +232,9 @@ TransporteData tranData = new TransporteData();
     private void btnAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPaqueteActionPerformed
        String tipo = (String) comboTipo.getSelectedItem();
        int asiento = Integer.parseInt(txtAsiento.getText());
-        Transporte tran = tranData.obtenerTransportePorTipo(tipo);
-        pasajeSeleccionado = new Pasaje(tran,origenSeleccionado,destinoSeleccionado,asiento);
+        transporteSeleccionado = tranData.obtenerTransportePorTipo(tipo);
+        
+        pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
          btnAgregarPaquete.setEnabled(false);
           btnSiguiente.setEnabled(true);
           bloquearTodosCampos(PanelTransporte);
