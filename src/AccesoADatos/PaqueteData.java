@@ -11,19 +11,14 @@ import Entidades.DestinoEstadistica;
 import Entidades.Estadia;
 import Entidades.MenuPension;
 import Entidades.Paquete;
-import Entidades.PaqueteDetalle;
 import Entidades.Pasaje;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 

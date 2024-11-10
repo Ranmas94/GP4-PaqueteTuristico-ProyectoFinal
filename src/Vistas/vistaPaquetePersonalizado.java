@@ -5,22 +5,30 @@
 package Vistas;
 
 import AccesoADatos.AlojamientoData;
+import AccesoADatos.MenuData;
+import AccesoADatos.PaqueteData;
+import AccesoADatos.TransporteData;
 import Entidades.Alojamiento;
 import Entidades.Estadia;
 import Entidades.MenuPension;
+import Entidades.Paquete;
 import Entidades.Pasaje;
 import Entidades.Transporte;
 import static Vistas.PasajeView.pasajeSeleccionado;
 import static Vistas.PasajeView.transporteSeleccionado;
 import static Vistas.seleccionarMenu.menuSeleccionado;
 import static Vistas.vistaDestino.destinoSeleccionado;
+import static Vistas.vistaDestino.origenSeleccionado;
 import static Vistas.vistaDestino.fechFin;
 import static Vistas.vistaDestino.fechInicio;
 import static Vistas.vistaEstadia.alojamientoSeleccionado;
 import static Vistas.vistaEstadia.estadiaSeleccionada;
 import static Vistas.seleccionarMenu.menuSeleccionado;
+import static Vistas.vistaCliente.clienteSeleccionado;
+import static Vistas.vistaCliente.medioPago;
 import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.origenSeleccionado;
+import static Vistas.vistaDestino.temporada;
 import static Vistas.vistaEstadia.alojamientoSeleccionado;
 import static Vistas.vistaEstadia.estadiaSeleccionada;
 import com.toedter.calendar.JDateChooser;
@@ -42,6 +50,10 @@ import javax.swing.ButtonGroup;
  */
 public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
  private final AlojamientoData alData = new AlojamientoData();
+ private final MenuData menuData = new MenuData();
+ private final TransporteData tranData = new TransporteData();
+ private final PaqueteData paqData = new PaqueteData();
+ private boolean paqueteModificado = false;
     /**
      * Creates new form vistaPaquetePersonalizado
      */
@@ -55,6 +67,14 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         grupoNinios.add(jrbMenoresNo);
         grupoNinios.add(jrbMenoresSi);
         
+        bloquearCampos(contenedorInfo);
+        bloquearCampos(panelCantPasajeros);
+        bloquearCampos(panelCantMenores);
+        jbConfirmar.setEnabled(false);
+        jbConfirmarPaquete.setEnabled(false);
+        
+        cargarComboBox();
+        cargarDatos();
         
     }
 
@@ -580,31 +600,35 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbEstadiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbEstadiaItemStateChanged
-        // TODO add your handling code here:
+      mostrarDatosEstadia();
     }//GEN-LAST:event_jcbEstadiaItemStateChanged
 
     private void jcbMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMenuItemStateChanged
-        // TODO add your handling code here:
+          mostrarDatosMenu();
     }//GEN-LAST:event_jcbMenuItemStateChanged
 
     private void jcbTransporteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbTransporteItemStateChanged
-        // TODO add your handling code here:
+        mostrarDatosTransporte();
     }//GEN-LAST:event_jcbTransporteItemStateChanged
 
     private void jcbEstadiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadiaActionPerformed
-        // TODO add your handling code here:
+         mostrarDatosEstadia();
     }//GEN-LAST:event_jcbEstadiaActionPerformed
 
     private void jcbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMenuActionPerformed
-        // TODO add your handling code here:
+         mostrarDatosMenu();
     }//GEN-LAST:event_jcbMenuActionPerformed
 
     private void jcbTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTransporteActionPerformed
-        // TODO add your handling code here:
+         mostrarDatosTransporte();
     }//GEN-LAST:event_jcbTransporteActionPerformed
 
     private void jrbIndividualSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualSIActionPerformed
-        // TODO add your handling code here:
+        if(jrbIndividualSI.isSelected()){
+            jbConfirmarPaquete.setEnabled(true);
+        }else{
+            desbloquearCampos(panelCantPasajeros);
+        }
     }//GEN-LAST:event_jrbIndividualSIActionPerformed
 
     private void jrbIndividualNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualNoActionPerformed
@@ -612,7 +636,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbIndividualNoActionPerformed
 
     private void jrbMenoresSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMenoresSiActionPerformed
-        // TODO add your handling code here:
+        if(jrbMenoresSi.isSelected()){
+            desbloquearCampos(panelCantMenores);
+        }else{
+            jbConfirmarPaquete.setEnabled(true);
+        }
     }//GEN-LAST:event_jrbMenoresSiActionPerformed
 
     private void jrbMenoresNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMenoresNoActionPerformed
@@ -620,19 +648,33 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbMenoresNoActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        // TODO add your handling code here:
+        jbConfirmar.setEnabled(true);
+        jbModificar.setEnabled(false);
+        desbloquearCamposEspecificos();
+        paqueteModificado = true;
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
-        // TODO add your handling code here:
+        if(validarCamposVacios(contenedorInfo)){
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos.");
+            return;
+        }else{
+            confirmarCambios();
+            JOptionPane.showMessageDialog(this, "Se confirmaron los cambios en el paquete.");
+            jbConfirmar.setEnabled(false);
+            bloquearCampos(contenedorInfo);
+        }
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jbConfirmarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarPaqueteActionPerformed
-        // TODO add your handling code here:
+       crearPaquete();
+       JOptionPane.showMessageDialog(this, "Paquete creado con éxito.");
+       dispose();
+       
     }//GEN-LAST:event_jbConfirmarPaqueteActionPerformed
 
     private void jbDescartarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarPaqueteActionPerformed
-        // TODO add your handling code here:
+       dispose();
     }//GEN-LAST:event_jbDescartarPaqueteActionPerformed
 
 
@@ -689,30 +731,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfHabitaciones;
     // End of variables declaration//GEN-END:variables
 
-private void limpiarCampos(JPanel jpanel) {
-        for (Component c : jpanel.getComponents()) {
-            if (c instanceof JTextField) {
-                JTextField t = (JTextField) c;
-                t.setText("");
-            }
-            
-            if(c instanceof JCheckBox){
-                JCheckBox t = (JCheckBox) c;
-                t.setSelected(false);
-            }
-            
-            if(c instanceof JComboBox){
-                JComboBox t = (JComboBox) c;
-                t.setSelectedIndex(-1);
-                t.setSelectedItem(null);
-            }
-            
-            if(c instanceof JSpinner ){
-                JSpinner t = (JSpinner) c;
-                t.setValue(1);
-            } 
-        }
-    }
+
  
 private boolean validarCamposVacios(JPanel jpanel) {
     for (Component c : jpanel.getComponents()) {
@@ -795,13 +814,14 @@ private boolean validarCamposVacios(JPanel jpanel) {
     }
 }
   
-  private void bloquearCamposEspecificos(){
-      tfDestino.setEnabled(false);
-      tfCostoEstadia.setEnabled(false);
-      tfHabitaciones.setEnabled(false);
-      tfCostoMenu.setEnabled(false);
-      tfCostoTransporte.setEnabled(false);
-      tfCostoTotal.setEnabled(false);
+
+  
+  private void desbloquearCamposEspecificos(){
+      dcFechaFin.setEnabled(true);
+      dcFechaInicio.setEnabled(true);
+      jcbEstadia.setEnabled(true);
+      jcbMenu.setEnabled(true);
+      jcbTransporte.setEnabled(true);
   }
   
   private void cargarDatos(){
@@ -827,7 +847,9 @@ private boolean validarCamposVacios(JPanel jpanel) {
           
       }catch(NullPointerException ex){
           JOptionPane.showMessageDialog(this, "ERROR");
-      }
+      }catch(ClassCastException | NumberFormatException ex){
+         JOptionPane.showMessageDialog(this, "Error al cargar datos. " +ex);
+     }
   }
   
 
@@ -875,5 +897,67 @@ private boolean validarCamposVacios(JPanel jpanel) {
   }
   
   
+  private void mostrarDatosEstadia(){
+      Alojamiento aloj = (Alojamiento) jcbEstadia.getSelectedItem();
+      tfCapacidad.setText(String.valueOf(aloj.getCapacidad())); 
+      tfHabitaciones.setText(String.valueOf(aloj.getNroAmbientes())); 
+      tfCostoEstadia.setText(String.valueOf(aloj.getPrecioPorNoche())); 
+  }
+  
+  private void mostrarDatosMenu(){
+      String tipo = (String) jcbMenu.getSelectedItem();
+      MenuPension menu = menuData.buscarMenuPorTipo(tipo);
+      
+      tfCostoMenu.setText(String.valueOf(menu.getPorcentaje()));
+  }
+  
+  private void mostrarDatosTransporte(){
+      String tipo = (String) jcbTransporte.getSelectedItem();
+       tfCostoTransporte.setText(String.valueOf(tranData.obtenerCostoPorTipo(tipo)));
+  }
+  
+  
+private void crearPaquete(){
+    try{
+    int cantPasajerosAdultos =1;
+    int cantPasajerosNinios =0;
+    int cantPasajerosNiniosMenores =0;
+   
+    
+    double totalEstadia = estadiaSeleccionada.getTotal();
+    double totalMenu = menuSeleccionado.getPorcentaje();
+    double totalTransporte = transporteSeleccionado.getCosto();
+    
+    
+    if(!jrbIndividualSI.isSelected()){
+        cantPasajerosAdultos = (int) jsCantMayores.getValue();
+    }
+    if(jrbMenoresSi.isSelected()){
+        cantPasajerosNinios = (int) jsMenores1.getValue();
+        cantPasajerosNiniosMenores= (int) jsMenores2.getValue();
+    }
+    
+    int totalPasajeros = cantPasajerosAdultos + cantPasajerosNinios + cantPasajerosNiniosMenores;
+    double costoBase = totalEstadia + totalTransporte;
+    double costoMenu = costoBase * totalMenu;
+    double precioTotal = (costoBase + costoMenu) * totalPasajeros;
+    double penalizacion = 0.10 * totalPasajeros;
+    if (paqueteModificado) {
+       precioTotal *= penalizacion;
+    }
+    
+    
+  
+    
+    Paquete paquete = new Paquete(clienteSeleccionado,estadiaSeleccionada,
+            pasajeSeleccionado,menuSeleccionado, origenSeleccionado, destinoSeleccionado,fechInicio,fechFin,temporada,totalPasajeros,medioPago,
+               true,false,precioTotal);
+    paqData.guardarPaquete(paquete);
+   }catch(NullPointerException ex){
+         JOptionPane.showMessageDialog(this, "Error. Hay datos en NULL. " +ex);
+   }catch(ClassCastException | NumberFormatException ex){
+         JOptionPane.showMessageDialog(this, "Error al armar paquete. " +ex);
+}
+} 
 
 }
