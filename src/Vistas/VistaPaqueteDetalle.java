@@ -115,8 +115,8 @@ public class VistaPaqueteDetalle extends javax.swing.JInternalFrame {
                 paquete.getIdPaquete(),
                 paquete.getFechaInicio(),
                 paquete.getFechaFin(),
-                paquete.getOrigen().getCiudad(),  // Suponiendo que el método getCiudad() existe en Destino
-                paquete.getDestino().getCiudad(), // Suponiendo que el método getCiudad() existe en Destino
+                paquete.getOrigen().getCiudad(), 
+                paquete.getDestino().getCiudad(), 
                 paquete.getCantidadPasajeros(),
                 paquete.getMedioPago(),
                 paquete.getPrecioTotal()
