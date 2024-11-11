@@ -122,7 +122,6 @@ DestinoData destData = new DestinoData();
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel9.setText("Precio por noche:");
 
-        cbDestino.setSelectedIndex(-1);
         cbDestino.setToolTipText("");
         cbDestino.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
