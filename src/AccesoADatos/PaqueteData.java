@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package AccesoADatos;
 
 
@@ -265,15 +268,16 @@ public ArrayList<Paquete> mostrarPaquetes() {
       public ArrayList<PaqueteDetalle> obtenerDetallePaquetes() {
     ArrayList<PaqueteDetalle> detallesPaquetes = new ArrayList<>();
     String sql = "SELECT p.idPaquete,o.ciudad AS ciudadOrigen,d.ciudad AS ciudadDestino, p.fechaInicio, p.fechaFin, a.nombre AS nombreAlojamiento, a.direccion AS direccionAlojamiento,"
-                + "t.tipo as tipoTransporte, p.cantidadPasajeros,p.medioPago,p.precioTotal, p.pagado, p.cancelado"    
-         + "FROM paquete p"
-         + "LEFT JOIN estadia e ON e.idEstadia = p.idEstadia"
-         + "LEFT JOIN alojamiento a ON a.idAlojamiento = e.idAlojamiento"
-         + "LEFT JOIN pasaje pa ON pa.idPasaje = p.idPasaje"
-         + "LEFT JOIN transporte t ON t.idTransporte = pa.idTransporte"
-         + "LEFT JOIN menu m ON m.idMenu = p.idMenu"
-         + "LEFT JOIN destino o ON o.idDestino = p.origen"
-         + "LEFT JOIN destino d ON d.idDestino = p.destino;";
+        + "t.tipo as tipoTransporte, p.cantidadPasajeros,p.medioPago,p.precioTotal, p.pagado, p.cancelado   " 
+        + "FROM paquete p"
+        + "LEFT JOIN estadia e ON e.idEstadia = p.idEstadia"
+        + "LEFT JOIN alojamiento a ON a.idAlojamiento = e.idAlojamiento"
+        + "LEFT JOIN pasaje pa ON pa.idPasaje = p.idPasaje"
+        + "LEFT JOIN transporte t ON t.idTransporte = pa.idTransporte"
+        + "LEFT JOIN menu m ON m.idMenu = p.idMenu"
+        + "LEFT JOIN destino o ON o.idDestino = p.origen"
+        + "LEFT JOIN destino d ON d.idDestino = p.destino;"
+    ;
 
     try (PreparedStatement ps = con.prepareStatement(sql);
          ResultSet rs = ps.executeQuery()){
