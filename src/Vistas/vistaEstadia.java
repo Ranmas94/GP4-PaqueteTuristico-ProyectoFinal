@@ -304,7 +304,7 @@ public static Estadia estadiaSeleccionada;
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         
-        Date fechaCheckIn = CheckIn.getDate();
+        Date fechaCheckIn =  CheckIn.getDate();
         Date fechaCheckOut = CheckOut.getDate();
         
         
