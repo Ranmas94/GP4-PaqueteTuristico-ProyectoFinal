@@ -155,8 +155,8 @@ private DestinoData destData = new DestinoData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-      Date fechainicio = (Date) fechaInicio.getDate();
-       Date fechafin = (Date) fechaFin.getDate();
+       java.util.Date fechainicio = fechaInicio.getDate();
+       java.util.Date fechafin = fechaFin.getDate();
        if(validarCamposVacios(contenedor)){
            JOptionPane.showMessageDialog(this, "Debe seleccionar todos los campos");
            return;
@@ -166,8 +166,8 @@ private DestinoData destData = new DestinoData();
        }else{
        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
-       fechInicio = fechainicio;
-       fechFin = fechafin;
+       fechInicio = (Date) fechainicio;
+       fechFin = (Date) fechafin;
        temporada();
        }
        
