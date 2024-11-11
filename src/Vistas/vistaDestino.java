@@ -10,7 +10,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.sql.Date;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -216,8 +216,8 @@ private DestinoData destData = new DestinoData();
        }else{
        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
-       fechInicio = (Date) fechainicio;
-       fechFin = (Date) fechafin;
+       fechInicio =  fechainicio;
+       fechFin = fechafin;
        temporada();
        }
        
@@ -296,12 +296,12 @@ private void temporada() {
     // Determinación de la temporada
     if ((inicio.isAfter(inicioTemporadaAltaInvierno) && inicio.isBefore(finTemporadaAltaInvierno))
         || (inicio.isAfter(inicioTemporadaAltaJulio) && inicio.isBefore(finTemporadaAltaJulio))) {
-        temporada = "temporada_Alta";
+        temporada = "temporada_alta";
     } else if (inicio.isAfter(inicioPrimavera) && inicio.isBefore(finPrimavera)
         || (inicio.isAfter(semanaSantaInicio) && inicio.isBefore(semanaSantaFin))) {
-        temporada = "temporada_Media";
+        temporada = "temporada_media";
     } else {
-        temporada = "temporada_Baja";
+        temporada = "temporada_baja";
     }
 }
 

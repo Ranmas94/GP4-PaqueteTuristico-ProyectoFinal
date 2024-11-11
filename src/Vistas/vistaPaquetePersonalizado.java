@@ -891,9 +891,9 @@ private boolean validarCamposVacios(JPanel jpanel) {
   }
   
 
-      private void cargarComboBox(){
+   private void cargarComboBox(){
    jcbEstadia.removeAllItems();
-   int capacidad = Integer.parseInt(tfCapacidad.getText());
+   int capacidad = (alojamientoSeleccionado.getCapacidad());
    
    List<Alojamiento> lista = alData.buscarAlojamientoCapacidad(capacidad,destinoSeleccionado.getIdDestino());
    
