@@ -49,7 +49,7 @@ TransporteData transData = new TransporteData();
         jbEliminar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("TRANSPORTE");
+        jLabel1.setText("AGREGAR TRANSPORTE");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("INGRESE ID:");

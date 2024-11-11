@@ -80,7 +80,6 @@ TransporteData tranData = new TransporteData();
 
         jLabel2.setText("¿Tipo de transporte en el que desea viajar?");
 
-        comboTipo.setSelectedIndex(-1);
         comboTipo.setEnabled(false);
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
