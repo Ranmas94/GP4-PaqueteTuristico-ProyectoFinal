@@ -38,7 +38,7 @@ public class PaqueteData {
     // Guardar un paquete
 public void guardarPaquete(Paquete paquete) {
     
-    String sql = "INSERT INTO paquete(idCliente, idEstadia, idPasaje, idMenu, origen, destino, fechaInicio, fechaFin, temporada ,cantidadPasajeros, medioPago, pagado, cancelado, precioTotal"
+    String sql = "INSERT INTO paquete(idCliente, idEstadia, idPasaje, idMenu, origen, destino, fechaInicio, fechaFin, temporada ,cantidadPasajeros, medioPago, pagado, cancelado, precioTotal)"
                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {

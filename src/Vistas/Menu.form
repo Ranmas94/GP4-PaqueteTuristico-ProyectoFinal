@@ -48,6 +48,14 @@
             <Property name="text" type="java.lang.String" value="Datos"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemEstadisticaTemporada">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Estadisticas por temporada"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEstadisticaTemporadaActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemPaquetesComprados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Paquetes recientes"/>

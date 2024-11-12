@@ -157,7 +157,7 @@ MenuData menuData = new MenuData();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +168,7 @@ MenuData menuData = new MenuData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbtipoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbtipoMenuActionPerformed
-    
+    actualizar();
     }//GEN-LAST:event_jcbtipoMenuActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
@@ -179,45 +179,15 @@ MenuData menuData = new MenuData();
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-       // Obtener el tipo seleccionado
-        String tipo = (String) jcbtipoMenu.getSelectedItem();
-        
-        // Validar que el costo no esté vacío y sea un número
-        String costoStr = tfCosto.getText();
-        if (costoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un menú válido.");
-            return;
-        }
-
-        double costo;
-        try {
-            costo = Double.parseDouble(costoStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El costo ingresado no es un número válido.");
-            return;
-        }
-
-        // Crear el objeto MenuPension
-        menuSeleccionado = new MenuPension(tipo, costo);
-        JOptionPane.showMessageDialog(this, "Menú agregado al paquete" + menuSeleccionado.getIdMenu());
-
-        // Habilitar y deshabilitar botones según corresponda
-        jbSiguiente.setEnabled(true);
-        jbAgregar.setEnabled(false);
+       guardar();
+       JOptionPane.showMessageDialog(this, "Datos agregados al paquete");
+       jbSiguiente.setEnabled(true);
+       jbAgregar.setEnabled(false);
+       
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jcbtipoMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbtipoMenuItemStateChanged
 
-            String tipo = (String) jcbtipoMenu.getSelectedItem();
-            MenuPension menu = menuData.buscarMenuPorTipo(tipo);
-
-            // Validar si el menú existe
-            if (menu != null) {
-                tfCosto.setText(String.valueOf(menu.getPorcentaje()));
-            } else {
-                tfCosto.setText("");
-                JOptionPane.showMessageDialog(this, "Menú no encontrado.");
-            }
         
     }//GEN-LAST:event_jcbtipoMenuItemStateChanged
 
@@ -230,18 +200,27 @@ MenuData menuData = new MenuData();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbSiguiente;
-    private javax.swing.JComboBox<String> jcbtipoMenu;
+    private javax.swing.JComboBox<MenuPension> jcbtipoMenu;
     private javax.swing.JLabel jlSeleccionar;
     private javax.swing.JTextField tfCosto;
     // End of variables declaration//GEN-END:variables
 
 private void cargarComboBox(){
-     jcbtipoMenu.removeAllItems();
-    tfCosto.setText("");
-    for(MenuPension m : menuData.listarMenus()){
-        jcbtipoMenu.addItem(m.getTipo());
+   for(MenuPension m : menuData.listarMenus()){
+       jcbtipoMenu.addItem(m);
+   }
 
-    }    
+    }
+
+private void actualizar(){
+   MenuPension menu = (MenuPension) jcbtipoMenu.getSelectedItem();
+   tfCosto.setText(String.valueOf(menu.getPorcentaje()));
+   
 }
 
+private void guardar(){
+    menuSeleccionado = (MenuPension) jcbtipoMenu.getSelectedItem();
 }
+}
+
+

@@ -62,6 +62,7 @@ public class Menu extends javax.swing.JFrame {
         itemMenu = new javax.swing.JMenuItem();
         itemTransporte = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        itemEstadisticaTemporada = new javax.swing.JMenuItem();
         itemPaquetesComprados = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -309,6 +310,14 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu2.setText("Datos");
 
+        itemEstadisticaTemporada.setText("Estadisticas por temporada");
+        itemEstadisticaTemporada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEstadisticaTemporadaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemEstadisticaTemporada);
+
         itemPaquetesComprados.setText("Paquetes recientes");
         itemPaquetesComprados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,6 +437,14 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(v);
     }//GEN-LAST:event_itemPaquetesCompradosActionPerformed
 
+    private void itemEstadisticaTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEstadisticaTemporadaActionPerformed
+        escritorio.repaint();
+        VistaEstadisticaTemporada v = new   VistaEstadisticaTemporada();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
+    }//GEN-LAST:event_itemEstadisticaTemporadaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -470,6 +487,7 @@ public class Menu extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem itemAlojamiento;
     private javax.swing.JMenuItem itemDestino;
+    private javax.swing.JMenuItem itemEstadisticaTemporada;
     private javax.swing.JMenuItem itemMenu;
     private javax.swing.JMenuItem itemPaquetesComprados;
     private javax.swing.JMenuItem itemTransporte;

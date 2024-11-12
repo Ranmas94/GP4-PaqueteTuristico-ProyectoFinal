@@ -325,7 +325,6 @@ public static Estadia estadiaSeleccionada;
             Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
             alojamientoSeleccionado = alData.buscarAlojamientoID(aloj.getIdAlojamiento());
             
-            
             double precioporNoche = alojamientoSeleccionado.getPrecioPorNoche();
             
            LocalDate inicio = fechaCheckIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

@@ -287,7 +287,6 @@ TransporteData tranData = new TransporteData();
         String tipo = (String) comboTipo.getSelectedItem();
         int asiento = Integer.parseInt(txtAsiento.getText());
         transporteSeleccionado = tranData.obtenerTransportePorTipo(tipo);
-
         pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
         btnAgregarPaquete.setEnabled(false);
         btnSiguiente.setEnabled(true);

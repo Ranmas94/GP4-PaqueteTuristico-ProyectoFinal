@@ -27,12 +27,13 @@ public class PasajeData {
     
 // Método para agregar un pasaje
 public void agregarPasaje(Pasaje pasaje) {
-    String sql = "INSERT INTO pasaje (idTransporte, asiento, origen, destino) VALUES (?, ?, ?, ?)";
+    String sql = "INSERT INTO pasaje (asiento, idTransporte,  origen, destino) VALUES (?, ?, ?, ?)";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, pasaje.getIdTransporte().getIdTransporte());
-        ps.setInt(2, pasaje.getAsiento());
+       
+        ps.setInt(1, pasaje.getAsiento());
+         ps.setInt(2, pasaje.getIdTransporte().getIdTransporte());
         ps.setInt(3, pasaje.getOrigen().getIdDestino());
         ps.setInt(4, pasaje.getDestino().getIdDestino());
 
@@ -52,11 +53,12 @@ public void agregarPasaje(Pasaje pasaje) {
 
 // Método para actualizar un pasaje
 public void actualizarPasaje(Pasaje pasaje) {
-    String sql = "UPDATE pasaje SET idTransporte = ?, asiento = ?, origen = ?, destino = ? WHERE idPasaje = ?";
+    String sql = "UPDATE pasaje SET  asiento = ?,idTransporte = ?, origen = ?, destino = ? WHERE idPasaje = ?";
 
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setInt(1, pasaje.getIdTransporte().getIdTransporte());
-        ps.setInt(2, pasaje.getAsiento());
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+         ps.setInt(1, pasaje.getAsiento());
+        ps.setInt(2, pasaje.getIdTransporte().getIdTransporte());
         ps.setInt(3, pasaje.getOrigen().getIdDestino());
         ps.setInt(4, pasaje.getDestino().getIdDestino());
         ps.setInt(5, pasaje.getIdPasaje());

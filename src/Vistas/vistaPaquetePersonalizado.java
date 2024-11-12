@@ -46,6 +46,8 @@ import javax.swing.JTextField;
 import java.sql.Date;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import javax.swing.ButtonGroup;
 
 /**
@@ -79,12 +81,13 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         bloquearCampos(panelCantMenores);
         jbConfirmar.setEnabled(false);
         jbConfirmarPaquete.setEnabled(false);
-        
+       
         cargarComboBoxEstadia();
         cargarComboBoxMenu();
         cargarComboBoxTransporte();
         actualizarCosto();
         cargarDatos();
+ 
         
     }
 
@@ -749,7 +752,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbConfirmarPaquete;
     private javax.swing.JButton jbDescartarPaquete;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JComboBox<Alojamiento> jcbEstadia;
+    private javax.swing.JComboBox<String> jcbEstadia;
     private javax.swing.JComboBox<String> jcbMenu;
     private javax.swing.JComboBox<String> jcbTransporte;
     private com.toedter.calendar.JDateChooser jdCheckin;
@@ -774,7 +777,10 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 
- 
+ private void aa(){
+     JOptionPane.showMessageDialog(this, alojamientoSeleccionado.getIdAlojamiento() + " --" + alojamientoSeleccionado.getIdDestino().getIdDestino() +"-----"+ alojamientoSeleccionado.getNombre());
+ }
+    
 private boolean validarCamposVacios(JPanel jpanel) {
     for (Component c : jpanel.getComponents()) {
         if (c instanceof JTextField) {
@@ -878,7 +884,7 @@ private boolean validarCamposVacios(JPanel jpanel) {
           dcFechaInicio.setDate(fechInicio);
           dcFechaFin.setDate(fechFin);
           
-          jcbEstadia.setSelectedItem(alojamientoSeleccionado);
+          jcbEstadia.setSelectedItem(alojamientoSeleccionado.getNombre());
           tfCapacidad.setText(String.valueOf(alojamientoSeleccionado.getCapacidad()));
           tfHabitaciones.setText(String.valueOf(alojamientoSeleccionado.getNroAmbientes()));
           jdCheckin.setDate((estadiaSeleccionada.getFechaCheckIn()));
@@ -910,7 +916,7 @@ private boolean validarCamposVacios(JPanel jpanel) {
        JOptionPane.showMessageDialog(this, "No hay alojamientos disponibles.");
    }else{
    for(Alojamiento alo : lista){ 
-       jcbEstadia.addItem(alo);
+       jcbEstadia.addItem(alo.getNombre());
    } 
    
    }
@@ -941,14 +947,14 @@ private boolean validarCamposVacios(JPanel jpanel) {
       
       String tipomenu = (String) jcbMenu.getSelectedItem();
       double costomenu = Double.parseDouble(tfCostoMenu.getText());
-      menuSeleccionado = new MenuPension(tipomenu, costomenu);
+      menuSeleccionado = new MenuPension(menuSeleccionado.getIdMenu(),tipomenu, costomenu);
       
       
       int asiento = pasajeSeleccionado.getAsiento();
       String tipoTransporte = (String) jcbTransporte.getSelectedItem();
       double costoTransporte = Double.parseDouble(tfCostoTransporte.getText());
-      transporteSeleccionado = new Transporte(tipoTransporte,costoTransporte);
-       pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
+      transporteSeleccionado = new Transporte(transporteSeleccionado.getIdTransporte(),tipoTransporte,costoTransporte);
+       pasajeSeleccionado = new Pasaje( pasajeSeleccionado.getIdPasaje(),transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
        
      }catch(NullPointerException ex){
          JOptionPane.showMessageDialog(this, "Error. Hay datos en NULL. " +ex);
@@ -959,10 +965,21 @@ private boolean validarCamposVacios(JPanel jpanel) {
   
   
   private void mostrarDatosEstadia(){
-      Alojamiento aloj = (Alojamiento) jcbEstadia.getSelectedItem();
+      Alojamiento aloj = alData.buscarAlojamientoNombre(String.valueOf(jcbEstadia.getSelectedItem()));
       tfCapacidad.setText(String.valueOf(aloj.getCapacidad())); 
       tfHabitaciones.setText(String.valueOf(aloj.getNroAmbientes())); 
-      tfCostoEstadia.setText(String.valueOf(aloj.getPrecioPorNoche())); 
+     double precionoche = aloj.getPrecioPorNoche();
+     java.util.Date fechaCheckIn = estadiaSeleccionada.getFechaCheckIn();
+     java.util.Date fechaCheckOut =  estadiaSeleccionada.getFechaCheckOut();
+     
+      
+           LocalDate inicio = fechaCheckIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           LocalDate fin = fechaCheckOut.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           long diasEntre = ChronoUnit.DAYS.between(inicio, fin);
+            
+            double Total = precionoche * diasEntre;
+        tfCostoEstadia.setText(String.valueOf(Total));
+     
   }
   
   private void mostrarDatosMenu(){
