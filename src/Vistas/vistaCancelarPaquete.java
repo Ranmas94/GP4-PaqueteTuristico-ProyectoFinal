@@ -98,7 +98,7 @@ public class vistaCancelarPaquete extends javax.swing.JFrame {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
             Date fechaInicio = formatoFecha.parse(fInicio);
             Date fechaActual = new Date();
-
+//
             long diferenciaEnMilis = fechaInicio.getTime() - fechaActual.getTime();
             long diasDiferencia = TimeUnit.DAYS.convert(diferenciaEnMilis, TimeUnit.MILLISECONDS);
 
