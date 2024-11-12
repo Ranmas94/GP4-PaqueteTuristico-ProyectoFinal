@@ -15,7 +15,7 @@ public class VistaPaqueteDetalle extends javax.swing.JInternalFrame {
 
    private JTable table;
    private DefaultTableModel tableModel;
-   private PaqueteData paqueteData;
+   private final PaqueteData paqueteData = new PaqueteData();
     
     
     public VistaPaqueteDetalle() {
@@ -56,9 +56,10 @@ public class VistaPaqueteDetalle extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(453, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,6 +107,8 @@ public class VistaPaqueteDetalle extends javax.swing.JInternalFrame {
         tableModel.addColumn("Cantidad Pasajeros");
         tableModel.addColumn("Medio de Pago");
         tableModel.addColumn("Precio Total");
+        
+        jTable1.setModel(tableModel);
     }
     private void llenarTabla() {
         ArrayList<Paquete> paquetes = paqueteData.resumenPaquetesComprados();

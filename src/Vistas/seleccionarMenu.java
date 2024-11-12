@@ -157,7 +157,7 @@ MenuData menuData = new MenuData();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +168,7 @@ MenuData menuData = new MenuData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbtipoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbtipoMenuActionPerformed
-    
+    actualizar();
     }//GEN-LAST:event_jcbtipoMenuActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
@@ -179,27 +179,16 @@ MenuData menuData = new MenuData();
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        String tipo =  (String) jcbtipoMenu.getSelectedItem();
-        double costo = Double.parseDouble(tfCosto.getText());
-        menuSeleccionado = new MenuPension(tipo,costo); 
-        if(menuSeleccionado !=null){
-            JOptionPane.showMessageDialog(this, "Menu agregado al paquete");
-             jbSiguiente.setEnabled(true);
-             jbAgregar.setEnabled(false);
-        }else{
-            JOptionPane.showMessageDialog(this, "Error al intentar agregar al paquete.");
-            return;
-        }
+       guardar();
+       JOptionPane.showMessageDialog(this, "Datos agregados al paquete");
+       jbSiguiente.setEnabled(true);
+       jbAgregar.setEnabled(false);
+       
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jcbtipoMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbtipoMenuItemStateChanged
- if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-        String tipo = (String) jcbtipoMenu.getSelectedItem();
-        MenuPension menu = menuData.buscarMenuPorTipo(tipo);
-        if (menu != null) {
-            tfCosto.setText(String.valueOf(menu.getPorcentaje()));
-        }
-    }
+
+        
     }//GEN-LAST:event_jcbtipoMenuItemStateChanged
 
 
@@ -211,18 +200,27 @@ MenuData menuData = new MenuData();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbSiguiente;
-    private javax.swing.JComboBox<String> jcbtipoMenu;
+    private javax.swing.JComboBox<MenuPension> jcbtipoMenu;
     private javax.swing.JLabel jlSeleccionar;
     private javax.swing.JTextField tfCosto;
     // End of variables declaration//GEN-END:variables
 
 private void cargarComboBox(){
-     jcbtipoMenu.removeAllItems();
-    tfCosto.setText("");
-    for(MenuPension m : menuData.listarMenus()){
-        jcbtipoMenu.addItem(m.getTipo());
+   for(MenuPension m : menuData.listarMenus()){
+       jcbtipoMenu.addItem(m);
+   }
 
-    }    
+    }
+
+private void actualizar(){
+   MenuPension menu = (MenuPension) jcbtipoMenu.getSelectedItem();
+   tfCosto.setText(String.valueOf(menu.getPorcentaje()));
+   
 }
 
+private void guardar(){
+    menuSeleccionado = (MenuPension) jcbtipoMenu.getSelectedItem();
 }
+}
+
+

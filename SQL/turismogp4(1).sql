@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2024 a las 19:05:57
+-- Tiempo de generación: 12-11-2024 a las 23:42:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -253,26 +253,17 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`, `documento`, `correo`, `telefono`) VALUES
-(1, 'Lourdes', 'Escudero', 111, 'lourdesescudero@gmail.com', '26640000'),
-(2, 'Victor', 'Aguilera', 222, 'victoraguilera@gmail.com', '2664111111'),
-(3, 'Stefani', 'Escobar', 333, 'stefaniescobar@gmail.com', '2664222222'),
-(4, 'Dante', 'Poblete', 444, 'dantepoblete@gmail.com', '2664333333'),
-(5, 'Federico', 'Grippo', 555, 'federicogrippo@gmail.com', '2664444444'),
-(6, 'Maximiliano', 'Matilla', 666, 'maximilianomatilla@gmail.com', '2664555555'),
-(7, 'Juan', 'Pérez', 12345678, 'juan.perez@example.com', '123-4567890'),
-(8, 'Ana', 'Gómez', 87654321, 'ana.gomez@example.com', '987-6543210'),
-(9, 'Luis', 'Martínez', 23456789, 'luis.martinez@example.com', '234-5678901'),
-(10, 'María', 'Rodríguez', 34567890, 'maria.rodriguez@example.com', '345-6987654'),
-(11, 'Carlos', 'Fernández', 45678901, 'carlos.fernandez@example.com', '456-7890123'),
-(12, 'Laura', 'López', 56789012, 'laura.lopez@example.com', '567-8901234'),
-(13, 'Diego', 'Sánchez', 67890123, 'diego.sanchez@example.com', '678-9012345'),
-(14, 'Paula', 'Torres', 78901234, 'paula.torres@example.com', '789-0123456'),
-(15, 'Javier', 'Herrera', 89012345, 'javier.herrera@example.com', '890-1234567'),
-(16, 'Sofía', 'Jiménez', 90123456, 'sofia.jimenez@example.com', '901-2345678'),
-(17, 'Pedro', 'Martínez', 23456789, 'pedro.martinez@example.com', '234-5678901'),
-(18, 'Lucía', 'Ramírez', 34567890, 'lucia.ramirez@example.com', '345-6789012'),
-(19, 'Esteban', 'Morales', 45678901, 'esteban.morales@example.com', '456-7890123'),
-(20, 'Fernanda', 'Castillo', 56789012, 'fernanda.castillo@example.com', '567-8901234');
+(1, 'Juan ', 'Martinez', 13049699, '2664747474', 'hernandezchrist'),
+(2, 'Pedro', 'Sanchez', 43840001, '2665101021', ' kristin73@brow'),
+(3, 'José', 'Rodriguez', 40901232, '2664001123', 'heathersmith@bi'),
+(4, 'Gabriela ', 'Hernandez', 29013341, '2665443292', 'Gabii11@gmail.c'),
+(5, 'Ana', 'Perez', 21652212, '2665218312', 'Anita1@hotmail.'),
+(6, 'Juan', 'Ramirez', 33988900, '2665981211', 'juan0033@gmail.'),
+(7, 'Pamela', 'Torres', 45326363, '2664119292', 'pamelaT@hotmail'),
+(8, 'l', 'l', 1, '1', 'l'),
+(9, 'lo', 'lo', 22, '44', 'lol'),
+(10, 'l', 'l', 1, '1', 'l'),
+(11, 'laa', 'laa', 11, '2', 'aaaaaaa');
 
 -- --------------------------------------------------------
 
@@ -332,26 +323,17 @@ CREATE TABLE `estadia` (
 --
 
 INSERT INTO `estadia` (`idEstadia`, `idAlojamiento`, `fechaCheckIn`, `fechaCheckOut`, `total`) VALUES
-(1, 1, '2024-11-02', '2024-11-05', 30300.00),
-(3, 101, '2024-11-09', '2024-11-10', 23000.00),
-(4, 100, '2024-11-02', '2024-11-07', 150000.00),
-(5, 1, '2024-11-01', '2024-11-23', 222200.00),
-(6, 2, '2024-11-10', '2024-11-15', 45000.00),
-(9, 4, '2024-11-26', '2024-11-29', 24000.00),
-(10, 5, '2024-12-01', '2024-12-10', 105000.00),
-(11, 6, '2024-12-17', '2024-12-20', 35700.00),
-(12, 170, '2025-01-02', '2025-01-07', 95000.00),
-(13, 111, '2025-01-10', '2025-01-13', 69000.00),
-(14, 123, '2025-02-01', '2025-02-08', 245000.00),
-(15, 87, '2024-11-15', '2024-11-20', 155000.00),
-(16, 181, '2025-01-02', '2024-11-12', 200000.00),
-(17, 29, '2024-11-01', '2024-11-05', 180000.00),
-(18, 183, '2025-03-27', '2025-04-02', 214900.00),
-(19, 48, '2025-07-23', '2025-07-28', 138000.00),
-(20, 184, '2025-01-05', '2025-01-15', 428800.00),
-(21, 185, '2025-05-15', '2025-07-23', 276000.00),
-(22, 186, '2025-03-27', '2025-04-03', 191400.00),
-(23, 2, '2025-06-19', '2024-11-24', 110000.00);
+(1, 181, '2025-01-03', '2025-01-29', 520000.00),
+(2, 29, '2025-07-17', '2025-07-22', 180000.00),
+(3, 99, '2025-07-24', '2025-07-26', 56000.00),
+(4, 184, '2025-01-06', '2025-01-14', 338240.00),
+(5, 185, '2025-07-20', '2025-07-26', 207000.00),
+(6, 186, '2025-03-28', '2025-04-01', 127600.00),
+(7, 4, '2025-06-20', '2025-06-23', 24000.00),
+(8, 69, '2024-11-02', '2024-11-03', 23000.00),
+(9, 16, '2024-11-02', '2024-11-29', 567000.00),
+(10, 3, '2024-11-02', '2024-11-14', 144000.00),
+(11, 3, '2024-11-02', '2024-11-11', 108000.00);
 
 -- --------------------------------------------------------
 
@@ -404,26 +386,17 @@ CREATE TABLE `paquete` (
 --
 
 INSERT INTO `paquete` (`idPaquete`, `idCliente`, `idEstadia`, `idPasaje`, `idMenu`, `origen`, `destino`, `fechaInicio`, `fechaFin`, `temporada`, `cantidadPasajeros`, `medioPago`, `pagado`, `cancelado`, `precioTotal`) VALUES
-(1, 1, 1, 1, 1, 1, 1, '2024-11-01', '2024-11-06', 'temporada_alta', 2, 'Tarjeta', 1, 0, 50300.00),
-(2, 2, 3, 2, 2, 1, 1, '2024-11-09', '2024-11-10', 'temporada_media', 3, 'Efectivo', 0, 0, 36720.00),
-(3, 3, 4, 3, 2, 1, 16, '2024-11-03', '2024-11-08', 'temporada_baja', 1, 'Transferencia', 1, 0, 173400.00),
-(4, 4, 5, 4, 1, 13, 1, '2024-10-31', '2024-11-24', 'temporada_alta', 2, 'Tarjeta', 0, 0, 235200.00),
-(5, 5, 6, NULL, 3, 4, 1, '2025-11-10', '2025-11-15', 'temporada_media', 4, 'Transferencia', 1, 0, 47250.00),
-(6, 6, 9, NULL, 2, 5, 2, '2024-11-25', '2024-11-30', 'temporada_baja', 2, 'Efectivo', 1, 0, 24480.00),
-(7, 7, 10, 5, 1, 16, 2, '2024-11-30', '2024-12-11', 'temporada_alta', 3, 'Tarjeta', 0, 0, 125000.00),
-(8, 8, 11, 6, 3, 12, 2, '2024-12-16', '2024-12-21', 'temporada_media', 2, 'Efectivo', 1, 0, 51135.00),
-(9, 9, 12, 7, 3, 13, 6, '2025-01-01', '2025-01-08', 'temporada_baja', 1, 'Transferencia', 1, 0, 120750.00),
-(10, 10, 13, 8, 1, 10, 11, '2025-01-09', '2025-01-14', 'temporada_alta', 5, 'Tarjeta', 0, 0, 77000.00),
-(11, 11, 14, 9, 4, 6, 7, '2025-01-31', '2025-02-09', '', 2, 'Tarjeta', 0, 0, 48950.00),
-(12, 12, 15, 10, 4, 2, 3, '2024-11-14', '2024-11-21', '', 2, 'Tarjeta', 0, 0, 291500.00),
-(13, 13, 16, 11, 4, 4, 17, '2025-01-02', '2024-11-12', '', 2, 'Transferencia', 1, 1, 1500000.00),
-(14, 14, 17, 16, 4, 1, 8, '2024-11-01', '2024-11-05', '', 3, 'Transferencia', 0, 0, 670000.00),
-(15, 15, 18, 12, 4, 1, 18, '2025-03-27', '2025-04-02', '', 4, '', 0, 0, 280000.00),
-(16, 16, 19, 17, 4, 10, 15, '2025-07-23', '2025-07-28', '', 4, 'Transferencia', 0, 0, 160000.00),
-(17, 17, 22, 14, 4, 3, 20, '2025-03-27', '2025-04-03', '', 6, 'Transferencia', 0, 0, 800000.00),
-(18, 18, 20, 15, 4, 13, 21, '2025-01-05', '2025-01-15', '', 6, 'Transferencia', 0, 0, 53900.00),
-(19, 19, 21, 13, 4, 3, 19, '2025-05-15', '2025-07-23', '', 6, 'Transferencia', 0, 0, 445000.00),
-(20, 20, 23, 18, 4, 13, 1, '2025-06-19', '2024-11-24', '', 5, 'Transferencia', 1, 1, 200000.00);
+(1, 1, 1, 1, 2, 1, 17, '2025-01-02', '2025-01-30', 'temporada_baja', 1, 'Mercado Pago', 1, 0, 550800.00),
+(2, 2, 2, 2, 3, 1, 8, '2025-07-16', '2025-07-23', 'temporada_alta', 1, 'Tarjeta de débito', 1, 0, 202650.00),
+(3, 3, 3, 3, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 75900.00),
+(4, 4, 4, 4, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Mercado Pago', 1, 0, 365404.80),
+(5, 5, 5, 5, 2, 1, 19, '2025-07-19', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 231540.00),
+(6, 6, 6, 6, 2, 1, 20, '2025-03-27', '2025-04-02', 'temporada_media', 1, 'Efectivo', 1, 0, 150552.00),
+(7, 7, 7, 7, 2, 1, 2, '2025-06-19', '2025-06-24', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 37740.00),
+(8, 8, 8, 8, 1, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 14, 'Efectivo', 1, 0, 884940.00),
+(9, 9, 9, 9, 4, 1, 4, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Efectivo', 1, 0, 58000.00),
+(10, 10, 10, 10, 4, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Tarjeta de crédito', 1, 0, 16720.00),
+(11, 11, 11, 11, 2, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Tarjeta de crédito', 1, 0, 12342.00);
 
 -- --------------------------------------------------------
 
@@ -434,9 +407,9 @@ INSERT INTO `paquete` (`idPaquete`, `idCliente`, `idEstadia`, `idPasaje`, `idMen
 CREATE TABLE `pasaje` (
   `idPasaje` int(11) NOT NULL,
   `asiento` int(11) DEFAULT NULL,
-  `idTransporte` int(11) NOT NULL,
-  `origen` int(11) NOT NULL,
-  `destino` int(11) NOT NULL
+  `idTransporte` int(11) DEFAULT NULL,
+  `origen` int(11) DEFAULT NULL,
+  `destino` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -444,24 +417,17 @@ CREATE TABLE `pasaje` (
 --
 
 INSERT INTO `pasaje` (`idPasaje`, `asiento`, `idTransporte`, `origen`, `destino`) VALUES
-(1, 2, 1, 1, 1),
-(2, 33, 2, 1, 1),
-(3, 12, 1, 1, 16),
-(4, 11, 2, 13, 1),
-(5, 23, 1, 16, 2),
-(6, 1, 2, 12, 2),
-(7, 32, 1, 13, 6),
-(8, 22, 3, 10, 11),
-(9, 4, 1, 6, 7),
-(10, 6, 1, 2, 3),
-(11, 33, 1, 4, 17),
-(12, 2, 1, 1, 18),
-(13, 11, 1, 3, 19),
-(14, 31, 1, 3, 20),
-(15, 22, 1, 13, 21),
-(16, 9, 1, 19, 8),
-(17, 23, 1, 10, 15),
-(18, 8, 1, 13, 1);
+(1, 39, 1, 1, 17),
+(2, 10, 2, 1, 8),
+(3, 16, 2, 1, 15),
+(4, 18, 1, 1, 21),
+(5, 37, 1, 1, 19),
+(6, 19, 1, 1, 20),
+(7, 31, 2, 1, 2),
+(8, 31, 1, 1, 1),
+(9, 5, 2, 1, 4),
+(10, 18, 1, 1, 1),
+(11, 37, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -482,7 +448,8 @@ CREATE TABLE `transporte` (
 INSERT INTO `transporte` (`idTransporte`, `tipo`, `costo`) VALUES
 (1, 'Avión', 20000.00),
 (2, 'Colectivo', 13000.00),
-(3, 'Compartido', 8000.00);
+(3, 'Compartido', 8000.00),
+(4, 'Ninguno', 0.00);
 
 --
 -- Índices para tablas volcadas
@@ -561,7 +528,7 @@ ALTER TABLE `alojamiento`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `destino`
@@ -573,7 +540,7 @@ ALTER TABLE `destino`
 -- AUTO_INCREMENT de la tabla `estadia`
 --
 ALTER TABLE `estadia`
-  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -585,13 +552,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
-  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `transporte`

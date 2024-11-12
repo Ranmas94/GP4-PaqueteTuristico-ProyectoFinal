@@ -175,34 +175,7 @@ public class MenuData {
         }
     }
     
-    /*
-    public List<String> obtenerOpcionesEnumTipo() {
-        List<String> opcionesEnum = new ArrayList<>();
-        String sql = "SHOW COLUMNS FROM Menu LIKE 'tipo'";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                // Extraer los valores del ENUM desde el resultado de la consulta
-                String enumValues = rs.getString("Type");
-                enumValues = enumValues.substring(enumValues.indexOf("(") + 1, enumValues.indexOf(")"));
-                
-                // Dividir los valores por coma y limpiar las comillas simples
-                for (String value : enumValues.split(",")) {
-                    opcionesEnum.add(value.replace("'", ""));
-                }
-            }
-
-            rs.close();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al obtener opciones del ENUM tipo: " + ex.getMessage());
-        }
-
-        return opcionesEnum;
-    }*/
+   
     // Método para obtener solo los tipos de menú
 public List<String> obtenerTiposMenu() {
     String sql = "SELECT tipo FROM menu";

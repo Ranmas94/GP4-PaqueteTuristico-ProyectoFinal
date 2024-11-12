@@ -5,8 +5,11 @@
 package Vistas;
 
 import AccesoADatos.AlojamientoData;
+import AccesoADatos.ClienteData;
+import AccesoADatos.EstadiaData;
 import AccesoADatos.MenuData;
 import AccesoADatos.PaqueteData;
+import AccesoADatos.PasajeData;
 import AccesoADatos.TransporteData;
 import Entidades.Alojamiento;
 import Entidades.Estadia;
@@ -41,7 +44,10 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import java.sql.Date;
+
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import javax.swing.ButtonGroup;
 
 /**
@@ -53,6 +59,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
  private final MenuData menuData = new MenuData();
  private final TransporteData tranData = new TransporteData();
  private final PaqueteData paqData = new PaqueteData();
+ private final EstadiaData estadiaData = new EstadiaData();
+ private final PasajeData pasajeData = new PasajeData();
+ private final ClienteData clienteData = new ClienteData();
  private boolean paqueteModificado = false;
     /**
      * Creates new form vistaPaquetePersonalizado
@@ -64,17 +73,20 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         grupoIndividual.add(jrbIndividualNo);
         
         ButtonGroup grupoNinios = new ButtonGroup();
-        grupoNinios.add(jrbMenoresNo);
-        grupoNinios.add(jrbMenoresSi);
+  
         
         bloquearCampos(contenedorInfo);
         bloquearCampos(panelCantPasajeros);
-        bloquearCampos(panelCantMenores);
+      
         jbConfirmar.setEnabled(false);
         jbConfirmarPaquete.setEnabled(false);
-        
-        cargarComboBox();
+       
+        cargarComboBoxEstadia();
+        cargarComboBoxMenu();
+        cargarComboBoxTransporte();
+        actualizarCosto();
         cargarDatos();
+ 
         
     }
 
@@ -126,18 +138,15 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         panelCantPasajeros = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jsCantMayores = new javax.swing.JSpinner();
-        jLabel9 = new javax.swing.JLabel();
-        jrbMenoresSi = new javax.swing.JRadioButton();
-        jrbMenoresNo = new javax.swing.JRadioButton();
-        panelCantMenores = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jsMenores1 = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
         jsMenores2 = new javax.swing.JSpinner();
         jbConfirmarPaquete = new javax.swing.JButton();
-        jbDescartarPaquete = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         tfCostoTotal = new javax.swing.JTextField();
+        jbDescartarPaquete1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 153));
         setPreferredSize(new java.awt.Dimension(800, 800));
@@ -177,11 +186,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
         tfCostoTransporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jcbEstadia.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbEstadiaItemStateChanged(evt);
-            }
-        });
         jcbEstadia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbEstadiaActionPerformed(evt);
@@ -215,7 +219,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
         tfCapacidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jbModificar.setBackground(new java.awt.Color(255, 0, 0));
+        jbModificar.setBackground(new java.awt.Color(255, 0, 51));
         jbModificar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbModificar.setText("MODIFICAR");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -252,82 +256,73 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         contenedorInfoLayout.setHorizontalGroup(
             contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenedorInfoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contenedorInfoLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbTransporte, 0, 210, Short.MAX_VALUE)
+                            .addComponent(jcbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcbTransporte, 0, 210, Short.MAX_VALUE)
-                                    .addComponent(jcbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(43, 43, 43)
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel13))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfCostoMenu)
-                                    .addComponent(tfCostoTransporte))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jcbEstadia, javax.swing.GroupLayout.Alignment.LEADING, 0, 210, Short.MAX_VALUE)
-                                    .addComponent(tfDestino, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contenedorInfoLayout.createSequentialGroup()
-                                        .addComponent(jLabel19)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jdCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(dcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(19, 19, 19))
-                                    .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel20))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                                .addComponent(jdCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18))
-                                            .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                                .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbConfirmar)
-                        .addGap(86, 86, 86)))
-                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
+                        .addGap(43, 43, 43)
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfCostoTransporte, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(tfCostoMenu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(2, 2, 2)
-                        .addComponent(dcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jcbEstadia, javax.swing.GroupLayout.Alignment.LEADING, 0, 210, Short.MAX_VALUE)
+                            .addComponent(tfDestino, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jdCheckin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfHabitaciones))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contenedorInfoLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfCostoEstadia, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(51, 51, 51))
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contenedorInfoLayout.createSequentialGroup()
+                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel20))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(contenedorInfoLayout.createSequentialGroup()
+                                        .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jdCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(8, 8, 8)
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(12, 12, 12)))
+                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dcFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(tfHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCostoEstadia))
+                .addGap(17, 17, 17))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addComponent(jbConfirmar)
+                .addGap(40, 40, 40)
+                .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(229, 229, 229))
             .addGroup(contenedorInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addComponent(jSeparator1)
+                .addContainerGap())
+            .addGroup(contenedorInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contenedorInfoLayout.setVerticalGroup(
@@ -342,65 +337,84 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                                 .addComponent(tfDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel10))
                             .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(dcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(dcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(15, 15, 15)
                         .addComponent(dcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jcbEstadia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21)
-                    .addComponent(tfHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(jdCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel12)
-                        .addComponent(tfCostoEstadia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jcbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(tfCostoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jcbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(tfCostoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3)
+                        .addComponent(jcbEstadia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15)
+                        .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21)
+                        .addComponent(tfHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contenedorInfoLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jdCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel19)))
+                            .addGroup(contenedorInfoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jcbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(tfCostoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contenedorInfoLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jcbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCostoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(contenedorInfoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel14))))
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jbConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfCostoEstadia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))))
+                .addGap(40, 40, 40)
+                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbConfirmar))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("PAQUETE CREADO");
+        jLabel1.setText("RESUMEN DEL PAQUETE");
 
         panelPasajeroIndividual.setBackground(new java.awt.Color(255, 255, 153));
         panelPasajeroIndividual.setToolTipText("");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel7.setText("INDIVIDUAL:");
+        jLabel7.setText("PAQUETE INDIVIDUAL:");
 
         jrbIndividualSI.setBackground(new java.awt.Color(255, 255, 153));
         jrbIndividualSI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualSI.setText("SI");
+        jrbIndividualSI.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jrbIndividualSIItemStateChanged(evt);
+            }
+        });
         jrbIndividualSI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbIndividualSIActionPerformed(evt);
@@ -410,6 +424,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbIndividualNo.setBackground(new java.awt.Color(255, 255, 153));
         jrbIndividualNo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualNo.setText("NO");
+        jrbIndividualNo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jrbIndividualNoItemStateChanged(evt);
+            }
+        });
         jrbIndividualNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbIndividualNoActionPerformed(evt);
@@ -421,13 +440,13 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         panelPasajeroIndividualLayout.setHorizontalGroup(
             panelPasajeroIndividualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPasajeroIndividualLayout.createSequentialGroup()
-                .addGap(215, 215, 215)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel7)
-                .addGap(46, 46, 46)
-                .addComponent(jrbIndividualSI, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(73, 73, 73)
+                .addComponent(jrbIndividualSI, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
                 .addComponent(jrbIndividualNo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPasajeroIndividualLayout.setVerticalGroup(
             panelPasajeroIndividualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,29 +462,35 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         panelCantPasajeros.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel8.setText("CANTIDAD DE MAYORES:");
+        jLabel8.setText("CANTIDAD DE MAYORES (INCLUYÉNDOSE):");
 
         jsCantMayores.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jsCantMayores.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("NIÑOS: ");
-
-        jrbMenoresSi.setBackground(new java.awt.Color(255, 255, 153));
-        jrbMenoresSi.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jrbMenoresSi.setText("SI");
-        jrbMenoresSi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbMenoresSiActionPerformed(evt);
+        jsCantMayores.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsCantMayoresStateChanged(evt);
             }
         });
 
-        jrbMenoresNo.setBackground(new java.awt.Color(255, 255, 153));
-        jrbMenoresNo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jrbMenoresNo.setText("NO");
-        jrbMenoresNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbMenoresNoActionPerformed(evt);
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel16.setText("NIÑOS +10 AÑOS:");
+
+        jsMenores1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jsMenores1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsMenores1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsMenores1StateChanged(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel17.setText("NIÑOS -10 AÑOS:");
+
+        jsMenores2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jsMenores2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsMenores2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsMenores2StateChanged(evt);
             }
         });
 
@@ -474,17 +499,19 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         panelCantPasajerosLayout.setHorizontalGroup(
             panelCantPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCantPasajerosLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jsCantMayores, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(jLabel9)
-                .addGap(28, 28, 28)
-                .addComponent(jrbMenoresSi)
-                .addGap(48, 48, 48)
-                .addComponent(jrbMenoresNo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jsCantMayores, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jsMenores2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         panelCantPasajerosLayout.setVerticalGroup(
             panelCantPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,51 +520,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addGroup(panelCantPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jsCantMayores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrbMenoresNo)
-                    .addComponent(jLabel9)
-                    .addComponent(jrbMenoresSi))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        panelCantMenores.setBackground(new java.awt.Color(255, 255, 153));
-
-        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel16.setText("NIÑOS +10 AÑOS:");
-
-        jsMenores1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jsMenores1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-
-        jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel17.setText("NIÑOS -10 AÑOS:");
-
-        jsMenores2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jsMenores2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-
-        javax.swing.GroupLayout panelCantMenoresLayout = new javax.swing.GroupLayout(panelCantMenores);
-        panelCantMenores.setLayout(panelCantMenoresLayout);
-        panelCantMenoresLayout.setHorizontalGroup(
-            panelCantMenoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCantMenoresLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jLabel16)
-                .addGap(54, 54, 54)
-                .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jsMenores2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelCantMenoresLayout.setVerticalGroup(
-            panelCantMenoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCantMenoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelCantMenoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(jsMenores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jsMenores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jbConfirmarPaquete.setBackground(new java.awt.Color(255, 255, 153));
@@ -549,12 +536,12 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
-        jbDescartarPaquete.setBackground(new java.awt.Color(255, 0, 51));
-        jbDescartarPaquete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jbDescartarPaquete.setText("DESCARTAR PAQUETE");
-        jbDescartarPaquete.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setBackground(new java.awt.Color(255, 0, 51));
+        jbSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbSalir.setText("SALIR");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbDescartarPaqueteActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -563,9 +550,13 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
         tfCostoTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfCostoTotal.setText("COSTO");
-        tfCostoTotal.addActionListener(new java.awt.event.ActionListener() {
+
+        jbDescartarPaquete1.setBackground(new java.awt.Color(255, 0, 51));
+        jbDescartarPaquete1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbDescartarPaquete1.setText("DESCARTAR PAQUETE");
+        jbDescartarPaquete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCostoTotalActionPerformed(evt);
+                jbDescartarPaquete1ActionPerformed(evt);
             }
         });
 
@@ -574,35 +565,31 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelCantPasajeros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelCantMenores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(contenedorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panelPasajeroIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 32, Short.MAX_VALUE)))
-                        .addContainerGap())
+                            .addComponent(contenedorInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelPasajeroIndividual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(jLabel18)
+                        .addGap(66, 66, 66)
+                        .addComponent(jbConfirmarPaquete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(129, 129, 129))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 531, Short.MAX_VALUE)
-                        .addComponent(jbDescartarPaquete)
-                        .addGap(18, 18, 18))))
+                        .addComponent(jbDescartarPaquete1)
+                        .addGap(87, 87, 87)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(272, 272, 272))
+                .addGap(273, 273, 273))
             .addGroup(layout.createSequentialGroup()
-                .addGap(268, 268, 268)
-                .addComponent(jbConfirmarPaquete)
+                .addGap(250, 250, 250)
+                .addComponent(jLabel18)
+                .addGap(28, 28, 28)
+                .addComponent(tfCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -610,31 +597,26 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(contenedorInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPasajeroIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panelCantMenores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(tfCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jbConfirmarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jbDescartarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbConfirmarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbDescartarPaquete1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jcbEstadiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbEstadiaItemStateChanged
-      mostrarDatosEstadia();
-    }//GEN-LAST:event_jcbEstadiaItemStateChanged
 
     private void jcbMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMenuItemStateChanged
           mostrarDatosMenu();
@@ -657,34 +639,21 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbTransporteActionPerformed
 
     private void jrbIndividualSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualSIActionPerformed
-        if(jrbIndividualSI.isSelected()){
+
             jbConfirmarPaquete.setEnabled(true);
-        }else{
-            desbloquearCampos(panelCantPasajeros);
-        }
+       
     }//GEN-LAST:event_jrbIndividualSIActionPerformed
 
     private void jrbIndividualNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualNoActionPerformed
-        // TODO add your handling code here:
+       desbloquearCampos(panelCantPasajeros);
     }//GEN-LAST:event_jrbIndividualNoActionPerformed
-
-    private void jrbMenoresSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMenoresSiActionPerformed
-        if(jrbMenoresSi.isSelected()){
-            desbloquearCampos(panelCantMenores);
-        }else{
-            jbConfirmarPaquete.setEnabled(true);
-        }
-    }//GEN-LAST:event_jrbMenoresSiActionPerformed
-
-    private void jrbMenoresNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMenoresNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbMenoresNoActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         jbConfirmar.setEnabled(true);
         jbModificar.setEnabled(false);
         desbloquearCamposEspecificos();
         paqueteModificado = true;
+       actualizarCosto();
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
@@ -696,23 +665,44 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Se confirmaron los cambios en el paquete.");
             jbConfirmar.setEnabled(false);
             bloquearCampos(contenedorInfo);
+            actualizarCosto();
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jbConfirmarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarPaqueteActionPerformed
        crearPaquete();
-       JOptionPane.showMessageDialog(this, "Paquete creado con éxito.");
-       dispose();
+      actualizarCosto();
        
     }//GEN-LAST:event_jbConfirmarPaqueteActionPerformed
 
-    private void jbDescartarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarPaqueteActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
        dispose();
-    }//GEN-LAST:event_jbDescartarPaqueteActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void tfCostoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCostoTotalActionPerformed
+    private void jsCantMayoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsCantMayoresStateChanged
+
+       actualizarCosto();
+    }//GEN-LAST:event_jsCantMayoresStateChanged
+
+    private void jsMenores1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMenores1StateChanged
+        actualizarCosto();       
+    }//GEN-LAST:event_jsMenores1StateChanged
+
+    private void jsMenores2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMenores2StateChanged
+        actualizarCosto();
+    }//GEN-LAST:event_jsMenores2StateChanged
+
+    private void jrbIndividualSIItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualSIItemStateChanged
+        actualizarCosto();
+    }//GEN-LAST:event_jrbIndividualSIItemStateChanged
+
+    private void jrbIndividualNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualNoItemStateChanged
+actualizarCosto();      
+    }//GEN-LAST:event_jrbIndividualNoItemStateChanged
+
+    private void jbDescartarPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarPaquete1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfCostoTotalActionPerformed
+    }//GEN-LAST:event_jbDescartarPaquete1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -739,25 +729,22 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbConfirmarPaquete;
-    private javax.swing.JButton jbDescartarPaquete;
+    private javax.swing.JButton jbDescartarPaquete1;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JComboBox<Alojamiento> jcbEstadia;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbEstadia;
     private javax.swing.JComboBox<String> jcbMenu;
     private javax.swing.JComboBox<String> jcbTransporte;
     private com.toedter.calendar.JDateChooser jdCheckin;
     private com.toedter.calendar.JDateChooser jdCheckout;
     private javax.swing.JRadioButton jrbIndividualNo;
     private javax.swing.JRadioButton jrbIndividualSI;
-    private javax.swing.JRadioButton jrbMenoresNo;
-    private javax.swing.JRadioButton jrbMenoresSi;
     private javax.swing.JSpinner jsCantMayores;
     private javax.swing.JSpinner jsMenores1;
     private javax.swing.JSpinner jsMenores2;
-    private javax.swing.JPanel panelCantMenores;
     private javax.swing.JPanel panelCantPasajeros;
     private javax.swing.JPanel panelPasajeroIndividual;
     private javax.swing.JTextField tfCapacidad;
@@ -770,7 +757,10 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 
- 
+ private void aa(){
+     JOptionPane.showMessageDialog(this, alojamientoSeleccionado.getIdAlojamiento() + " --" + alojamientoSeleccionado.getIdDestino().getIdDestino() +"-----"+ alojamientoSeleccionado.getNombre());
+ }
+    
 private boolean validarCamposVacios(JPanel jpanel) {
     for (Component c : jpanel.getComponents()) {
         if (c instanceof JTextField) {
@@ -812,12 +802,17 @@ private boolean validarCamposVacios(JPanel jpanel) {
         }
         
         if (c instanceof JCheckBox) {
-            JCheckBox checkBox = (JCheckBox) c;
-            checkBox.setEnabled(false); // Deshabilita el JCheckBox
+            JCheckBox cb = (JCheckBox) c;
+          cb.setEnabled(false); // Deshabilita el JCheckBox
         }
         
         if(c instanceof JDateChooser) {
             JDateChooser t = (JDateChooser) c;
+            t.setEnabled(false);
+        }
+        
+        if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
             t.setEnabled(false);
         }
         
@@ -849,6 +844,12 @@ private boolean validarCamposVacios(JPanel jpanel) {
             t.setEnabled(true);
         }
         
+         if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(true);
+        }
+        
+        
     }
 }
   
@@ -857,9 +858,12 @@ private boolean validarCamposVacios(JPanel jpanel) {
   private void desbloquearCamposEspecificos(){
       dcFechaFin.setEnabled(true);
       dcFechaInicio.setEnabled(true);
+      tfCapacidad.setEnabled(true);
       jcbEstadia.setEnabled(true);
       jcbMenu.setEnabled(true);
       jcbTransporte.setEnabled(true);
+      jdCheckin.setEnabled(true);
+      jdCheckout.setEnabled(true);
   }
   
   private void cargarDatos(){
@@ -869,30 +873,30 @@ private boolean validarCamposVacios(JPanel jpanel) {
           dcFechaInicio.setDate(fechInicio);
           dcFechaFin.setDate(fechFin);
           
-          jcbEstadia.setSelectedItem(alojamientoSeleccionado);
+          jcbEstadia.setSelectedItem(alojamientoSeleccionado.getNombre());
           tfCapacidad.setText(String.valueOf(alojamientoSeleccionado.getCapacidad()));
           tfHabitaciones.setText(String.valueOf(alojamientoSeleccionado.getNroAmbientes()));
           jdCheckin.setDate((estadiaSeleccionada.getFechaCheckIn()));
           jdCheckout.setDate((estadiaSeleccionada.getFechaCheckOut()));
           tfCostoEstadia.setText(String.valueOf(estadiaSeleccionada.getTotal()));
           
-          jcbMenu.setSelectedItem(menuSeleccionado);
+          jcbMenu.setSelectedItem(menuSeleccionado.getTipo());
           tfCostoMenu.setText(String.valueOf(menuSeleccionado.getPorcentaje()));
           
-          jcbTransporte.setSelectedItem(transporteSeleccionado);
+          jcbTransporte.setSelectedItem(transporteSeleccionado.getTipo());
           tfCostoTransporte.setText(String.valueOf(transporteSeleccionado.getCosto()));
           
           
       }catch(NullPointerException ex){
-          JOptionPane.showMessageDialog(this, "ERROR");
+          JOptionPane.showMessageDialog(this, "Error al cargar datos null");
       }catch(ClassCastException | NumberFormatException ex){
          JOptionPane.showMessageDialog(this, "Error al cargar datos. " +ex);
      }
   }
   
 
-   private void cargarComboBox(){
-   jcbEstadia.removeAllItems();
+   private void cargarComboBoxEstadia(){
+
    int capacidad = (alojamientoSeleccionado.getCapacidad());
    
    List<Alojamiento> lista = alData.buscarAlojamientoCapacidad(capacidad,destinoSeleccionado.getIdDestino());
@@ -900,32 +904,46 @@ private boolean validarCamposVacios(JPanel jpanel) {
    if(lista.isEmpty()){
        JOptionPane.showMessageDialog(this, "No hay alojamientos disponibles.");
    }else{
-   for(Alojamiento alo : lista){ //el 1 se intercambia por getDestino.
-       jcbEstadia.addItem(alo);
+   for(Alojamiento alo : lista){ 
+       jcbEstadia.addItem(alo.getNombre());
    } 
    
    }
       }
-      
+   
+   
+   private void cargarComboBoxMenu(){
+        jcbMenu.removeAllItems();
+    for(MenuPension m : menuData.listarMenus()){
+        jcbMenu.addItem(m.getTipo());
+
+    }    
+   }
+   
+    private void cargarComboBoxTransporte(){
+         for(String t : tranData.obtenerTodosLosTipos()){
+        jcbTransporte.addItem(t);
+    }
+    }
       
   private void confirmarCambios(){
      try{
-      Date inicio = (Date) jdCheckin.getDate();
-      Date fin =  (Date) jdCheckout.getDate();
+         java.util.Date inicio = jdCheckin.getDate();
+         java.util.Date fin =   jdCheckout.getDate();
       double Total = estadiaSeleccionada.getTotal(); 
-      alojamientoSeleccionado = (Alojamiento) jcbEstadia.getSelectedItem();
+      alojamientoSeleccionado = alData.buscarAlojamientoNombre(String.valueOf(jcbEstadia.getSelectedItem()));
       estadiaSeleccionada = new Estadia(alojamientoSeleccionado, inicio, fin, Total);
       
       String tipomenu = (String) jcbMenu.getSelectedItem();
-      double costomenu = Double.parseDouble(tfCostoMenu.getText());
-      menuSeleccionado = new MenuPension(tipomenu, costomenu);
       
+      menuSeleccionado = menuData.buscarMenuPorTipo(tipomenu);
+       
       
       int asiento = pasajeSeleccionado.getAsiento();
       String tipoTransporte = (String) jcbTransporte.getSelectedItem();
-      double costoTransporte = Double.parseDouble(tfCostoTransporte.getText());
-      transporteSeleccionado = new Transporte(tipoTransporte,costoTransporte);
-       pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
+     transporteSeleccionado = tranData.obtenerTransportePorTipo(tipoTransporte);
+         System.out.println(transporteSeleccionado.getTipo());
+       pasajeSeleccionado = new Pasaje( pasajeSeleccionado.getIdPasaje(),transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
        
      }catch(NullPointerException ex){
          JOptionPane.showMessageDialog(this, "Error. Hay datos en NULL. " +ex);
@@ -936,10 +954,21 @@ private boolean validarCamposVacios(JPanel jpanel) {
   
   
   private void mostrarDatosEstadia(){
-      Alojamiento aloj = (Alojamiento) jcbEstadia.getSelectedItem();
+      Alojamiento aloj = alData.buscarAlojamientoNombre(String.valueOf(jcbEstadia.getSelectedItem()));
       tfCapacidad.setText(String.valueOf(aloj.getCapacidad())); 
       tfHabitaciones.setText(String.valueOf(aloj.getNroAmbientes())); 
-      tfCostoEstadia.setText(String.valueOf(aloj.getPrecioPorNoche())); 
+     double precionoche = aloj.getPrecioPorNoche();
+     java.util.Date fechaCheckIn = estadiaSeleccionada.getFechaCheckIn();
+     java.util.Date fechaCheckOut =  estadiaSeleccionada.getFechaCheckOut();
+     
+      
+           LocalDate inicio = fechaCheckIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           LocalDate fin = fechaCheckOut.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           long diasEntre = ChronoUnit.DAYS.between(inicio, fin);
+            
+            double Total = precionoche * diasEntre;
+        tfCostoEstadia.setText(String.valueOf(Total));
+     actualizarCosto();
   }
   
   private void mostrarDatosMenu(){
@@ -947,45 +976,56 @@ private boolean validarCamposVacios(JPanel jpanel) {
       MenuPension menu = menuData.buscarMenuPorTipo(tipo);
       
       tfCostoMenu.setText(String.valueOf(menu.getPorcentaje()));
+      actualizarCosto();
   }
   
   private void mostrarDatosTransporte(){
       String tipo = (String) jcbTransporte.getSelectedItem();
        tfCostoTransporte.setText(String.valueOf(tranData.obtenerCostoPorTipo(tipo)));
+       actualizarCosto();
   }
   
   
 private void crearPaquete(){
     try{
-    int cantPasajerosAdultos =1;
-    int cantPasajerosNinios =0;
-    int cantPasajerosNiniosMenores =0;
-   
+
+    int cantPasajerosAdultos= 0;
+    int cantPasajerosNinios = 0 ;
+    int cantPasajerosNiniosMenores = 0;
     
     double totalEstadia = estadiaSeleccionada.getTotal();
     double totalMenu = menuSeleccionado.getPorcentaje();
     double totalTransporte = transporteSeleccionado.getCosto();
-    
-    
-    if(!jrbIndividualSI.isSelected()){
-        cantPasajerosAdultos = (int) jsCantMayores.getValue();
-    }
-    if(jrbMenoresSi.isSelected()){
-        cantPasajerosNinios = (int) jsMenores1.getValue();
-        cantPasajerosNiniosMenores= (int) jsMenores2.getValue();
-    }
-    
-    int totalPasajeros = cantPasajerosAdultos + cantPasajerosNinios + cantPasajerosNiniosMenores;
+    double precioTotal = 0;
+    double precioAdultos = cantPasajerosAdultos * cantPasajerosNinios;
+    double precioNinios = 0;
     double costoBase = totalEstadia + totalTransporte;
     double costoMenu = costoBase * totalMenu;
-    double precioTotal = (costoBase + costoMenu) * totalPasajeros;
-    double penalizacion = 0.10 * totalPasajeros;
+    int totalPasajeros = cantPasajerosAdultos + cantPasajerosNinios + cantPasajerosNiniosMenores;
+     double penalizacion = 0.10 * totalPasajeros;
+    
+    if(jrbIndividualNo.isSelected()){
+        precioTotal = (precioTotal +(costoMenu + costoBase));
+    }else{
+        cantPasajerosAdultos = (int) jsCantMayores.getValue();
+        cantPasajerosNinios = (int) jsMenores1.getValue();
+        cantPasajerosNiniosMenores= (int) jsMenores2.getValue();
+        
+          precioAdultos = (precioTotal +(costoMenu + costoBase)) * precioAdultos;
+         precioNinios = ((precioNinios + (costoMenu + costoBase)) * cantPasajerosNiniosMenores)* 0.5;
+         
+         precioTotal = precioAdultos + precioNinios;
+        
+    }
+    
     if (paqueteModificado) {
        precioTotal *= penalizacion;
     }
     
     
-  
+    estadiaData.guardarEstadia(estadiaSeleccionada);
+    pasajeData.agregarPasaje(pasajeSeleccionado);
+    clienteData.guardarCliente(clienteSeleccionado);
     
     Paquete paquete = new Paquete(clienteSeleccionado,estadiaSeleccionada,
             pasajeSeleccionado,menuSeleccionado, origenSeleccionado, destinoSeleccionado,fechInicio,fechFin,temporada,totalPasajeros,medioPago,
@@ -998,4 +1038,44 @@ private void crearPaquete(){
 }
 } 
 
+private void actualizarCosto(){
+     try{
+          int cantPasajerosAdultos= 0;
+    int cantPasajerosNinios = 0 ;
+    int cantPasajerosNiniosMenores = 0;
+    
+    double totalEstadia = estadiaSeleccionada.getTotal();
+    double totalMenu = menuSeleccionado.getPorcentaje();
+    double totalTransporte = transporteSeleccionado.getCosto();
+    double precioTotal = 0;
+    double precioAdultos = cantPasajerosAdultos * cantPasajerosNinios;
+    double precioNinios = 0;
+    double costoBase = totalEstadia + totalTransporte;
+    double costoMenu = costoBase * totalMenu;
+    int totalPasajeros = cantPasajerosAdultos + cantPasajerosNinios + cantPasajerosNiniosMenores;
+     double penalizacion = 0.10 * totalPasajeros;
+    
+    if(jrbIndividualSI.isSelected()){
+        precioTotal = (precioTotal +(costoMenu + costoBase));
+    }else if(jrbIndividualNo.isSelected()){
+        cantPasajerosAdultos = (int) jsCantMayores.getValue();
+        cantPasajerosNinios = (int) jsMenores1.getValue();
+        cantPasajerosNiniosMenores= (int) jsMenores2.getValue();
+        
+          precioAdultos = (precioTotal +(costoMenu + costoBase)) * precioAdultos;
+         precioNinios = ((precioNinios + (costoMenu + costoBase)) * cantPasajerosNiniosMenores)* 0.5;
+         
+         precioTotal = precioAdultos + precioNinios;
+        
+    }
+    
+    if (paqueteModificado) {
+       precioTotal = precioTotal * penalizacion;
+    }
+    
+    tfCostoTotal.setText(String.valueOf(precioTotal));
+}catch(NullPointerException | ClassCastException | NumberFormatException ex){
+       
+   }
+}
 }

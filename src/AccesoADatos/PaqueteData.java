@@ -37,8 +37,9 @@ public class PaqueteData {
     
     // Guardar un paquete
 public void guardarPaquete(Paquete paquete) {
-    String sql = "INSERT INTO paquete(idCliente, idEstadia, idPasaje, idMenu, origen, destino, fechaInicio, fechaFin, cantidadPasajeros, medioPago, pagado, cancelado, precioTotal"
-               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    String sql = "INSERT INTO paquete(idCliente, idEstadia, idPasaje, idMenu, origen, destino, fechaInicio, fechaFin, temporada ,cantidadPasajeros, medioPago, pagado, cancelado, precioTotal)"
+               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -49,13 +50,14 @@ public void guardarPaquete(Paquete paquete) {
         ps.setInt(4, paquete.getIdMenu().getIdMenu());
         ps.setInt(5, paquete.getOrigen().getIdDestino());
         ps.setInt(6, paquete.getDestino().getIdDestino());
-        ps.setDate(7, (Date) paquete.getFechaInicio());
-        ps.setDate(8, (Date) paquete.getFechaFin());
-        ps.setInt(9, paquete.getCantidadPasajeros());
-        ps.setString(10, paquete.getMedioPago());
-        ps.setBoolean(11, paquete.isPagado());
-        ps.setBoolean(12, paquete.isCancelado());
-        ps.setDouble(13, paquete.getPrecioTotal());
+        ps.setDate(7, new java.sql.Date(paquete.getFechaInicio().getTime()));
+        ps.setDate(8, new java.sql.Date(paquete.getFechaFin().getTime()));
+        ps.setString(9, paquete.getTemporada());
+        ps.setInt(10, paquete.getCantidadPasajeros());
+        ps.setString(11, paquete.getMedioPago());
+        ps.setBoolean(12, paquete.isPagado());
+        ps.setBoolean(13, paquete.isCancelado());
+        ps.setDouble(14, paquete.getPrecioTotal());
        
 
         ps.executeUpdate();
@@ -73,7 +75,7 @@ public void guardarPaquete(Paquete paquete) {
 
 // Modificar paquete
 public void modificarPaquete(Paquete paquete) {
-    String sql = "UPDATE paquete SET idCliente = ?, idEstadia = ?, idPasaje = ?, idMenu = ?, origen = ?, destino = ?, fechaInicio = ?, fechaFin = ?, cantidadPasajeros = ?, medioPago = ?, "
+    String sql = "UPDATE paquete SET idCliente = ?, idEstadia = ?, idPasaje = ?, idMenu = ?, origen = ?, destino = ?, fechaInicio = ?, fechaFin = ?,temporada = ?, cantidadPasajeros = ?, medioPago = ?, "
                + "pagado = ?, cancelado = ?, precioTotal = ? WHERE idPaquete = ?";
 
     try {
@@ -84,14 +86,15 @@ public void modificarPaquete(Paquete paquete) {
         ps.setInt(4, paquete.getIdMenu().getIdMenu());
         ps.setInt(5, paquete.getOrigen().getIdDestino());
         ps.setInt(6, paquete.getDestino().getIdDestino());
-        ps.setDate(7, (Date) paquete.getFechaInicio());
-        ps.setDate(8, (Date) paquete.getFechaFin());
-        ps.setInt(9, paquete.getCantidadPasajeros());
-        ps.setString(10, paquete.getMedioPago());
-        ps.setBoolean(11, paquete.isPagado());
-        ps.setBoolean(12, paquete.isCancelado());
-        ps.setDouble(13, paquete.getPrecioTotal());
-        ps.setInt(14, paquete.getIdPaquete());
+        ps.setDate(7, new java.sql.Date(paquete.getFechaInicio().getTime()));
+        ps.setDate(8, new java.sql.Date(paquete.getFechaFin().getTime()));
+        ps.setString(9, paquete.getTemporada());
+        ps.setInt(10, paquete.getCantidadPasajeros());
+        ps.setString(11, paquete.getMedioPago());
+        ps.setBoolean(12, paquete.isPagado());
+        ps.setBoolean(13, paquete.isCancelado());
+        ps.setDouble(14, paquete.getPrecioTotal());
+        ps.setInt(15, paquete.getIdPaquete());
 
         int filasAfectadas = ps.executeUpdate();
 
@@ -213,57 +216,71 @@ public ArrayList<Paquete> mostrarPaquetes() {
     }
     return estadisticas;
 }
-    //paquetes comprados los ultimos dos meses
-    public ArrayList<Paquete> resumenPaquetesComprados(){
-      ArrayList<Paquete> resumen = new ArrayList<>();
-     LocalDate fecha = LocalDate.now().minusMonths(2); //le restamos dos meses a la fecha actual
-      String sql = "SELECT * FROM paquete WHERE paquete.fechaFin > ? AND paquete.cancelado = false";
-      
-         try {
-             PreparedStatement ps = con.prepareStatement(sql);
-             ps.setDate(1, Date.valueOf(fecha));
-             
-             ResultSet rs = ps.executeQuery();
-             while(rs.next()){
-                 Paquete paquete = new Paquete();
-                 
-                 Estadia estadia = new Estadia();
-                 Pasaje pasaje = new Pasaje();
-                 MenuPension menu = new MenuPension();
-                 Destino origen = new Destino();
-                 Destino destino = new Destino();
-                 
-                 estadia.setIdEstadia(rs.getInt("idEstadia"));
-                 pasaje.setIdPasaje(rs.getInt("idPasaje"));
-                 menu.setIdMenu(rs.getInt("idMenu"));
-                 origen.setIdDestino(rs.getInt("origen"));
-                 destino.setIdDestino(rs.getInt("destino"));
-                 
-                 paquete.setIdPaquete(rs.getInt("idPaquete"));
-                 paquete.setIdEstadia(estadia);
-                 paquete.setIdPasaje(pasaje);
-                 paquete.setIdMenu(menu);
-                 paquete.setOrigen(origen);
-                 paquete.setDestino(destino);
-                 paquete.setFechaInicio(rs.getDate("fechaInicio"));
-                 paquete.setFechaFin(rs.getDate("fechaFin"));
-                 paquete.setTemporada(rs.getString("temporada"));
-                 paquete.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
-                 paquete.setMedioPago(rs.getString("medioPago"));
-                 paquete.setPagado(rs.getBoolean("pagado"));
-                 paquete.setCancelado(rs.getBoolean("cancelado"));
-                 paquete.setPrecioTotal(rs.getDouble("precioTotal"));
-                 
-                 resumen.add(paquete);
-             }
-             ps.close();
-             rs.close();
-             
-         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias." + ex.getMessage());
-         }
-         return resumen;
-  }
+   public ArrayList<Paquete> resumenPaquetesComprados() {
+    ArrayList<Paquete> resumen = new ArrayList<>();
+    LocalDate fecha = LocalDate.now().minusMonths(2); // le restamos dos meses a la fecha actual
+    
+    // Ajustar la consulta para incluir JOIN con la tabla destino
+    String sql = """
+        SELECT p.*, 
+               o.ciudad AS origenCiudad, 
+               d.ciudad AS destinoCiudad
+        FROM paquete p
+        JOIN destino o ON p.origen = o.idDestino
+        JOIN destino d ON p.destino = d.idDestino
+        WHERE p.fechaFin > ? AND p.cancelado = false AND p.fechaFin < NOW() AND p.pagado = true
+    """;
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(fecha));
+        
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Paquete paquete = new Paquete();
+            
+            Estadia estadia = new Estadia();
+            Pasaje pasaje = new Pasaje();
+            MenuPension menu = new MenuPension();
+            Destino origen = new Destino();
+            Destino destino = new Destino();
+            
+            estadia.setIdEstadia(rs.getInt("idEstadia"));
+            pasaje.setIdPasaje(rs.getInt("idPasaje"));
+            menu.setIdMenu(rs.getInt("idMenu"));
+            
+            // Asignar IDs y ciudades a origen y destino
+            origen.setIdDestino(rs.getInt("origen"));
+            origen.setCiudad(rs.getString("origenCiudad"));
+            
+            destino.setIdDestino(rs.getInt("destino"));
+            destino.setCiudad(rs.getString("destinoCiudad"));
+            
+            paquete.setIdPaquete(rs.getInt("idPaquete"));
+            paquete.setIdEstadia(estadia);
+            paquete.setIdPasaje(pasaje);
+            paquete.setIdMenu(menu);
+            paquete.setOrigen(origen);
+            paquete.setDestino(destino);
+            paquete.setFechaInicio(rs.getDate("fechaInicio"));
+            paquete.setFechaFin(rs.getDate("fechaFin"));
+            paquete.setTemporada(rs.getString("temporada"));
+            paquete.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+            paquete.setMedioPago(rs.getString("medioPago"));
+            paquete.setPagado(rs.getBoolean("pagado"));
+            paquete.setCancelado(rs.getBoolean("cancelado"));
+            paquete.setPrecioTotal(rs.getDouble("precioTotal"));
+            
+            resumen.add(paquete);
+        }
+        ps.close();
+        rs.close();
+        
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias." + ex.getMessage());
+    }
+    return resumen;
+}
   
       public ArrayList<PaqueteDetalle> obtenerDetallePaquetes() {
     ArrayList<PaqueteDetalle> detallesPaquetes = new ArrayList<>();

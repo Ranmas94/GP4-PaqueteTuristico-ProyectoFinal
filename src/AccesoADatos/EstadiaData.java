@@ -56,8 +56,8 @@ public class EstadiaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, estadia.getIdAlojamiento().getIdAlojamiento());
-            ps.setDate(2, (Date) estadia.getFechaCheckIn());
-            ps.setDate(3, (Date) estadia.getFechaCheckOut());
+            ps.setDate(2,  new java.sql.Date(estadia.getFechaCheckIn().getTime()));
+            ps.setDate(3, new java.sql.Date(estadia.getFechaCheckOut().getTime()));
             ps.setDouble(4, estadia.getTotal());
             ps.setInt(5, estadia.getIdEstadia());
 
