@@ -179,27 +179,46 @@ MenuData menuData = new MenuData();
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        String tipo =  (String) jcbtipoMenu.getSelectedItem();
-        double costo = Double.parseDouble(tfCosto.getText());
-        menuSeleccionado = new MenuPension(tipo,costo); 
-        if(menuSeleccionado !=null){
-            JOptionPane.showMessageDialog(this, "Menu agregado al paquete");
-             jbSiguiente.setEnabled(true);
-             jbAgregar.setEnabled(false);
-        }else{
-            JOptionPane.showMessageDialog(this, "Error al intentar agregar al paquete.");
+       // Obtener el tipo seleccionado
+        String tipo = (String) jcbtipoMenu.getSelectedItem();
+        
+        // Validar que el costo no esté vacío y sea un número
+        String costoStr = tfCosto.getText();
+        if (costoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un menú válido.");
             return;
         }
+
+        double costo;
+        try {
+            costo = Double.parseDouble(costoStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El costo ingresado no es un número válido.");
+            return;
+        }
+
+        // Crear el objeto MenuPension
+        menuSeleccionado = new MenuPension(tipo, costo);
+        JOptionPane.showMessageDialog(this, "Menú agregado al paquete" + menuSeleccionado.getIdMenu());
+
+        // Habilitar y deshabilitar botones según corresponda
+        jbSiguiente.setEnabled(true);
+        jbAgregar.setEnabled(false);
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jcbtipoMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbtipoMenuItemStateChanged
- if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-        String tipo = (String) jcbtipoMenu.getSelectedItem();
-        MenuPension menu = menuData.buscarMenuPorTipo(tipo);
-        if (menu != null) {
-            tfCosto.setText(String.valueOf(menu.getPorcentaje()));
-        }
-    }
+
+            String tipo = (String) jcbtipoMenu.getSelectedItem();
+            MenuPension menu = menuData.buscarMenuPorTipo(tipo);
+
+            // Validar si el menú existe
+            if (menu != null) {
+                tfCosto.setText(String.valueOf(menu.getPorcentaje()));
+            } else {
+                tfCosto.setText("");
+                JOptionPane.showMessageDialog(this, "Menú no encontrado.");
+            }
+        
     }//GEN-LAST:event_jcbtipoMenuItemStateChanged
 
 

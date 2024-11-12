@@ -27,23 +27,24 @@ public class PasajeData {
     
 // Método para agregar un pasaje
 public void agregarPasaje(Pasaje pasaje) {
-    String sql = "INSERT INTO pasajes (idTransporte, asiento, origen, destino) VALUES (?, ?, ?, ?)";
+    String sql = "INSERT INTO pasaje (idTransporte, asiento, origen, destino) VALUES (?, ?, ?, ?)";
 
-    try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+    try {
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, pasaje.getIdTransporte().getIdTransporte());
         ps.setInt(2, pasaje.getAsiento());
         ps.setInt(3, pasaje.getOrigen().getIdDestino());
         ps.setInt(4, pasaje.getDestino().getIdDestino());
 
         ps.executeUpdate();
-
-        try (ResultSet rs = ps.getGeneratedKeys()) {
+        ResultSet rs = ps.getGeneratedKeys(); 
             if (rs.next()) {
                 pasaje.setIdPasaje(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Pasaje agregado con éxito");
             }
-        }
+        
 
-        JOptionPane.showMessageDialog(null, "Pasaje agregado con éxito");
+        
     } catch (SQLException ex) {
         System.out.println("Error al agregar el pasaje: " + ex.getMessage());
     }
@@ -51,7 +52,7 @@ public void agregarPasaje(Pasaje pasaje) {
 
 // Método para actualizar un pasaje
 public void actualizarPasaje(Pasaje pasaje) {
-    String sql = "UPDATE pasajes SET idTransporte = ?, asiento = ?, origen = ?, destino = ? WHERE idPasaje = ?";
+    String sql = "UPDATE pasaje SET idTransporte = ?, asiento = ?, origen = ?, destino = ? WHERE idPasaje = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setInt(1, pasaje.getIdTransporte().getIdTransporte());
@@ -73,7 +74,7 @@ public void actualizarPasaje(Pasaje pasaje) {
 
 // Método para eliminar un pasaje por ID
 public void eliminarPasaje(int idPasaje) {
-    String sql = "DELETE FROM pasajes WHERE idPasaje = ?";
+    String sql = "DELETE FROM pasaje WHERE idPasaje = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setInt(1, idPasaje);

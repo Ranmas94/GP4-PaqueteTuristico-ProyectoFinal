@@ -62,6 +62,7 @@ public class Menu extends javax.swing.JFrame {
         itemMenu = new javax.swing.JMenuItem();
         itemTransporte = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        itemPaquetesComprados = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -306,7 +307,16 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Datos");
+
+        itemPaquetesComprados.setText("Paquetes recientes");
+        itemPaquetesComprados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemPaquetesCompradosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemPaquetesComprados);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -410,6 +420,14 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(v);
     }//GEN-LAST:event_itemTransporteActionPerformed
 
+    private void itemPaquetesCompradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPaquetesCompradosActionPerformed
+       escritorio.repaint();
+        VistaPaqueteDetalle v = new  VistaPaqueteDetalle();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
+    }//GEN-LAST:event_itemPaquetesCompradosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -453,6 +471,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAlojamiento;
     private javax.swing.JMenuItem itemDestino;
     private javax.swing.JMenuItem itemMenu;
+    private javax.swing.JMenuItem itemPaquetesComprados;
     private javax.swing.JMenuItem itemTransporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;

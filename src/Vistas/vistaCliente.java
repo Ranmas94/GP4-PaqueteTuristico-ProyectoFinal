@@ -201,7 +201,6 @@ public static Cliente clienteSeleccionado;
         
         Cliente cli = new Cliente(nombre,apellido,dni,telefono,correo);
         clienteSeleccionado = cli;
-        cliData.guardarCliente(cli);
         jbResumen.setEnabled(true);
         jbGuardar.setEnabled(false);
        }catch(NullPointerException ex){

@@ -151,43 +151,46 @@ public static Estadia estadiaSeleccionada;
                 .addContainerGap()
                 .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contenedorLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
-                        .addGap(25, 25, 25))
-                    .addGroup(contenedorLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
+                                .addGap(25, 25, 25))
+                            .addGroup(contenedorLayout.createSequentialGroup()
+                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(contenedorLayout.createSequentialGroup()
+                                        .addGap(112, 112, 112)
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)))
                         .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(contenedorLayout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(jLabel13)
+                                .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
-                                .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)))
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfDireccion)
+                                .addComponent(tfCapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                                .addComponent(tfAmbientes, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(tfCantidadCamas, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(tfCantidadBanios)
+                                .addComponent(tfPrecio))
+                            .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(contenedorLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfDireccion)
-                        .addComponent(tfCapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                        .addComponent(tfAmbientes, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tfCantidadCamas, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tfCantidadBanios)
-                        .addComponent(tfPrecio))
-                    .addComponent(jcbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addComponent(jcbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(84, 84, 84))
         );
         contenedorLayout.setVerticalGroup(
@@ -319,7 +322,8 @@ public static Estadia estadiaSeleccionada;
                    jbSiguiente.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
             
-            alojamientoSeleccionado = (Alojamiento) jcbAlojamiento.getSelectedItem();
+            Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
+            alojamientoSeleccionado = alData.buscarAlojamientoID(aloj.getIdAlojamiento());
             
             
             double precioporNoche = alojamientoSeleccionado.getPrecioPorNoche();
@@ -331,7 +335,7 @@ public static Estadia estadiaSeleccionada;
             double Total = precioporNoche * diasEntre;
             
             estadiaSeleccionada = new Estadia(alojamientoSeleccionado,fechaCheckIn, fechaCheckOut, Total); 
-            estData.guardarEstadia(estadiaSeleccionada);
+         
             jbAgregar.setEnabled(false);
           }
         
