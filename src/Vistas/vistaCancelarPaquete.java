@@ -84,7 +84,7 @@ public class vistaCancelarPaquete extends javax.swing.JFrame {
         jButton2.setText("Salir");
         jInternalFrame1.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 80, -1));
 
-        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 430));
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
