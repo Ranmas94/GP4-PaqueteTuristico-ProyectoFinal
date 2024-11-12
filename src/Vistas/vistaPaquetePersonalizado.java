@@ -409,6 +409,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbIndividualSI.setBackground(new java.awt.Color(255, 255, 153));
         jrbIndividualSI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualSI.setText("SI");
+        jrbIndividualSI.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jrbIndividualSIItemStateChanged(evt);
+            }
+        });
         jrbIndividualSI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbIndividualSIActionPerformed(evt);
@@ -418,6 +423,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbIndividualNo.setBackground(new java.awt.Color(255, 255, 153));
         jrbIndividualNo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualNo.setText("NO");
+        jrbIndividualNo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jrbIndividualNoItemStateChanged(evt);
+            }
+        });
         jrbIndividualNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbIndividualNoActionPerformed(evt);
@@ -455,6 +465,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
         jsCantMayores.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jsCantMayores.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jsCantMayores.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsCantMayoresStateChanged(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("NIÑOS: ");
@@ -462,6 +477,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbMenoresSi.setBackground(new java.awt.Color(255, 255, 153));
         jrbMenoresSi.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbMenoresSi.setText("SI");
+        jrbMenoresSi.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jrbMenoresSiItemStateChanged(evt);
+            }
+        });
         jrbMenoresSi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbMenoresSiActionPerformed(evt);
@@ -471,6 +491,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbMenoresNo.setBackground(new java.awt.Color(255, 255, 153));
         jrbMenoresNo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbMenoresNo.setText("NO");
+        jrbMenoresNo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jrbMenoresNoItemStateChanged(evt);
+            }
+        });
         jrbMenoresNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbMenoresNoActionPerformed(evt);
@@ -514,12 +539,22 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
         jsMenores1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jsMenores1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsMenores1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsMenores1StateChanged(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel17.setText("NIÑOS -10 AÑOS:");
 
         jsMenores2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jsMenores2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsMenores2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsMenores2StateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCantMenoresLayout = new javax.swing.GroupLayout(panelCantMenores);
         panelCantMenores.setLayout(panelCantMenoresLayout);
@@ -664,11 +699,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbTransporteActionPerformed
 
     private void jrbIndividualSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualSIActionPerformed
-        if(jrbIndividualSI.isSelected()){
+
             jbConfirmarPaquete.setEnabled(true);
-        }else{
-            desbloquearCampos(panelCantPasajeros);
-        }
+       
     }//GEN-LAST:event_jrbIndividualSIActionPerformed
 
     private void jrbIndividualNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualNoActionPerformed
@@ -676,11 +709,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbIndividualNoActionPerformed
 
     private void jrbMenoresSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMenoresSiActionPerformed
-        if(jrbMenoresSi.isSelected()){
+
             desbloquearCampos(panelCantMenores);
-        }else{
             jbConfirmarPaquete.setEnabled(true);
-        }
     }//GEN-LAST:event_jrbMenoresSiActionPerformed
 
     private void jrbMenoresNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMenoresNoActionPerformed
@@ -692,7 +723,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jbModificar.setEnabled(false);
         desbloquearCamposEspecificos();
         paqueteModificado = true;
-       
+       actualizarCosto();
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
@@ -704,6 +735,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Se confirmaron los cambios en el paquete.");
             jbConfirmar.setEnabled(false);
             bloquearCampos(contenedorInfo);
+            actualizarCosto();
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
@@ -718,8 +750,38 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbDescartarPaqueteActionPerformed
 
     private void tfCostoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCostoTotalActionPerformed
-        // TODO add your handling code here:
+       
+        
     }//GEN-LAST:event_tfCostoTotalActionPerformed
+
+    private void jsCantMayoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsCantMayoresStateChanged
+
+       actualizarCosto();
+    }//GEN-LAST:event_jsCantMayoresStateChanged
+
+    private void jsMenores1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMenores1StateChanged
+        actualizarCosto();       
+    }//GEN-LAST:event_jsMenores1StateChanged
+
+    private void jsMenores2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMenores2StateChanged
+        actualizarCosto();
+    }//GEN-LAST:event_jsMenores2StateChanged
+
+    private void jrbIndividualSIItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualSIItemStateChanged
+        actualizarCosto();
+    }//GEN-LAST:event_jrbIndividualSIItemStateChanged
+
+    private void jrbIndividualNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualNoItemStateChanged
+actualizarCosto();      
+    }//GEN-LAST:event_jrbIndividualNoItemStateChanged
+
+    private void jrbMenoresSiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbMenoresSiItemStateChanged
+actualizarCosto();        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbMenoresSiItemStateChanged
+
+    private void jrbMenoresNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbMenoresNoItemStateChanged
+actualizarCosto();        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbMenoresNoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -822,8 +884,8 @@ private boolean validarCamposVacios(JPanel jpanel) {
         }
         
         if (c instanceof JCheckBox) {
-            JCheckBox checkBox = (JCheckBox) c;
-            checkBox.setEnabled(false); // Deshabilita el JCheckBox
+            JCheckBox cb = (JCheckBox) c;
+          cb.setEnabled(false); // Deshabilita el JCheckBox
         }
         
         if(c instanceof JDateChooser) {
@@ -863,6 +925,12 @@ private boolean validarCamposVacios(JPanel jpanel) {
             JDateChooser t = (JDateChooser) c;
             t.setEnabled(true);
         }
+        
+         if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(true);
+        }
+        
         
     }
 }
@@ -942,18 +1010,18 @@ private boolean validarCamposVacios(JPanel jpanel) {
          java.util.Date inicio = jdCheckin.getDate();
          java.util.Date fin =   jdCheckout.getDate();
       double Total = estadiaSeleccionada.getTotal(); 
-      alojamientoSeleccionado = (Alojamiento) jcbEstadia.getSelectedItem();
+      alojamientoSeleccionado = alData.buscarAlojamientoNombre(String.valueOf(jcbEstadia.getSelectedItem()));
       estadiaSeleccionada = new Estadia(alojamientoSeleccionado, inicio, fin, Total);
       
       String tipomenu = (String) jcbMenu.getSelectedItem();
-      double costomenu = Double.parseDouble(tfCostoMenu.getText());
-      menuSeleccionado = new MenuPension(menuSeleccionado.getIdMenu(),tipomenu, costomenu);
       
+      menuSeleccionado = menuData.buscarMenuPorTipo(tipomenu);
+       
       
       int asiento = pasajeSeleccionado.getAsiento();
       String tipoTransporte = (String) jcbTransporte.getSelectedItem();
-      double costoTransporte = Double.parseDouble(tfCostoTransporte.getText());
-      transporteSeleccionado = new Transporte(transporteSeleccionado.getIdTransporte(),tipoTransporte,costoTransporte);
+     transporteSeleccionado = tranData.obtenerTransportePorTipo(tipoTransporte);
+         System.out.println(transporteSeleccionado.getTipo());
        pasajeSeleccionado = new Pasaje( pasajeSeleccionado.getIdPasaje(),transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
        
      }catch(NullPointerException ex){
@@ -979,7 +1047,7 @@ private boolean validarCamposVacios(JPanel jpanel) {
             
             double Total = precionoche * diasEntre;
         tfCostoEstadia.setText(String.valueOf(Total));
-     
+     actualizarCosto();
   }
   
   private void mostrarDatosMenu(){
@@ -987,11 +1055,13 @@ private boolean validarCamposVacios(JPanel jpanel) {
       MenuPension menu = menuData.buscarMenuPorTipo(tipo);
       
       tfCostoMenu.setText(String.valueOf(menu.getPorcentaje()));
+      actualizarCosto();
   }
   
   private void mostrarDatosTransporte(){
       String tipo = (String) jcbTransporte.getSelectedItem();
        tfCostoTransporte.setText(String.valueOf(tranData.obtenerCostoPorTipo(tipo)));
+       actualizarCosto();
   }
   
   

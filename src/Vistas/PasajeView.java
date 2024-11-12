@@ -291,7 +291,7 @@ TransporteData tranData = new TransporteData();
         btnAgregarPaquete.setEnabled(false);
         btnSiguiente.setEnabled(true);
         bloquearTodosCampos(PanelTransporte);
-        JOptionPane.showMessageDialog(this, "Datos agregados al paquete." +transporteSeleccionado.getIdTransporte());
+        JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
