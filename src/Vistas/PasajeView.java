@@ -9,6 +9,7 @@ import static Vistas.vistaDestino.destinoSeleccionado;
 import static Vistas.vistaDestino.origenSeleccionado;
 import java.awt.Component;
 import java.util.Random;
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 
 import javax.swing.JComboBox;
@@ -35,6 +36,9 @@ TransporteData tranData = new TransporteData();
         btnAgregarPaquete.setEnabled(false);
         btnSiguiente.setEnabled(false);
         cargarComboBox();
+        ButtonGroup grupoIndividual = new ButtonGroup();
+        grupoIndividual.add(checkSi);
+        grupoIndividual.add(CheckNo);
     }
    
     // Configuración inicial de botones y campos
@@ -50,8 +54,8 @@ TransporteData tranData = new TransporteData();
 
         PanelTransporte = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        checkSi = new javax.swing.JCheckBox();
+        CheckNo = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
         txtOrigen = new javax.swing.JTextField();
@@ -78,21 +82,21 @@ TransporteData tranData = new TransporteData();
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("¿Desea incluir tranporte en su paquete turístico?:");
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 153));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jCheckBox1.setText("SI");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkSi.setBackground(new java.awt.Color(255, 255, 153));
+        checkSi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        checkSi.setText("SI");
+        checkSi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkSiActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setBackground(new java.awt.Color(255, 255, 153));
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jCheckBox2.setText("NO");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        CheckNo.setBackground(new java.awt.Color(255, 255, 153));
+        CheckNo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CheckNo.setText("NO");
+        CheckNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                CheckNoActionPerformed(evt);
             }
         });
 
@@ -200,8 +204,8 @@ TransporteData tranData = new TransporteData();
                                         .addComponent(jLabel1)
                                         .addGap(39, 39, 39)
                                         .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox2)
-                                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(CheckNo)
+                                            .addComponent(checkSi, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(PanelTransporteLayout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -232,9 +236,9 @@ TransporteData tranData = new TransporteData();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelTransporteLayout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(checkSi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(CheckNo)
                         .addGap(15, 15, 15)
                         .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -284,14 +288,11 @@ TransporteData tranData = new TransporteData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPaqueteActionPerformed
-        String tipo = (String) comboTipo.getSelectedItem();
-        int asiento = Integer.parseInt(txtAsiento.getText());
-        transporteSeleccionado = tranData.obtenerTransportePorTipo(tipo);
-        pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
-        btnAgregarPaquete.setEnabled(false);
-        btnSiguiente.setEnabled(true);
-        bloquearTodosCampos(PanelTransporte);
-        JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+        if(checkSi.isSelected()){
+        agregar();
+        }else{
+            
+        }
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -302,12 +303,8 @@ TransporteData tranData = new TransporteData();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-
-        Random random = new Random();
-        txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
-        txtOrigen.setText(origenSeleccionado.toString());
-        txtDestino.setText(destinoSeleccionado.toString());
-        btnAgregarPaquete.setEnabled(true);
+        
+       cargarDatos();
 
     }//GEN-LAST:event_comboTipoActionPerformed
 
@@ -316,8 +313,8 @@ TransporteData tranData = new TransporteData();
         actualizarCosto(tipo);
     }//GEN-LAST:event_comboTipoItemStateChanged
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        jCheckBox1.setSelected(false); // Desmarcar el checkbox "Sí"
+    private void CheckNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckNoActionPerformed
+        checkSi.setSelected(false); // Desmarcar el checkbox "Sí"
 
         // Desactivar campos de tipo de transporte y botón Agregar Paquete
         bloquearCampos(PanelTransporte);
@@ -325,26 +322,26 @@ TransporteData tranData = new TransporteData();
 
         // Habilitar botón Siguiente ya que no se necesita transporte
         btnSiguiente.setEnabled(true);
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_CheckNoActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        jCheckBox2.setSelected(false); // Desmarcar el checkbox "No"
+    private void checkSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkSiActionPerformed
+        CheckNo.setSelected(false); // Desmarcar el checkbox "No"
 
         // Habilitar selección de tipo de transporte
         comboTipo.setEnabled(true);
 
         // Desactivar botón Siguiente hasta agregar el paquete
         btnSiguiente.setEnabled(false);
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_checkSiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckNo;
     private javax.swing.JPanel PanelTransporte;
     private javax.swing.JButton btnAgregarPaquete;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JCheckBox checkSi;
     private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -400,6 +397,39 @@ private void cargarComboBox(){
     }
  
  }
+ 
+ private void agregar(){
+     try{
+          String tipo = (String) comboTipo.getSelectedItem();
+        int asiento = Integer.parseInt(txtAsiento.getText());
+        transporteSeleccionado = tranData.obtenerTransportePorTipo(tipo);
+        pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
+        btnAgregarPaquete.setEnabled(false);
+        btnSiguiente.setEnabled(true);
+        bloquearTodosCampos(PanelTransporte);
+        JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+     }catch(NullPointerException ex){
+          JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+     }
+ }
+ 
+ private void cargarDatos(){
+      Random random = new Random();
+        txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
+        txtOrigen.setText(origenSeleccionado.toString());
+        txtDestino.setText(destinoSeleccionado.toString());
+        btnAgregarPaquete.setEnabled(true);
+ 
+}
+ 
+ private void cargarDatosNulos(){
+     
+        txtAsiento.setText("Nulo"); // Genera un número entre 1 y 40);
+        txtOrigen.setText("Nulo");
+        txtDestino.setText("Nulo");
+        btnAgregarPaquete.setEnabled(true);
+ 
+}
  
 private void actualizarCosto(String tipo){
     tfCosto.setText(String.valueOf(tranData.obtenerCostoPorTipo(tipo)));
