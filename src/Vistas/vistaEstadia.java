@@ -74,15 +74,17 @@ public static Estadia estadiaSeleccionada;
         jbSiguiente = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 153));
+        setBackground(new java.awt.Color(39, 134, 188));
         setTitle("Paquete Turístico");
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(819, 664));
 
-        contenedor.setBackground(new java.awt.Color(255, 255, 153));
+        contenedor.setBackground(new java.awt.Color(39, 134, 188));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Seleccione un alojamiento : ");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Seleccione un alojamiento  ");
 
+        jcbAlojamiento.setBackground(new java.awt.Color(255, 255, 255));
         jcbAlojamiento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jcbAlojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,50 +92,67 @@ public static Estadia estadiaSeleccionada;
             }
         });
 
+        tfDireccion.setBackground(new java.awt.Color(255, 255, 255));
         tfDireccion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        tfCapacidad.setBackground(new java.awt.Color(255, 255, 255));
         tfCapacidad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        tfAmbientes.setBackground(new java.awt.Color(255, 255, 255));
         tfAmbientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        tfCantidadCamas.setBackground(new java.awt.Color(255, 255, 255));
         tfCantidadCamas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        tfCantidadBanios.setBackground(new java.awt.Color(255, 255, 255));
         tfCantidadBanios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        tfPrecio.setBackground(new java.awt.Color(255, 255, 255));
         tfPrecio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPrecioActionPerformed(evt);
-            }
-        });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Dirección:");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Capacidad:");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Número de ambientes:");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cantidad de camas:");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Cantidad de baños:");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Precio por noche:");
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Check In: ");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Check Out:");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setText("Indique la capacidad de alojamiento deseada:");
+        CheckIn.setBackground(new java.awt.Color(255, 255, 255));
+        CheckIn.setForeground(new java.awt.Color(0, 0, 0));
 
+        CheckOut.setBackground(new java.awt.Color(255, 255, 255));
+        CheckOut.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Indique la capacidad de alojamiento deseada");
+
+        jcbCapacidad.setBackground(new java.awt.Color(255, 255, 255));
         jcbCapacidad.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jcbCapacidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,107 +160,11 @@ public static Estadia estadiaSeleccionada;
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hospedaje6.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hotelverde(1).png"))); // NOI18N
 
-        javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
-        contenedor.setLayout(contenedorLayout);
-        contenedorLayout.setHorizontalGroup(
-            contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contenedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contenedorLayout.createSequentialGroup()
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addGap(25, 25, 25))
-                            .addGroup(contenedorLayout.createSequentialGroup()
-                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(contenedorLayout.createSequentialGroup()
-                                        .addGap(112, 112, 112)
-                                        .addComponent(jLabel13)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)))
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contenedorLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfDireccion)
-                                .addComponent(tfCapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                                .addComponent(tfAmbientes, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfCantidadCamas, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfCantidadBanios)
-                                .addComponent(tfPrecio))
-                            .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(contenedorLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                        .addComponent(jcbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 60, Short.MAX_VALUE)))
-                .addGap(84, 84, 84))
-        );
-        contenedorLayout.setVerticalGroup(
-            contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contenedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(contenedorLayout.createSequentialGroup()
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(12, 12, 12)
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfAmbientes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCantidadCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(12, 12, 12)
-                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCantidadBanios, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)))
-                    .addComponent(jLabel4))
-                .addGap(15, 15, 15)
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(18, 18, 18)
-                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-
-        jbAgregar.setBackground(new java.awt.Color(255, 255, 153));
+        jbAgregar.setBackground(new java.awt.Color(51, 255, 153));
         jbAgregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbAgregar.setForeground(new java.awt.Color(0, 0, 0));
         jbAgregar.setText("AGREGAR AL PAQUETE");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,8 +172,9 @@ public static Estadia estadiaSeleccionada;
             }
         });
 
-        jbSiguiente.setBackground(new java.awt.Color(255, 102, 51));
+        jbSiguiente.setBackground(new java.awt.Color(51, 255, 153));
         jbSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbSiguiente.setForeground(new java.awt.Color(0, 0, 0));
         jbSiguiente.setText("SIGUIENTE");
         jbSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,106 +182,160 @@ public static Estadia estadiaSeleccionada;
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hotelicon(1).png"))); // NOI18N
         jLabel3.setText("SELECCIONE SU ESTADIA");
+        jLabel3.setIconTextGap(10);
+
+        javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
+        contenedor.setLayout(contenedorLayout);
+        contenedorLayout.setHorizontalGroup(
+            contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
+                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contenedorLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jcbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(contenedorLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfAmbientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                                    .addComponent(tfCantidadCamas, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfCantidadBanios)
+                                    .addComponent(tfCapacidad))
+                                .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(contenedorLayout.createSequentialGroup()
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel14)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(contenedorLayout.createSequentialGroup()
+                                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel11))
+                                        .addGap(330, 330, 330))
+                                    .addGroup(contenedorLayout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contenedorLayout.createSequentialGroup()
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contenedorLayout.createSequentialGroup()
+                                .addGap(534, 534, 534)
+                                .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contenedorLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(157, 157, 157))
+            .addGroup(contenedorLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
+        );
+        contenedorLayout.setVerticalGroup(
+            contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenedorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(30, 30, 30)
+                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jcbCapacidad))
+                .addGap(15, 15, 15)
+                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jcbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contenedorLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfAmbientes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfCantidadCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(tfCantidadBanios, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(tfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel13)
+                            .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(contenedorLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel4)))
+                .addGap(34, 34, 34)
+                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jbSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(212, 212, 212))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(248, 248, 248)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPrecioActionPerformed
-
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        
-        Date fechaCheckIn =  CheckIn.getDate();
-        Date fechaCheckOut = CheckOut.getDate();
-        
-        
-        if(validarCamposVacios(contenedor) ){
-            JOptionPane.showMessageDialog(this,"Todos los campos deben estar llenos.");
-            return;
-        }else if(fechInicio.after(fechaCheckIn) || fechFin.before(fechaCheckOut)){
-             JOptionPane.showMessageDialog(this,"Ingrese una fecha valida.");
-            return;
-  
-}           else{
-                   jbSiguiente.setEnabled(true);
-            JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
-            
-            Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
-            alojamientoSeleccionado = alData.buscarAlojamientoID(aloj.getIdAlojamiento());
-            
-            double precioporNoche = alojamientoSeleccionado.getPrecioPorNoche();
-            
-           LocalDate inicio = fechaCheckIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-           LocalDate fin = fechaCheckOut.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-           long diasEntre = ChronoUnit.DAYS.between(inicio, fin);
-            
-            double Total = precioporNoche * diasEntre;
-            
-            estadiaSeleccionada = new Estadia(alojamientoSeleccionado,fechaCheckIn, fechaCheckOut, Total); 
-         
-            jbAgregar.setEnabled(false);
-          }
-        
-        
-        
-        //validar si check in y check out están dentro de los parametros de fecha inicio, fecha fin
+        guardar();
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jcbCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCapacidadActionPerformed
        cargarComboBoxAlojamiento();
-      
-    
     }//GEN-LAST:event_jcbCapacidadActionPerformed
 
     private void jcbAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlojamientoActionPerformed
-      try{
-        Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
-       tfDireccion.setText(aloj.getDireccion());
-        tfCapacidad.setText(String.valueOf(aloj.getCapacidad())); 
-        tfAmbientes.setText(String.valueOf(aloj.getNroAmbientes())); 
-        tfCantidadCamas.setText(String.valueOf(aloj.getCamas())); 
-        tfCantidadBanios.setText(String.valueOf(aloj.getBanios())); 
-        tfPrecio.setText(String.valueOf(aloj.getPrecioPorNoche())); 
-      }catch(NullPointerException ex){
-          limpiarCampos(contenedor);
-      }
+     cargarAlojamiento();
     }//GEN-LAST:event_jcbAlojamientoActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-        seleccionarMenu v = new seleccionarMenu();
+        vistaMenuPension v = new vistaMenuPension();
         v.setVisible(true);
        Menu.escritorio.add(v);
        this.dispose();
@@ -454,5 +432,50 @@ private void cargarComboBoxAlojamiento(){
         return false; //devuelve false todos los campos estan llenos
     }
   
+ private void cargarAlojamiento(){
+     try{
+        Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
+       tfDireccion.setText(aloj.getDireccion());
+        tfCapacidad.setText(String.valueOf(aloj.getCapacidad())); 
+        tfAmbientes.setText(String.valueOf(aloj.getNroAmbientes())); 
+        tfCantidadCamas.setText(String.valueOf(aloj.getCamas())); 
+        tfCantidadBanios.setText(String.valueOf(aloj.getBanios())); 
+        tfPrecio.setText(String.valueOf(aloj.getPrecioPorNoche())); 
+      }catch(NullPointerException ex){
+          limpiarCampos(contenedor);
+      }
+ }
  
+ private void guardar(){
+      Date fechaCheckIn =  CheckIn.getDate();
+        Date fechaCheckOut = CheckOut.getDate();
+        
+        
+        if(validarCamposVacios(contenedor) ){
+            JOptionPane.showMessageDialog(this,"Todos los campos deben estar llenos.");
+            return;
+        }else if(fechInicio.after(fechaCheckIn) || fechFin.before(fechaCheckOut)){
+             JOptionPane.showMessageDialog(this,"Ingrese una fecha valida.");
+            return;
+  
+}           else{
+                   jbSiguiente.setEnabled(true);
+            JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+            
+            Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
+            alojamientoSeleccionado = alData.buscarAlojamientoID(aloj.getIdAlojamiento());
+            
+            double precioporNoche = alojamientoSeleccionado.getPrecioPorNoche();
+            
+           LocalDate inicio = fechaCheckIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           LocalDate fin = fechaCheckOut.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           long diasEntre = ChronoUnit.DAYS.between(inicio, fin);
+            
+            double Total = precioporNoche * diasEntre;
+            
+            estadiaSeleccionada = new Estadia(alojamientoSeleccionado,fechaCheckIn, fechaCheckOut, Total); 
+         
+            jbAgregar.setEnabled(false);
+          }
+ }
 }
