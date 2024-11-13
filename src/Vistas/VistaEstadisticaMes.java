@@ -15,9 +15,7 @@ import java.util.List;
  * @author Ranma
  */
 public class VistaEstadisticaMes extends javax.swing.JInternalFrame {
-
-    // Creo instancia paquetedata para obtener stats
-    private PaqueteData paqueteData;
+    private PaqueteData paqueteData = new PaqueteData();
 
     public VistaEstadisticaMes() {
          initComponents();
@@ -39,26 +37,21 @@ public class VistaEstadisticaMes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbMes = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Meses");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        jcbMes.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcbMesItemStateChanged(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -69,7 +62,7 @@ public class VistaEstadisticaMes extends javax.swing.JInternalFrame {
                 "Cuidad", "Lugar", "Cantidad De Visitas"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,59 +75,55 @@ public class VistaEstadisticaMes extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jcbMes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void configurarComboBox() {
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
+        jcbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         }));
     }
 
     private void configurarTabla() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
         modeloTabla.setColumnIdentifiers(new String[] { "Ciudad", "Lugar", "Cantidad de Personas" });
-        jTable1.setModel(modeloTabla);
+        tabla.setModel(modeloTabla);
     }
     
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+    private void jcbMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMesItemStateChanged
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
             // obtiene mes, indice +1 porque inicia desde 0
-            int mesSeleccionado = jComboBox1.getSelectedIndex() + 1;
+            int mesSeleccionado = jcbMes.getSelectedIndex() + 1;
             
             cargarEstadisticasDelMes(mesSeleccionado);
         }
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    }//GEN-LAST:event_jcbMesItemStateChanged
     
     private void cargarEstadisticasDelMes(int mes) {
         // Tenemos las stats por mes
         List<DestinoEstadistica> estadisticas = paqueteData.obtenerEstadisticasPorMes(mes);
 
         // Limpa la tabla antes de cargar mas datos
-        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
         modeloTabla.setRowCount(0);  // Limpiar la tabla
 
         // Recorre stats y va añadiendo filas a la tabla
@@ -148,9 +137,9 @@ public class VistaEstadisticaMes extends javax.swing.JInternalFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jcbMes;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

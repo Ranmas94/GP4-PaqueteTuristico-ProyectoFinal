@@ -194,7 +194,7 @@ public ArrayList<Paquete> mostrarPaquetes() {
                 + "FROM paquete p "
                 + "JOIN destino d ON d.idDestino = p.destino "
                 + "WHERE p.cancelado = false "
-                + " AND MONTH(p.fechaInicio) = ?"
+                + "AND MONTH(p.fechaInicio) = ? "
                 + "GROUP BY d.ciudad, d.lugar "
                 + "ORDER BY totalPersonas DESC;";
 
