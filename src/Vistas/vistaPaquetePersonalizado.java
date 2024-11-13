@@ -6,12 +6,14 @@ package Vistas;
 
 import AccesoADatos.AlojamientoData;
 import AccesoADatos.ClienteData;
+import AccesoADatos.ClientePaqueteData;
 import AccesoADatos.EstadiaData;
 import AccesoADatos.MenuData;
 import AccesoADatos.PaqueteData;
 import AccesoADatos.PasajeData;
 import AccesoADatos.TransporteData;
 import Entidades.Alojamiento;
+import Entidades.ClientePaquete;
 import Entidades.Estadia;
 import Entidades.MenuPension;
 import Entidades.Paquete;
@@ -62,6 +64,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
  private final EstadiaData estadiaData = new EstadiaData();
  private final PasajeData pasajeData = new PasajeData();
  private final ClienteData clienteData = new ClienteData();
+ private final ClientePaqueteData clientePaqueteData = new ClientePaqueteData();
  private boolean paqueteModificado = false;
     /**
      * Creates new form vistaPaquetePersonalizado
@@ -145,56 +148,82 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jLabel17 = new javax.swing.JLabel();
         jsMenores2 = new javax.swing.JSpinner();
         jbConfirmarPaquete = new javax.swing.JButton();
-        jbSalir = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         tfCostoTotal = new javax.swing.JTextField();
         jbDescartarPaquete1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 153));
+        setBackground(new java.awt.Color(39, 134, 188));
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(800, 800));
+        setPreferredSize(new java.awt.Dimension(1021, 800));
 
-        contenedorInfo.setBackground(new java.awt.Color(255, 255, 153));
+        contenedorInfo.setBackground(new java.awt.Color(39, 134, 188));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("DESTINO:");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("ESTADÍA:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("MENÚ:");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("TRANSPORTE:");
 
+        tfDestino.setBackground(new java.awt.Color(255, 255, 255));
+        tfDestino.setForeground(new java.awt.Color(0, 0, 0));
         tfDestino.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("FECHA INICIO:");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("FECHA FIN:");
+
+        dcFechaInicio.setBackground(new java.awt.Color(255, 255, 255));
+        dcFechaInicio.setForeground(new java.awt.Color(0, 0, 0));
+
+        dcFechaFin.setBackground(new java.awt.Color(255, 255, 255));
+        dcFechaFin.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel12.setText("COSTO TOTAL:");
 
+        tfCostoEstadia.setBackground(new java.awt.Color(255, 255, 255));
+        tfCostoEstadia.setForeground(new java.awt.Color(0, 0, 0));
         tfCostoEstadia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("COSTO:");
 
+        tfCostoMenu.setBackground(new java.awt.Color(255, 255, 255));
+        tfCostoMenu.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("COSTO:");
 
+        tfCostoTransporte.setBackground(new java.awt.Color(255, 255, 255));
+        tfCostoTransporte.setForeground(new java.awt.Color(0, 0, 0));
         tfCostoTransporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jcbEstadia.setBackground(new java.awt.Color(255, 255, 255));
+        jcbEstadia.setForeground(new java.awt.Color(0, 0, 0));
         jcbEstadia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbEstadiaActionPerformed(evt);
             }
         });
 
+        jcbTransporte.setBackground(new java.awt.Color(255, 255, 255));
+        jcbTransporte.setForeground(new java.awt.Color(0, 0, 0));
         jcbTransporte.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbTransporteItemStateChanged(evt);
@@ -206,6 +235,8 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbMenu.setBackground(new java.awt.Color(255, 255, 255));
+        jcbMenu.setForeground(new java.awt.Color(0, 0, 0));
         jcbMenu.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbMenuItemStateChanged(evt);
@@ -218,12 +249,16 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("CAPACIDAD");
 
+        tfCapacidad.setBackground(new java.awt.Color(255, 255, 255));
+        tfCapacidad.setForeground(new java.awt.Color(0, 0, 0));
         tfCapacidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jbModificar.setBackground(new java.awt.Color(255, 0, 51));
+        jbModificar.setBackground(new java.awt.Color(247, 151, 91));
         jbModificar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbModificar.setForeground(new java.awt.Color(0, 0, 0));
         jbModificar.setText("MODIFICAR");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,8 +266,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
-        jbConfirmar.setBackground(new java.awt.Color(255, 255, 153));
+        jbConfirmar.setBackground(new java.awt.Color(51, 255, 153));
         jbConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbConfirmar.setForeground(new java.awt.Color(0, 0, 0));
         jbConfirmar.setText("CONFIRMAR CAMBIOS");
         jbConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,9 +277,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         });
 
         jLabel19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("CHECK-IN");
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("CHECK-OUT");
 
         jdCheckin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -252,6 +290,8 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
+        jdCheckout.setBackground(new java.awt.Color(255, 255, 255));
+        jdCheckout.setForeground(new java.awt.Color(0, 0, 0));
         jdCheckout.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jdCheckoutKeyReleased(evt);
@@ -261,6 +301,8 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel21.setText("HABITACIONES");
 
+        tfHabitaciones.setBackground(new java.awt.Color(255, 255, 255));
+        tfHabitaciones.setForeground(new java.awt.Color(0, 0, 0));
         tfHabitaciones.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -308,7 +350,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                             .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jdCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                                 .addComponent(tfCapacidad)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21)
                             .addComponent(jLabel11)
@@ -319,19 +361,20 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                     .addComponent(tfCostoEstadia)
                     .addComponent(tfHabitaciones))
                 .addGap(17, 17, 17))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
-                .addGap(232, 232, 232)
-                .addComponent(jbConfirmar)
-                .addGap(40, 40, 40)
-                .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                .addGap(229, 229, 229))
             .addGroup(contenedorInfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
             .addGroup(contenedorInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
+                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contenedorInfoLayout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addComponent(jbConfirmar)
+                        .addGap(40, 40, 40)
+                        .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(contenedorInfoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contenedorInfoLayout.setVerticalGroup(
@@ -372,7 +415,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jdCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jcbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,13 +451,14 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("RESUMEN DEL PAQUETE");
 
-        panelPasajeroIndividual.setBackground(new java.awt.Color(255, 255, 153));
+        panelPasajeroIndividual.setBackground(new java.awt.Color(39, 134, 188));
         panelPasajeroIndividual.setToolTipText("");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("PAQUETE INDIVIDUAL:");
 
-        jrbIndividualSI.setBackground(new java.awt.Color(255, 255, 153));
+        jrbIndividualSI.setBackground(new java.awt.Color(23, 91, 129));
         jrbIndividualSI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualSI.setText("SI");
         jrbIndividualSI.addItemListener(new java.awt.event.ItemListener() {
@@ -428,7 +472,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbIndividualNo.setBackground(new java.awt.Color(255, 255, 153));
+        jrbIndividualNo.setBackground(new java.awt.Color(23, 91, 129));
         jrbIndividualNo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualNo.setText("NO");
         jrbIndividualNo.addItemListener(new java.awt.event.ItemListener() {
@@ -466,9 +510,10 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelCantPasajeros.setBackground(new java.awt.Color(255, 255, 153));
+        panelCantPasajeros.setBackground(new java.awt.Color(39, 134, 188));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("CANTIDAD DE MAYORES (INCLUYÉNDOSE):");
 
         jsCantMayores.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -480,6 +525,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         });
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("NIÑOS +10 AÑOS:");
 
         jsMenores1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -491,6 +537,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         });
 
         jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("NIÑOS -10 AÑOS:");
 
         jsMenores2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -510,7 +557,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsCantMayores, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,8 +581,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jbConfirmarPaquete.setBackground(new java.awt.Color(255, 255, 153));
+        jbConfirmarPaquete.setBackground(new java.awt.Color(51, 255, 153));
         jbConfirmarPaquete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbConfirmarPaquete.setForeground(new java.awt.Color(0, 0, 0));
         jbConfirmarPaquete.setText("CONFIRMAR PAQUETE");
         jbConfirmarPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -543,23 +591,17 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
-        jbSalir.setBackground(new java.awt.Color(255, 0, 51));
-        jbSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jbSalir.setText("SALIR");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
-            }
-        });
-
         jLabel18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel18.setText("COSTO TOTAL DEL PAQUETE:");
 
+        tfCostoTotal.setBackground(new java.awt.Color(255, 255, 255));
+        tfCostoTotal.setForeground(new java.awt.Color(0, 0, 0));
         tfCostoTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfCostoTotal.setText("COSTO");
 
-        jbDescartarPaquete1.setBackground(new java.awt.Color(255, 0, 51));
+        jbDescartarPaquete1.setBackground(new java.awt.Color(247, 151, 91));
         jbDescartarPaquete1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbDescartarPaquete1.setForeground(new java.awt.Color(0, 0, 0));
         jbDescartarPaquete1.setText("DESCARTAR PAQUETE");
         jbDescartarPaquete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -579,13 +621,11 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                             .addComponent(panelCantPasajeros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelPasajeroIndividual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jbConfirmarPaquete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbDescartarPaquete1)
-                        .addGap(76, 76, 76)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbConfirmarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jbDescartarPaquete1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(252, 252, 252))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(250, 250, 250)
                         .addComponent(jLabel18)
@@ -617,8 +657,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbConfirmarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbDescartarPaquete1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbDescartarPaquete1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
 
@@ -695,10 +734,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_jbConfirmarPaqueteActionPerformed
 
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-       dispose();
-    }//GEN-LAST:event_jbSalirActionPerformed
-
     private void jsCantMayoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsCantMayoresStateChanged
 
        actualizarCosto();
@@ -762,7 +797,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbConfirmarPaquete;
     private javax.swing.JButton jbDescartarPaquete1;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbEstadia;
     private javax.swing.JComboBox<String> jcbMenu;
     private javax.swing.JComboBox<String> jcbTransporte;
@@ -1062,10 +1096,13 @@ private void crearPaquete(){
     pasajeData.agregarPasaje(pasajeSeleccionado);
     clienteData.guardarCliente(clienteSeleccionado);
     
-    Paquete paquete = new Paquete(clienteSeleccionado,estadiaSeleccionada,
+    Paquete paquete = new Paquete(estadiaSeleccionada,
             pasajeSeleccionado,menuSeleccionado, origenSeleccionado, destinoSeleccionado,fechInicio,fechFin,temporada,totalPasajeros,medioPago,
                true,false,precioTotal);
     paqData.guardarPaquete(paquete);
+    
+    ClientePaquete clientePaquete  = new ClientePaquete(clienteSeleccionado,paquete);
+    clientePaqueteData.guardarClientePaquete(clientePaquete);
    }catch(NullPointerException ex){
          JOptionPane.showMessageDialog(this, "Error. Hay datos en NULL. " +ex);
    }catch(ClassCastException | NumberFormatException ex){

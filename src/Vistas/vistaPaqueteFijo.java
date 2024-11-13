@@ -704,4 +704,12 @@ public class vistaPaqueteFijo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfTelefono;
     private javax.swing.JTextField tfTransporte;
     // End of variables declaration//GEN-END:variables
+private void cargarComboBox(){
+    jcbMedioPago.addItem("Tarjeta de débito");
+    jcbMedioPago.addItem("Tarjeta de crédito");
+    jcbMedioPago.addItem("Efectivo");
+    jcbMedioPago.addItem("Mercado Pago");
+    
+}
+
 }
