@@ -63,7 +63,9 @@ public class Menu extends javax.swing.JFrame {
         itemTransporte = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         itemEstadisticaTemporada = new javax.swing.JMenuItem();
+        itemEstadisticaMes = new javax.swing.JMenuItem();
         itemPaquetesComprados = new javax.swing.JMenuItem();
+        itemCancelar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -318,6 +320,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(itemEstadisticaTemporada);
 
+        itemEstadisticaMes.setText("Estadisticas por mes");
+        itemEstadisticaMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEstadisticaMesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemEstadisticaMes);
+
         itemPaquetesComprados.setText("Paquetes recientes");
         itemPaquetesComprados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,6 +335,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(itemPaquetesComprados);
+
+        itemCancelar.setText("Cancelar paquete");
+        itemCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCancelarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemCancelar);
 
         jMenuBar1.add(jMenu2);
 
@@ -445,6 +463,22 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(v);
     }//GEN-LAST:event_itemEstadisticaTemporadaActionPerformed
 
+    private void itemEstadisticaMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEstadisticaMesActionPerformed
+          escritorio.repaint();
+        VistaEstadisticaMes v = new   VistaEstadisticaMes();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
+    }//GEN-LAST:event_itemEstadisticaMesActionPerformed
+
+    private void itemCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCancelarActionPerformed
+         escritorio.repaint();
+        vistaCancelarPaquete v = new vistaCancelarPaquete();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
+    }//GEN-LAST:event_itemCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -486,7 +520,9 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem itemAlojamiento;
+    private javax.swing.JMenuItem itemCancelar;
     private javax.swing.JMenuItem itemDestino;
+    private javax.swing.JMenuItem itemEstadisticaMes;
     private javax.swing.JMenuItem itemEstadisticaTemporada;
     private javax.swing.JMenuItem itemMenu;
     private javax.swing.JMenuItem itemPaquetesComprados;

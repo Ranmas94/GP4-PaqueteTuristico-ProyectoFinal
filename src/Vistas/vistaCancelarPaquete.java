@@ -8,19 +8,23 @@ package Vistas;
  *
  * @author fedeg
  */
+import AccesoADatos.PaqueteData;
+import Entidades.PaqueteDetalle;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.swing.table.DefaultTableModel;
 
-public class vistaCancelarPaquete extends javax.swing.JFrame {
-
+public class vistaCancelarPaquete extends javax.swing.JInternalFrame {
+private final PaqueteData paqueteData = new PaqueteData();
+private boolean modificable = false;
     /**
      * Creates new form vistaCancelarPaquete
      */
     public vistaCancelarPaquete() {
         initComponents();
+         jbModificar.setEnabled(false);
     }
 
     /**
@@ -34,11 +38,13 @@ public class vistaCancelarPaquete extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tabla = new javax.swing.JTable();
+        jbVerificar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
+        tfID = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jbModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -48,84 +54,112 @@ public class vistaCancelarPaquete extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ingrese ID");
-        jInternalFrame1.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 70, 30));
+        jInternalFrame1.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 70, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jInternalFrame1.getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 30));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Origen", "Destino", "fInicio", "fFin", "Nombre Alojamiento", "Direccion Alojamiento", "Tipo Menu", "Etc"
+                "Origen", "Destino", "Fecha de inicio", "Fecha Fin", "Nombre Alojamiento", "Direccion Alojamiento", "Menu", "Transporte", "Pasajeros", "Medio de pago", "Precio Total", "Pagado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
-        jInternalFrame1.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 560, 280));
+        jInternalFrame1.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1010, 280));
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbVerificar.setText("Verificar");
+        jbVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbVerificarActionPerformed(evt);
             }
         });
-        jInternalFrame1.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+        jInternalFrame1.getContentPane().add(jbVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 180, 40));
 
-        jButton2.setText("Salir");
-        jInternalFrame1.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 80, -1));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        jInternalFrame1.getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 390, 150, 40));
 
-        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 440));
+        tfID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfIDKeyReleased(evt);
+            }
+        });
+        jInternalFrame1.getContentPane().add(tfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 160, -1));
+
+        jLabel2.setText("CANCELAR UN PAQUETE");
+        jInternalFrame1.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
+        jInternalFrame1.getContentPane().add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 210, 40));
+
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+  
 
-    private boolean verificarAnticipacionDeDias(String fInicio) {
-        try {
+    private void jbVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerificarActionPerformed
+          int filaSeleccionada = tabla.getSelectedRow();
+    if (filaSeleccionada >= 0) {
+        // Obtener la fecha como objeto Date
+        Object fechaObj = tabla.getValueAt(filaSeleccionada, 2); // Columna 2 es la fecha de inicio
+        String fechaInicio = null;
+
+        // Verificar si el objeto es de tipo Date
+        if (fechaObj instanceof java.util.Date) {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-            Date fechaInicio = formatoFecha.parse(fInicio);
-            Date fechaActual = new Date();
-
-            long diferenciaEnMilis = fechaInicio.getTime() - fechaActual.getTime();
-            long diasDiferencia = TimeUnit.DAYS.convert(diferenciaEnMilis, TimeUnit.MILLISECONDS);
-
-            return diasDiferencia >= 30;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al verificar la fecha de inicio: " + e.getMessage());
-            return false;
+            fechaInicio = formatoFecha.format((java.util.Date) fechaObj);
         }
+
+        // Validar si la conversión fue exitosa
+        if (fechaInicio != null && !verificarAnticipacionDeDias(fechaInicio)) {
+            JOptionPane.showMessageDialog(this, "El inicio del viaje debe ser al menos 30 días después de hoy.");
+            return;
+        }
+
+        // Modificar el paquete
+        JOptionPane.showMessageDialog(this, "Paquete válido para modificar. Continúa con los cambios necesarios.");
+        modificable = true;
+        jbModificar.setEnabled(true);
+        jbVerificar.setEnabled(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione un paquete para modificar.");
     }
+    }//GEN-LAST:event_jbVerificarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         int filaSeleccionada = jTable1.getSelectedRow();
-        if (filaSeleccionada >= 0) {
-            String fechaInicio = (String) jTable1.getValueAt(filaSeleccionada, 2); // Columna 2 es la fecha de inicio
+    private void tfIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfIDKeyReleased
+        mostrarPaquetes();
+    }//GEN-LAST:event_tfIDKeyReleased
 
-            // Verificar la fecha
-            if (!verificarAnticipacionDeDias(fechaInicio)) {
-                JOptionPane.showMessageDialog(this, "El inicio del viaje debe ser al menos 30 dias despues de hoy.");
-                return;
-            }
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
-            // Modificar el paquete
-            JOptionPane.showMessageDialog(this, "Paquete valido para modificar. Continua con los cambios necesarios.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un paquete para modificar.");
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        if(modificable){
+            int id = Integer.parseInt(tfID.getText());
+             paqueteData.cancelarPaquete(id);
+             jbModificar.setEnabled(false);
+             jbVerificar.setEnabled(true);
+             tfID.setText("");
+              DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
+             modeloTabla.setRowCount(0);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,12 +197,45 @@ public class vistaCancelarPaquete extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbModificar;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbVerificar;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField tfID;
     // End of variables declaration//GEN-END:variables
+  private boolean verificarAnticipacionDeDias(String fInicio) {
+        try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+            Date fechaInicio = formatoFecha.parse(fInicio);
+            Date fechaActual = new Date();
+
+            long diferenciaEnMilis = fechaInicio.getTime() - fechaActual.getTime();
+            long diasDiferencia = TimeUnit.DAYS.convert(diferenciaEnMilis, TimeUnit.MILLISECONDS);
+
+            return diasDiferencia >= 30;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al verificar la fecha de inicio: " + e.getMessage());
+            return false;
+        }
+    }
+  
+  private void mostrarPaquetes(){
+      try{
+      int id = Integer.parseInt(tfID.getText());
+      DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
+      modeloTabla.setRowCount(0);
+     for(PaqueteDetalle p : paqueteData.obtenerDetallePaquetes(id)){
+         modeloTabla.addRow(new Object[]{p.getCiudadOrigen(), p.getCiudaDestino(), p.getFechaInicio(), p.getFechaFin(), p.getNombreAlojamiento(), p.getDireccionAlojamiento(),
+         p.getTipoMenu(),p.getTipoTransporte(),p.getCantidadPasajeros(),p.getMedioPago(),p.getPrecioTotal(),p.isPagado()});
+     }
+      }catch(NumberFormatException ex){
+          JOptionPane.showMessageDialog(this, "Debe ingresar un ID válido");
+      }
+      
+      
+  }
 }

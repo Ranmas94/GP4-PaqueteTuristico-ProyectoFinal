@@ -216,6 +216,8 @@ public ArrayList<Paquete> mostrarPaquetes() {
     }
     return estadisticas;
 }
+    
+    
    public ArrayList<Paquete> resumenPaquetesComprados() {
     ArrayList<Paquete> resumen = new ArrayList<>();
     LocalDate fecha = LocalDate.now().minusMonths(2); // le restamos dos meses a la fecha actual
@@ -282,53 +284,79 @@ public ArrayList<Paquete> mostrarPaquetes() {
     return resumen;
 }
   
-      public ArrayList<PaqueteDetalle> obtenerDetallePaquetes() {
+   
+  public ArrayList<PaqueteDetalle> obtenerDetallePaquetes(int id) {
     ArrayList<PaqueteDetalle> detallesPaquetes = new ArrayList<>();
-    String sql = "SELECT p.idPaquete,o.ciudad AS ciudadOrigen,d.ciudad AS ciudadDestino, p.fechaInicio, p.fechaFin, a.nombre AS nombreAlojamiento, a.direccion AS direccionAlojamiento,"
-        + "t.tipo as tipoTransporte, p.cantidadPasajeros,p.medioPago,p.precioTotal, p.pagado, p.cancelado   " 
-        + "FROM paquete p"
-        + "LEFT JOIN estadia e ON e.idEstadia = p.idEstadia"
-        + "LEFT JOIN alojamiento a ON a.idAlojamiento = e.idAlojamiento"
-        + "LEFT JOIN pasaje pa ON pa.idPasaje = p.idPasaje"
-        + "LEFT JOIN transporte t ON t.idTransporte = pa.idTransporte"
-        + "LEFT JOIN menu m ON m.idMenu = p.idMenu"
-        + "LEFT JOIN destino o ON o.idDestino = p.origen"
-        + "LEFT JOIN destino d ON d.idDestino = p.destino;"
-    ;
+    String sql = "SELECT p.idPaquete, o.ciudad AS ciudadOrigen, d.ciudad AS ciudadDestino, " +
+                 "p.fechaInicio, p.fechaFin, a.nombre AS nombreAlojamiento, a.direccion AS direccionAlojamiento, " +
+                 "t.tipo AS tipoTransporte, p.cantidadPasajeros, p.medioPago, p.precioTotal, p.pagado, p.cancelado, " +
+                 "m.tipo AS tipoMenu " +
+                 "FROM paquete p " +
+                 "LEFT JOIN estadia e ON e.idEstadia = p.idEstadia " +
+                 "LEFT JOIN alojamiento a ON a.idAlojamiento = e.idAlojamiento " +
+                 "LEFT JOIN pasaje pa ON pa.idPasaje = p.idPasaje " +
+                 "LEFT JOIN transporte t ON t.idTransporte = pa.idTransporte " +
+                 "LEFT JOIN menu m ON m.idMenu = p.idMenu " +
+                 "LEFT JOIN destino o ON o.idDestino = p.origen " +
+                 "LEFT JOIN destino d ON d.idDestino = p.destino " +
+                 "WHERE p.idPaquete = ? AND p.cancelado = false;";
 
-    try (PreparedStatement ps = con.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()){
-          while (rs.next()) {
-            PaqueteDetalle detalle = new PaqueteDetalle();
-             Paquete paquete = new Paquete();
-              paquete.setIdPaquete(rs.getInt("idPaquete"));
-             
-             // Asignación de datos al objeto PaqueteDetalle
-            detalle.setIdPaquete(paquete); // Constructor que recibe idPaquete en Paquete
-            detalle.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
-            detalle.setMedioPago(rs.getString("medioPago"));
-            detalle.setPrecioTotal(rs.getDouble("precioTotal"));
-            detalle.setPagado(rs.getBoolean("pagado"));
-            detalle.setCancelado(rs.getBoolean("cancelado"));
-            detalle.setFechaInicio(rs.getDate("fechaInicio"));
-            detalle.setFechaFin(rs.getDate("fechaFin"));
-            detalle.setCiudadOrigen(rs.getString("ciudadOrigen"));
-            detalle.setCiudadDestino(rs.getString("ciudadDestino"));
-            detalle.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
-            detalle.setDireccionAlojamiento(rs.getString("direccionAlojamiento"));
-            detalle.setTipoMenu(rs.getString("tipoMenu"));
-            detalle.setTipoTransporte(rs.getString("tipoTransporte"));
-            
-            detallesPaquetes.add(detalle);
-             }
-        ps.close();
-        rs.close();
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, id); // Asignación del parámetro id
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                PaqueteDetalle detalle = new PaqueteDetalle();
+                Paquete paquete = new Paquete();
+
+                // Asignación de datos al objeto Paquete
+                paquete.setIdPaquete(rs.getInt("idPaquete"));
+                detalle.setIdPaquete(paquete);
+
+                // Asignación de datos al objeto PaqueteDetalle
+                detalle.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+                detalle.setMedioPago(rs.getString("medioPago"));
+                detalle.setPrecioTotal(rs.getDouble("precioTotal"));
+                detalle.setPagado(rs.getBoolean("pagado"));
+                detalle.setCancelado(rs.getBoolean("cancelado"));
+                detalle.setFechaInicio(rs.getDate("fechaInicio"));
+                detalle.setFechaFin(rs.getDate("fechaFin"));
+                detalle.setCiudadOrigen(rs.getString("ciudadOrigen"));
+                detalle.setCiudadDestino(rs.getString("ciudadDestino"));
+                detalle.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
+                detalle.setDireccionAlojamiento(rs.getString("direccionAlojamiento"));
+                detalle.setTipoMenu(rs.getString("tipoMenu"));
+                detalle.setTipoTransporte(rs.getString("tipoTransporte"));
+
+                detallesPaquetes.add(detalle);
+            }
+        }
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias." + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al encontrar coincidencias: " + ex.getMessage());
     }
-    
+
     return detallesPaquetes;
+}
+  
+  //cancelar un paquete por id
+  public void cancelarPaquete(int idPaquete) {
+    String sql = "UPDATE paquete SET cancelado = true WHERE idPaquete = ?";
     
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idPaquete);
+        int filasAfectadas = ps.executeUpdate();
         
+        if (filasAfectadas > 0) {
+           
+            JOptionPane.showMessageDialog(null,"El paquete con ID " + idPaquete + " ha sido cancelado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null,"No se encontró ningún paquete con el ID especificado.");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null,"Error al cancelar el paquete: " + ex.getMessage());
     }
+
+  
+}
 }
