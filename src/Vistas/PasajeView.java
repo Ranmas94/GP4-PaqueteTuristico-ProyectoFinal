@@ -291,6 +291,7 @@ TransporteData tranData = new TransporteData();
         if(checkSi.isSelected()){
         agregar();
         }else{
+            agregarNull();
             
         }
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
@@ -303,8 +304,11 @@ TransporteData tranData = new TransporteData();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        
+        if(checkSi.isSelected()){
        cargarDatos();
+        }else{
+            cargarDatosNulos();
+        }
 
     }//GEN-LAST:event_comboTipoActionPerformed
 
@@ -410,6 +414,17 @@ private void cargarComboBox(){
         JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
      }catch(NullPointerException ex){
           JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+     }
+ }
+ private void agregarNull(){
+     try{
+        pasajeSeleccionado = new Pasaje( null,null,null,0);
+        btnAgregarPaquete.setEnabled(false);
+        btnSiguiente.setEnabled(true);
+        bloquearTodosCampos(PanelTransporte);
+        JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+     }catch(NullPointerException ex){
+         
      }
  }
  
