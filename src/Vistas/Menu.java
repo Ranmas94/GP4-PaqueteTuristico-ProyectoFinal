@@ -408,35 +408,67 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCrearPaqueteActionPerformed
 
     private void jbCamboriuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCamboriuActionPerformed
-        // TODO add your handling code here:
+     escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbCamboriuActionPerformed
 
     private void jbBarilocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBarilocheActionPerformed
-        // TODO add your handling code here:
+        escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbBarilocheActionPerformed
 
     private void jbCataratasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCataratasActionPerformed
-        // TODO add your handling code here:
+       escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbCataratasActionPerformed
 
     private void jbPaisajesNorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaisajesNorteActionPerformed
-        // TODO add your handling code here:
+        escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbPaisajesNorteActionPerformed
 
     private void jbMardePlataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMardePlataActionPerformed
-        // TODO add your handling code here:
+        escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbMardePlataActionPerformed
 
     private void jbMendozaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMendozaActionPerformed
-        // TODO add your handling code here:
+     escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbMendozaActionPerformed
 
     private void jbGramadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGramadoActionPerformed
-        // TODO add your handling code here:
+        escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbGramadoActionPerformed
 
     private void jbBuenosAiresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuenosAiresActionPerformed
-        // TODO add your handling code here:
+        escritorio.repaint();
+        vistaPaqueteFijo v = new vistaPaqueteFijo();
+        escritorio.add(v);
+        v.setVisible(true);
+        escritorio.moveToFront(v);
     }//GEN-LAST:event_jbBuenosAiresActionPerformed
 
     private void itemTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTransporteActionPerformed

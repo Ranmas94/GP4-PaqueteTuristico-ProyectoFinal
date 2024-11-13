@@ -350,7 +350,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                             .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jdCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                                 .addComponent(tfCapacidad)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21)
                             .addComponent(jLabel11)
@@ -368,9 +368,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             .addGroup(contenedorInfoLayout.createSequentialGroup()
                 .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
-                        .addGap(232, 232, 232)
+                        .addGap(239, 239, 239)
                         .addComponent(jbConfirmar)
-                        .addGap(40, 40, 40)
+                        .addGap(42, 42, 42)
                         .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
                         .addContainerGap()
@@ -454,7 +454,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         panelPasajeroIndividual.setBackground(new java.awt.Color(39, 134, 188));
         panelPasajeroIndividual.setToolTipText("");
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("PAQUETE INDIVIDUAL:");
 
@@ -512,7 +512,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
         panelCantPasajeros.setBackground(new java.awt.Color(39, 134, 188));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("CANTIDAD DE MAYORES (INCLUYÉNDOSE):");
 
@@ -524,7 +524,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("NIÑOS +10 AÑOS:");
 
@@ -536,7 +536,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("NIÑOS -10 AÑOS:");
 
@@ -557,7 +557,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsCantMayores, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -623,9 +623,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbConfirmarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(42, 42, 42)
                         .addComponent(jbDescartarPaquete1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(252, 252, 252))
+                        .addGap(244, 244, 244))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(250, 250, 250)
                         .addComponent(jLabel18)
