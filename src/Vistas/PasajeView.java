@@ -32,13 +32,11 @@ TransporteData tranData = new TransporteData();
     public PasajeView() {
         initComponents();
         // Desactivar componentes al inicio
-        bloquearCampos(PanelTransporte);
-        btnAgregarPaquete.setEnabled(false);
-        btnSiguiente.setEnabled(false);
+         btnAgregarPaquete.setEnabled(false);
+       comboTipo.setEnabled(true);
         cargarComboBox();
-        ButtonGroup grupoIndividual = new ButtonGroup();
-        grupoIndividual.add(checkSi);
-        grupoIndividual.add(CheckNo);
+      
+       
     }
    
     // Configuración inicial de botones y campos
@@ -53,9 +51,6 @@ TransporteData tranData = new TransporteData();
     private void initComponents() {
 
         PanelTransporte = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        checkSi = new javax.swing.JCheckBox();
-        CheckNo = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
         txtOrigen = new javax.swing.JTextField();
@@ -79,37 +74,11 @@ TransporteData tranData = new TransporteData();
         PanelTransporte.setBackground(new java.awt.Color(255, 255, 153));
         PanelTransporte.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("¿Desea incluir tranporte en su paquete turístico?:");
-
-        checkSi.setBackground(new java.awt.Color(255, 255, 153));
-        checkSi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        checkSi.setText("SI");
-        checkSi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkSiActionPerformed(evt);
-            }
-        });
-
-        CheckNo.setBackground(new java.awt.Color(255, 255, 153));
-        CheckNo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        CheckNo.setText("NO");
-        CheckNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckNoActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("¿Tipo de transporte en el que desea viajar?");
 
         comboTipo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         comboTipo.setEnabled(false);
-        comboTipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboTipoItemStateChanged(evt);
-            }
-        });
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoActionPerformed(evt);
@@ -177,54 +146,46 @@ TransporteData tranData = new TransporteData();
         PanelTransporte.setLayout(PanelTransporteLayout);
         PanelTransporteLayout.setHorizontalGroup(
             PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTransporteLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(192, 192, 192))
             .addGroup(PanelTransporteLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelTransporteLayout.createSequentialGroup()
-                        .addComponent(btnAgregarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128)
-                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105))
-                    .addGroup(PanelTransporteLayout.createSequentialGroup()
-                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)))
+                        .addGap(64, 64, 64)
                         .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelTransporteLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelTransporteLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(39, 39, 39)
-                                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CheckNo)
-                                            .addComponent(checkSi, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelTransporteLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(141, 141, 141)
+                                .addComponent(jLabel3))
                             .addGroup(PanelTransporteLayout.createSequentialGroup()
-                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(45, 45, 45)
+                                .addComponent(btnAgregarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelTransporteLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(PanelTransporteLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelTransporteLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(406, 406, 406)
+                                .addComponent(jLabel5))
+                            .addGroup(PanelTransporteLayout.createSequentialGroup()
+                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(PanelTransporteLayout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(PanelTransporteLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(36, 36, 36)
+                                        .addComponent(jLabel9)
+                                        .addGap(78, 78, 78)
+                                        .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtAsiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelTransporteLayout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(29, 29, 29)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -233,44 +194,43 @@ TransporteData tranData = new TransporteData();
             .addGroup(PanelTransporteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelTransporteLayout.createSequentialGroup()
-                        .addComponent(checkSi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CheckNo)
-                        .addGap(15, 15, 15)
-                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1))
-                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(114, 114, 114))
                     .addGroup(PanelTransporteLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addGroup(PanelTransporteLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(12, 12, 12)
                         .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))))
-                .addGap(20, 20, 20)
-                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelTransporteLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4))
+                            .addGroup(PanelTransporteLayout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(20, 20, 20)))
+                .addGap(22, 22, 22)
+                .addGroup(PanelTransporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(292, 292, 292))
+                .addGap(270, 270, 270))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,12 +248,9 @@ TransporteData tranData = new TransporteData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPaqueteActionPerformed
-        if(checkSi.isSelected()){
         agregar();
-        }else{
-            agregarNull();
-            
-        }
+        btnAgregarPaquete.setEnabled(false);
+        btnSiguiente.setEnabled(true);
     }//GEN-LAST:event_btnAgregarPaqueteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -304,49 +261,18 @@ TransporteData tranData = new TransporteData();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        if(checkSi.isSelected()){
-       cargarDatos();
-        }else{
-            cargarDatosNulos();
-        }
-
-    }//GEN-LAST:event_comboTipoActionPerformed
-
-    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
         String tipo = (String) comboTipo.getSelectedItem();
+        cargarDatos();
         actualizarCosto(tipo);
-    }//GEN-LAST:event_comboTipoItemStateChanged
-
-    private void CheckNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckNoActionPerformed
-        checkSi.setSelected(false); // Desmarcar el checkbox "Sí"
-
-        // Desactivar campos de tipo de transporte y botón Agregar Paquete
-        bloquearCampos(PanelTransporte);
-        btnAgregarPaquete.setEnabled(false);
-
-        // Habilitar botón Siguiente ya que no se necesita transporte
-        btnSiguiente.setEnabled(true);
-    }//GEN-LAST:event_CheckNoActionPerformed
-
-    private void checkSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkSiActionPerformed
-        CheckNo.setSelected(false); // Desmarcar el checkbox "No"
-
-        // Habilitar selección de tipo de transporte
-        comboTipo.setEnabled(true);
-
-        // Desactivar botón Siguiente hasta agregar el paquete
-        btnSiguiente.setEnabled(false);
-    }//GEN-LAST:event_checkSiActionPerformed
+        btnAgregarPaquete.setEnabled(true);
+    }//GEN-LAST:event_comboTipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CheckNo;
     private javax.swing.JPanel PanelTransporte;
     private javax.swing.JButton btnAgregarPaquete;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JCheckBox checkSi;
     private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -366,41 +292,7 @@ private void cargarComboBox(){
     }
 }
 
- private void bloquearTodosCampos(JPanel jpanel) {
-    for (Component c : jpanel.getComponents()) {
-        if (c instanceof JTextField) {
-            JTextField t = (JTextField) c;
-            t.setEnabled(false); // Deshabilita el JTextField
-        }
-        
-        if (c instanceof JComboBox) {
-            JComboBox<?> combo = (JComboBox<?>) c;
-            combo.setEnabled(false); // Deshabilita el JComboBox
-        }
-        
-        if (c instanceof JCheckBox) {
-            JCheckBox checkBox = (JCheckBox) c;
-            checkBox.setEnabled(false); // Deshabilita el JCheckBox
-        }
-    }
-}
 
-
- private void bloquearCampos(JPanel jpanel) {
-    for (Component c : jpanel.getComponents()) {
-        if (c instanceof JTextField) {
-            JTextField t = (JTextField) c;
-            t.setEnabled(false); // Deshabilita el JTextField
-        }
-        
-        if (c instanceof JComboBox) {
-            JComboBox<?> combo = (JComboBox<?>) c;
-            combo.setEnabled(false); // Deshabilita el JComboBox
-        }
-        
-    }
- 
- }
  
  private void agregar(){
      try{
@@ -408,43 +300,26 @@ private void cargarComboBox(){
         int asiento = Integer.parseInt(txtAsiento.getText());
         transporteSeleccionado = tranData.obtenerTransportePorTipo(tipo);
         pasajeSeleccionado = new Pasaje( transporteSeleccionado,origenSeleccionado,destinoSeleccionado,asiento);
-        btnAgregarPaquete.setEnabled(false);
-        btnSiguiente.setEnabled(true);
-        bloquearTodosCampos(PanelTransporte);
+       
+       
         JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
      }catch(NullPointerException ex){
           JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
      }
  }
- private void agregarNull(){
-     try{
-        pasajeSeleccionado = new Pasaje( null,null,null,0);
-        btnAgregarPaquete.setEnabled(false);
-        btnSiguiente.setEnabled(true);
-        bloquearTodosCampos(PanelTransporte);
-        JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
-     }catch(NullPointerException ex){
-         
-     }
- }
+
  
  private void cargarDatos(){
       Random random = new Random();
         txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
         txtOrigen.setText(origenSeleccionado.toString());
         txtDestino.setText(destinoSeleccionado.toString());
-        btnAgregarPaquete.setEnabled(true);
+        
  
 }
  
- private void cargarDatosNulos(){
-     
-        txtAsiento.setText("Nulo"); // Genera un número entre 1 y 40);
-        txtOrigen.setText("Nulo");
-        txtDestino.setText("Nulo");
-        btnAgregarPaquete.setEnabled(true);
  
-}
+ 
  
 private void actualizarCosto(String tipo){
     tfCosto.setText(String.valueOf(tranData.obtenerCostoPorTipo(tipo)));

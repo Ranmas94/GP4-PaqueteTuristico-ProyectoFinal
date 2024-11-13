@@ -76,6 +76,8 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
   
         
         bloquearCampos(contenedorInfo);
+       jrbIndividualSI.setEnabled(false);
+       jrbIndividualNo.setEnabled(false);
         bloquearCampos(panelCantPasajeros);
       
         jbConfirmar.setEnabled(false);
@@ -175,7 +177,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jLabel11.setText("FECHA FIN:");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel12.setText("COSTO:");
+        jLabel12.setText("COSTO TOTAL:");
 
         tfCostoEstadia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -244,6 +246,18 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel20.setText("CHECK-OUT");
 
+        jdCheckin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jdCheckinKeyReleased(evt);
+            }
+        });
+
+        jdCheckout.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jdCheckoutKeyReleased(evt);
+            }
+        });
+
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel21.setText("HABITACIONES");
 
@@ -270,14 +284,10 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbTransporte, 0, 210, Short.MAX_VALUE)
                             .addComponent(jcbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
-                        .addGap(43, 43, 43)
-                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfCostoTransporte, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(tfCostoMenu))
+                        .addGap(118, 118, 118)
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfCostoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfCostoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -286,35 +296,34 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                             .addComponent(jdCheckin, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(contenedorInfoLayout.createSequentialGroup()
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel20))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jdCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(8, 8, 8)
+                            .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel15)
+                                .addComponent(jLabel20)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel14))
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jdCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                                .addComponent(tfCapacidad)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(12, 12, 12)))
                 .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dcFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(tfHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCostoEstadia))
+                    .addComponent(tfCostoEstadia)
+                    .addComponent(tfHabitaciones))
                 .addGap(17, 17, 17))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorInfoLayout.createSequentialGroup()
                 .addGap(232, 232, 232)
                 .addComponent(jbConfirmar)
                 .addGap(40, 40, 40)
-                .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                 .addGap(229, 229, 229))
             .addGroup(contenedorInfoLayout.createSequentialGroup()
                 .addContainerGap()
@@ -374,11 +383,12 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                                 .addGap(21, 21, 21)
                                 .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jcbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfCostoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jcbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(contenedorInfoLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel14))))
+                                .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(tfCostoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(contenedorInfoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(contenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -500,7 +510,7 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsCantMayores, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsMenores1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -577,18 +587,17 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(250, 250, 250)
-                                .addComponent(jLabel18)
-                                .addGap(28, 28, 28)
-                                .addComponent(tfCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(301, 301, 301)
-                                .addComponent(jLabel1)))
+                        .addGap(250, 250, 250)
+                        .addComponent(jLabel18)
+                        .addGap(28, 28, 28)
+                        .addComponent(tfCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(contenedorInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(355, 355, 355)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,26 +627,32 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
     private void jcbMenuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMenuItemStateChanged
           mostrarDatosMenu();
+          actualizarCosto();
     }//GEN-LAST:event_jcbMenuItemStateChanged
 
     private void jcbTransporteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbTransporteItemStateChanged
         mostrarDatosTransporte();
+        actualizarCosto();
     }//GEN-LAST:event_jcbTransporteItemStateChanged
 
     private void jcbEstadiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadiaActionPerformed
          mostrarDatosEstadia();
+         actualizarCosto();
     }//GEN-LAST:event_jcbEstadiaActionPerformed
 
     private void jcbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMenuActionPerformed
          mostrarDatosMenu();
+         actualizarCosto();
     }//GEN-LAST:event_jcbMenuActionPerformed
 
     private void jcbTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTransporteActionPerformed
          mostrarDatosTransporte();
+         actualizarCosto();
     }//GEN-LAST:event_jcbTransporteActionPerformed
 
     private void jrbIndividualSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualSIActionPerformed
         jbConfirmarPaquete.setEnabled(true);
+        actualizarCosto();
        
     }//GEN-LAST:event_jrbIndividualSIActionPerformed
 
@@ -650,7 +665,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jbConfirmar.setEnabled(true);
         jbModificar.setEnabled(false);
         desbloquearCamposEspecificos();
-        paqueteModificado = true;
        actualizarCosto();
     }//GEN-LAST:event_jbModificarActionPerformed
 
@@ -663,13 +677,21 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Se confirmaron los cambios en el paquete.");
             jbConfirmar.setEnabled(false);
             bloquearCampos(contenedorInfo);
-            actualizarCosto();
+            
         }
+        desbloquearCampos(panelPasajeroIndividual);
+        paqueteModificado = true;
+        jbConfirmar.setEnabled(true);
+        jbConfirmarPaquete.setEnabled(true);
+       
+        actualizarCosto();
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jbConfirmarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarPaqueteActionPerformed
        crearPaquete();
       actualizarCosto();
+        
+        
        
     }//GEN-LAST:event_jbConfirmarPaqueteActionPerformed
 
@@ -695,12 +717,20 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbIndividualSIItemStateChanged
 
     private void jrbIndividualNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualNoItemStateChanged
-actualizarCosto();      
+        actualizarCosto();      
     }//GEN-LAST:event_jrbIndividualNoItemStateChanged
 
     private void jbDescartarPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarPaquete1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbDescartarPaquete1ActionPerformed
+
+    private void jdCheckinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jdCheckinKeyReleased
+        actualizarCosto();
+    }//GEN-LAST:event_jdCheckinKeyReleased
+
+    private void jdCheckoutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jdCheckoutKeyReleased
+        actualizarCosto();
+    }//GEN-LAST:event_jdCheckoutKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -860,8 +890,6 @@ private boolean validarCamposVacios(JPanel jpanel) {
       jcbEstadia.setEnabled(true);
       jcbMenu.setEnabled(true);
       jcbTransporte.setEnabled(true);
-      jdCheckin.setEnabled(true);
-      jdCheckout.setEnabled(true);
   }
   
   private void cargarDatos(){
@@ -928,7 +956,7 @@ private boolean validarCamposVacios(JPanel jpanel) {
      try{
          java.util.Date inicio = jdCheckin.getDate();
          java.util.Date fin =   jdCheckout.getDate();
-      double Total = estadiaSeleccionada.getTotal(); 
+      double Total = Double.parseDouble(tfCostoEstadia.getText());
       alojamientoSeleccionado = alData.buscarAlojamientoNombre(String.valueOf(jcbEstadia.getSelectedItem()));
       estadiaSeleccionada = new Estadia(alojamientoSeleccionado, inicio, fin, Total);
       
@@ -1014,7 +1042,7 @@ private void crearPaquete(){
         } else if (jrbIndividualNo.isSelected()) {
             // Cálculo para varios pasajeros
             precioAdultos = (costoBase + costoMenu) * cantPasajerosAdultos;
-            precioNinios = (costoBase + costoMenu) * cantPasajerosNinios * 0.8; // 20% de descuento para niños
+            precioNinios = (costoBase + costoMenu) * cantPasajerosNinios;// 20% de descuento para niños
             precioNiniosMenores = (costoBase + costoMenu) * cantPasajerosNiniosMenores * 0.5; // 50% de descuento para menores
 
             // Sumar todos los costos
@@ -1026,7 +1054,10 @@ private void crearPaquete(){
             precioTotal *= 1.10; // Aumentar el precio total en un 10%
         }
     
-    
+         switch(temporada){
+           case "temporada_alta" -> precioTotal *= 1.30;
+           case "temporada_media" -> precioTotal *= 1.15;
+       }
     estadiaData.guardarEstadia(estadiaSeleccionada);
     pasajeData.agregarPasaje(pasajeSeleccionado);
     clienteData.guardarCliente(clienteSeleccionado);
@@ -1043,13 +1074,14 @@ private void crearPaquete(){
 } 
 
 private void actualizarCosto() {
+     
     try {
-        // Obtener la cantidad de pasajeros
+       
         int cantPasajerosAdultos = (int) jsCantMayores.getValue();
         int cantPasajerosNinios = (int) jsMenores1.getValue();
         int cantPasajerosNiniosMenores = (int) jsMenores2.getValue();
         
-        // Calcular el total de pasajeros
+       
         int totalPasajeros = cantPasajerosAdultos + cantPasajerosNinios + cantPasajerosNiniosMenores;
 
         // Obtener costos base
@@ -1059,19 +1091,19 @@ private void actualizarCosto() {
         double costoBase = totalEstadia + totalTransporte;
         double costoMenu = costoBase * totalMenu;
         
-        // Inicializar variables de precio
+       
         double precioTotal = 0;
         double precioAdultos = 0;
         double precioNinios = 0;
         
-        // Verificar si es un paquete individual
+     
         if (jrbIndividualSI.isSelected()) {
             // Costo para una sola persona
             precioTotal = costoBase + costoMenu;
         } else if (jrbIndividualNo.isSelected()) {
             // Cálculo para varios pasajeros
             precioAdultos = (costoBase + costoMenu) * cantPasajerosAdultos;
-            precioNinios = ((costoBase + costoMenu) * cantPasajerosNinios * 0.8); // Niños 20% descuento
+            precioNinios = ((costoBase + costoMenu) * cantPasajerosNinios ); // Niños 20% descuento
             double precioNiniosMenores = ((costoBase + costoMenu) * cantPasajerosNiniosMenores * 0.5); // Menores 50% descuento
 
             // Sumar todos los costos
@@ -1083,11 +1115,17 @@ private void actualizarCosto() {
             precioTotal *= 1.10; // Aplicar un 10% extra
         }
         
+       switch(temporada){
+           case "temporada_alta" -> precioTotal *= 1.30;
+           case "temporada_media" -> precioTotal *= 1.15;
+       }
+        
         // Actualizar el campo de texto con el costo total
         tfCostoTotal.setText(String.format("%.2f", precioTotal));
         
     } catch (NullPointerException | ClassCastException | NumberFormatException ex) {
         JOptionPane.showMessageDialog(this, "Error al calcular el costo total: " + ex.getMessage());
     }
+   
 }
 }

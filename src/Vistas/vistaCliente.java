@@ -190,25 +190,7 @@ public static Cliente clienteSeleccionado;
           JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
           return;
       }else{
-       try{
-        String nombre = tfNombre.getText();
-        String apellido = tfApellido.getText();
-        Long dni = Long.valueOf(tfDocumento.getText());
-        String telefono = tfTelefono.getText();
-        String correo = tfCorreo.getText();
-        
-        medioPago = (String) jcbMedioPago.getSelectedItem();
-        
-        Cliente cli = new Cliente(nombre,apellido,dni,telefono,correo);
-        clienteSeleccionado = cli;
-        jbResumen.setEnabled(true);
-        jbGuardar.setEnabled(false);
-       }catch(NullPointerException ex){
-           JOptionPane.showMessageDialog(this,"Debe llenar todos los campos.");
-       }catch(NumberFormatException ex){
-           JOptionPane.showMessageDialog(this, "Ingrese datos válidos");
-           limpiarCampos(contenedor);
-       }
+       guardar();
       }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -282,5 +264,25 @@ private boolean validarCamposVacios(JPanel jpanel) {
     }
     return false; // No hay campos vacíos
 }
-
+public void guardar(){
+   try{
+        String nombre = tfNombre.getText();
+        String apellido = tfApellido.getText();
+        Long dni = Long.valueOf(tfDocumento.getText());
+        String telefono = tfTelefono.getText();
+        String correo = tfCorreo.getText();
+        
+        medioPago = (String) jcbMedioPago.getSelectedItem();
+        
+        Cliente cli = new Cliente(nombre,apellido,dni,telefono,correo);
+        clienteSeleccionado = cli;
+        jbResumen.setEnabled(true);
+        jbGuardar.setEnabled(false);
+       }catch(NullPointerException ex){
+           JOptionPane.showMessageDialog(this,"Debe llenar todos los campos.");
+       }catch(NumberFormatException ex){
+           JOptionPane.showMessageDialog(this, "Ingrese datos válidos");
+           limpiarCampos(contenedor);
+       }
+}
 }
