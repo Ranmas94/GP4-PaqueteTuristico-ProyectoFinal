@@ -58,7 +58,7 @@ public class MenuPension {
 
     @Override
     public String toString() {
-        return tipo + porcentaje ;
+        return tipo  ;
     }
     
     
