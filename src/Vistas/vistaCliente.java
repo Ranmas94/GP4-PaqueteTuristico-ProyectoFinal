@@ -66,6 +66,7 @@ public static Cliente clienteSeleccionado;
         contenedor.setBackground(new java.awt.Color(39, 134, 188));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos(1).png"))); // NOI18N
         jLabel1.setText("INGRESE SUS DATOS");
         jLabel1.setIconTextGap(11);
@@ -111,7 +112,6 @@ public static Cliente clienteSeleccionado;
 
         jcbMedioPago.setBackground(new java.awt.Color(255, 255, 255));
         jcbMedioPago.setForeground(new java.awt.Color(0, 0, 0));
-        jcbMedioPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbGuardar.setBackground(new java.awt.Color(51, 255, 153));
         jbGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
