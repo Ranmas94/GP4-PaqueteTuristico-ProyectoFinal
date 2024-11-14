@@ -47,7 +47,6 @@ MenuData menuData = new MenuData();
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(39, 134, 188));
-        setClosable(true);
         setTitle("Paquete Turístico");
         setPreferredSize(new java.awt.Dimension(667, 488));
 

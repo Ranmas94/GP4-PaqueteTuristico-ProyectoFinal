@@ -998,6 +998,7 @@ private boolean validarCamposVacios(JPanel jpanel) {
          jrbIndividualNo.setEnabled(true);
          jbConfirmar.setEnabled(false);
          paqueteModificado=true;
+         bloquearCampos(contenedorInfo);
     } catch (NullPointerException ex) {
         JOptionPane.showMessageDialog(this, "Error. Hay datos en NULL. " + ex.getMessage());
     } catch (ClassCastException | NumberFormatException ex) {

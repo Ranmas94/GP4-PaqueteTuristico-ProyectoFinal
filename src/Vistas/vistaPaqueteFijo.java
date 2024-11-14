@@ -25,6 +25,7 @@ import Entidades.Transporte;
 import static Vistas.vistaCliente.clienteSeleccionado;
 import static Vistas.vistaCliente.medioPago;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
 import java.awt.Component;
 import java.util.Random;
 import java.util.Date;
@@ -72,7 +73,7 @@ private final AlojamientoData alData = new AlojamientoData();
          ButtonGroup grupoIndividual = new ButtonGroup();
         grupoIndividual.add(jrbSI);
         grupoIndividual.add(jrbNO);
-        
+        tfPresupuesto.setForeground(Color.black);
         bloquearCampos(panelPaquete);
         bloquearPasajeros(panelPasajeros);
         jbConfirmarCompra.setEnabled(false);
@@ -895,7 +896,9 @@ private final AlojamientoData alData = new AlojamientoData();
             JOptionPane.showMessageDialog(this, "Datos guardados con éxito");
             bloquearCampos(panelPasajeros);
         }
-        
+        double total = calcularPrecioTotal();
+       tfPresupuesto.setText(String.valueOf(total));
+       
     }//GEN-LAST:event_jbConfirmarCantPasajerosActionPerformed
 
     private void jrbSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbSIActionPerformed
@@ -909,6 +912,7 @@ private final AlojamientoData alData = new AlojamientoData();
 
     private void jbConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCompraActionPerformed
        crearNuevoPaquete();
+       dispose();
     }//GEN-LAST:event_jbConfirmarCompraActionPerformed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
@@ -1307,6 +1311,17 @@ private double calcularPrecioTotal(){
     double precioMayores = (mayores + menores1) * precioBase;
     double precioMenores = (menores2 * precioBase) * 0.5;
     double total = precioMayores + precioMenores;
+    
+   
+    String temporada = paquete.getTemporada();
+    switch (temporada) {
+    case "temporada_alta":
+        total *= 1.30; // 30% adicional para temporada alta
+        break;
+    case "temporada_media":
+        total *= 1.15; // 15% adicional para temporada media
+        break;
+}
     return total;    
 }
 }
