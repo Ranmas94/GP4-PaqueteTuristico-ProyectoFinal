@@ -54,9 +54,9 @@ private DestinoData destData = new DestinoData();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("AGREGAR UN DESTINO TURÍSTICO");
+        jLabel1.setText("GESTIONAR DESTINO TURÍSTICO");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("INGRESE ID DEL DESTINO:");
 
