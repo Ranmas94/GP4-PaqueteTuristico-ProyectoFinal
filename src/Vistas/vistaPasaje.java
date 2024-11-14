@@ -25,7 +25,7 @@ TransporteData tranData = new TransporteData();
     public vistaPasaje() {
         initComponents();
         // Desactivar componentes al inicio
-         btnAgregarPaquete.setEnabled(false);
+         btnAgregarPaquete.setEnabled(true);
        comboTipo.setEnabled(true);
         cargarComboBox();
       
@@ -273,7 +273,7 @@ TransporteData tranData = new TransporteData();
         String tipo = (String) comboTipo.getSelectedItem();
         cargarDatos();
         actualizarCosto(tipo);
-        btnAgregarPaquete.setEnabled(true);
+       
     }//GEN-LAST:event_comboTipoActionPerformed
 
 

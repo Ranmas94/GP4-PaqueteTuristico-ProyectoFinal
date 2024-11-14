@@ -4,11 +4,63 @@
  */
 package Vistas;
 
+import AccesoADatos.AlojamientoData;
+import AccesoADatos.ClienteData;
+import AccesoADatos.ClientePaqueteData;
+import AccesoADatos.DestinoData;
+import AccesoADatos.EstadiaData;
+import AccesoADatos.MenuData;
+import AccesoADatos.PaqueteData;
+import AccesoADatos.PasajeData;
+import AccesoADatos.TransporteData;
+import Entidades.Alojamiento;
+import Entidades.Cliente;
+import Entidades.Destino;
+import Entidades.Estadia;
+import Entidades.MenuPension;
+import Entidades.Paquete;
+import Entidades.Pasaje;
+import Entidades.Transporte;
+import static Vistas.vistaCliente.clienteSeleccionado;
+import static Vistas.vistaCliente.medioPago;
+import com.toedter.calendar.JDateChooser;
+import java.awt.Component;
+import java.util.Random;
+import java.util.Date;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Vic-G5
  */
 public class vistaPaqueteFijo extends javax.swing.JInternalFrame {
+private final AlojamientoData alData = new AlojamientoData();
+ private final MenuData menuData = new MenuData();
+ private final TransporteData tranData = new TransporteData();
+ private final PaqueteData paqData = new PaqueteData();
+ private final EstadiaData estadiaData = new EstadiaData();
+ private final PasajeData pasajeData = new PasajeData();
+ private final ClienteData clienteData = new ClienteData();
+ private final DestinoData destinoData = new DestinoData();
+ private final ClientePaqueteData clientePaqueteData = new ClientePaqueteData();
+ private Cliente cliente = new Cliente();
+ private Alojamiento alojamiento = new Alojamiento();
+ private MenuPension menu = new MenuPension();
+ private Transporte transporte = new Transporte();
+ private Estadia estadia = new Estadia();
+ private Destino destino = new Destino();
+ private Destino origen = new Destino();
+ private Paquete paquete = new Paquete();
+ private Pasaje pasaje = new Pasaje();
+ private String medioPago = new String();
 
     /**
      * Creates new form vistaPaqueteFijo
@@ -16,6 +68,14 @@ public class vistaPaqueteFijo extends javax.swing.JInternalFrame {
     public vistaPaqueteFijo() {
         initComponents();
         cargarComboBox();
+         ButtonGroup grupoIndividual = new ButtonGroup();
+        grupoIndividual.add(jrbSI);
+        grupoIndividual.add(jrbNO);
+        
+        bloquearCampos(panelPaquete);
+        bloquearPasajeros(panelPasajeros);
+        jbConfirmarCompra.setEnabled(false);
+        
     }
 
     /**
@@ -815,59 +875,75 @@ public class vistaPaqueteFijo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarClienteActionPerformed
-        // TODO add your handling code here:
+        if(validarCamposVacios(panelCliente)){
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+        }else{
+            guardarCliente();
+            
+           desbloquearRadioButton(panelPasajeros);
+        }
+         
     }//GEN-LAST:event_jbConfirmarClienteActionPerformed
 
     private void jbConfirmarCantPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCantPasajerosActionPerformed
-        // TODO add your handling code here:
+        if(!jrbSI.isSelected() && !jrbNO.isSelected()){
+            JOptionPane.showMessageDialog(this,"Seleccione una opción.");
+        }else{
+            jbConfirmarCompra.setEnabled(true);
+            jbConfirmarCantPasajeros.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "Datos guardados con éxito");
+            bloquearCampos(panelPasajeros);
+        }
+        
     }//GEN-LAST:event_jbConfirmarCantPasajerosActionPerformed
 
     private void jrbSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbSIActionPerformed
-        // TODO add your handling code here:
+       bloquearSpinner(panelPasajeros);
+      
     }//GEN-LAST:event_jrbSIActionPerformed
 
     private void jrbNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNOActionPerformed
-        // TODO add your handling code here:
+        desbloquearSpinner(panelPasajeros);
     }//GEN-LAST:event_jrbNOActionPerformed
 
     private void jbConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCompraActionPerformed
-        // TODO add your handling code here:
+       crearNuevoPaquete();
     }//GEN-LAST:event_jbConfirmarCompraActionPerformed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
-        // TODO add your handling code here:
+       dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbCamboriuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCamboriuActionPerformed
-        // TODO add your handling code here:
+       cargarPaquete(1,1,1,2,1,17);
     }//GEN-LAST:event_jbCamboriuActionPerformed
 
     private void jbIguazúActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIguazúActionPerformed
-        // TODO add your handling code here:
+        cargarPaquete(3,3,3,4,1,15);
     }//GEN-LAST:event_jbIguazúActionPerformed
 
     private void jbBarilocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBarilocheActionPerformed
-        // TODO add your handling code here:
+        cargarPaquete(2,2,2,3,1,8);
     }//GEN-LAST:event_jbBarilocheActionPerformed
 
     private void jbMarPlataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMarPlataActionPerformed
-        // TODO add your handling code here:
+        cargarPaquete(4,4,4,2,1,21);
     }//GEN-LAST:event_jbMarPlataActionPerformed
 
     private void jbMendozaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMendozaActionPerformed
-        // TODO add your handling code here:
+        cargarPaquete(5 ,5 ,5 ,2 ,1 ,19);
     }//GEN-LAST:event_jbMendozaActionPerformed
 
     private void jbBuenosAiresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuenosAiresActionPerformed
-        // TODO add your handling code here:
+       cargarPaquete(7 ,7, 7, 2, 1, 2);
     }//GEN-LAST:event_jbBuenosAiresActionPerformed
 
     private void jbGranadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGranadoActionPerformed
-        // TODO add your handling code here:
+        cargarPaquete(6, 6, 6, 2, 1, 20);
     }//GEN-LAST:event_jbGranadoActionPerformed
 
     private void jbJujuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbJujuyActionPerformed
-        // TODO add your handling code here:
+       cargarPaquete(8, 8, 8, 2, 1, 18);
     }//GEN-LAST:event_jbJujuyActionPerformed
 
 
@@ -952,4 +1028,284 @@ private void cargarComboBox(){
     
 }
 
+private void limpiarCampos(JPanel jpanel) {
+        for (Component c : jpanel.getComponents()) {
+            if (c instanceof JTextField) {
+                JTextField t = (JTextField) c;
+                t.setText("");
+            }
+            
+            if(c instanceof JComboBox){
+                JComboBox t = (JComboBox) c;
+                t.setSelectedIndex(-1);
+                t.setSelectedItem(null);
+            }
+            
+        }
+    }
+
+private boolean validarCamposVacios(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        if (c instanceof JTextField) {
+            JTextField t = (JTextField) c;
+            if (t.getText().trim().isEmpty()) {  // Verifica si el campo está vacío
+                return true;
+            }
+        }
+        
+        if (c instanceof JComboBox) {
+            JComboBox<?> combo = (JComboBox<?>) c;
+            if (combo.getSelectedItem() == null || combo.getSelectedIndex() == -1) { // Verifica si no hay selección
+                return true;
+            }
+        }
+        
+        if(c instanceof JDateChooser){
+           JDateChooser d = (JDateChooser) c;
+           if(d.getDate() == null){
+               return true;
+            }
+        }
+        
+       
+        
+    }
+    return false; // No hay campos vacíos
 }
+ 
+ private void bloquearCampos(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        if (c instanceof JTextField) {
+            JTextField t = (JTextField) c;
+            t.setEnabled(false); // Deshabilita el JTextField
+        }
+        
+        
+        if (c instanceof JComboBox) {
+            JComboBox<?> combo = (JComboBox<?>) c;
+            combo.setEnabled(false); // Deshabilita el JComboBox
+        }
+        
+        if (c instanceof JCheckBox) {
+            JCheckBox cb = (JCheckBox) c;
+          cb.setEnabled(false); // Deshabilita el JCheckBox
+        }
+        
+        if(c instanceof JDateChooser) {
+            JDateChooser t = (JDateChooser) c;
+            t.setEnabled(false);
+        }
+        
+        if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(false);
+        }
+        
+    } 
+     
+}
+ 
+ private void bloquearPasajeros(JPanel jpanel){
+     for (Component c : jpanel.getComponents()) {
+        
+        if(c instanceof JRadioButton){
+            JRadioButton t = (JRadioButton) c;
+            t.setEnabled(false);
+        }
+        
+        if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(false);
+        }
+        
+        if(c instanceof JButton){
+            JButton t = (JButton) c;
+            t.setEnabled(false);
+        }
+        
+    }
+ }
+ 
+ private void desbloquearRadioButton(JPanel jpanel){
+     for (Component c : jpanel.getComponents()) {
+        
+       if(c instanceof JRadioButton){
+            JRadioButton t = (JRadioButton) c;
+            t.setEnabled(true);
+        }
+        if(c instanceof JButton){
+            JButton t = (JButton) c;
+            t.setEnabled(true);
+        }
+        
+    }
+ }
+ 
+ private void bloquearSpinner(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        
+        if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(false);
+        }
+        
+    }
+ }
+ 
+  private void desbloquearSpinner(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        
+        if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(true);
+        }
+        
+    }
+ }
+ 
+ 
+ 
+  private void desbloquearCampos(JPanel jpanel) {
+    for (Component c : jpanel.getComponents()) {
+        if (c instanceof JTextField) {
+            JTextField t = (JTextField) c;
+            t.setEnabled(true); // habilita el JTextField
+        }
+        
+        
+        if (c instanceof JComboBox) {
+            JComboBox<?> combo = (JComboBox<?>) c;
+            combo.setEnabled(true); // habilita el JComboBox
+        }
+        
+        if (c instanceof JCheckBox) {
+            JCheckBox checkBox = (JCheckBox) c;
+            checkBox.setEnabled(true); // habilita el JCheckBox
+        }
+        
+        if(c instanceof JDateChooser) {
+            JDateChooser t = (JDateChooser) c;
+            t.setEnabled(true);
+        }
+        
+         if(c instanceof JSpinner){
+            JSpinner t = (JSpinner) c;
+            t.setEnabled(true);
+        }
+        
+        
+    }
+}
+
+
+private void cargarPaquete(int idPaquete,int idEstadia,int idPasaje,int idMenu,int idOrigen,int idDestino){
+    try{
+  
+     menu = menuData.buscarMenuPorId(idMenu);
+     pasaje = pasajeData.buscarPasajePorId(idPasaje);
+     int idTransporte = pasaje.getIdTransporte().getIdTransporte();
+     transporte = tranData.obtenerTransportePorId(idTransporte);
+     estadia = estadiaData.obtenerEstadia(idEstadia);
+     int idAlojamiento = estadia.getIdAlojamiento().getIdAlojamiento();
+    alojamiento = alData.buscarAlojamientoID(idAlojamiento);
+    destino = destinoData.buscarDestino(idDestino);
+    origen = destinoData.buscarDestino(idOrigen);
+    paquete = paqData.BuscarPaquete(idPaquete);
+    tfDestino.setText(destino.toString());
+    fechaPartida.setDate(paquete.getFechaInicio());
+    fechaRegreso.setDate(paquete.getFechaFin());
+    tfAlojamiento.setText(alojamiento.getNombre());
+    tfCapacidad.setText(String.valueOf(alojamiento.getCapacidad()));
+    tfHabitaciones.setText(String.valueOf(alojamiento.getNroAmbientes()));
+    tfPrecioNoche.setText(String.valueOf(alojamiento.getPrecioPorNoche()));
+    checkIn.setDate(estadia.getFechaCheckIn());
+    checkOut.setDate(estadia.getFechaCheckOut());
+    tfMenu.setText(menu.getTipo());
+    tfPorcentaje.setText(String.valueOf(menu.getPorcentaje()));
+    tfTransporte.setText(transporte.getTipo());
+    tfCosto.setText(String.valueOf(transporte.getCosto()));  
+    }catch(NullPointerException | NumberFormatException ex){
+        JOptionPane.showMessageDialog(this, "Error al precargar paquete.");
+    }
+}
+
+private void guardarCliente(){
+    try{
+        String nombre = tfNombre.getText();
+        String apellido = tfApellido.getText();
+        Long dni = Long.valueOf(tfDocumento.getText());
+        String telefono = tfTelefono.getText();
+        String correo = tfCorreo.getText();
+        String mediodePago = (String) jcbMedioPago.getSelectedItem();
+        
+        cliente.setNombre(nombre);
+        cliente.setApellido(apellido);
+        cliente.setDocumento(dni);
+        cliente.setTelefono(telefono);
+        cliente.setCorreo(correo);
+        
+        medioPago = mediodePago;
+        JOptionPane.showMessageDialog(this, "Datos guardados con éxito.");
+         jbConfirmarCliente.setEnabled(false);
+       }catch(NullPointerException ex){
+           JOptionPane.showMessageDialog(this,"Debe llenar todos los campos.");
+       }catch(NumberFormatException ex){
+           JOptionPane.showMessageDialog(this, "Ingrese datos válidos");
+           limpiarCampos(panelCliente);
+           
+       }
+   
+}
+
+private void crearNuevoPaquete(){
+     Random random = new Random();
+    int asiento = (random.nextInt(40) + 1);
+
+   pasaje.setIdTransporte(transporte);
+   pasaje.setOrigen(origen);
+   pasaje.setDestino(destino);
+   pasaje.setAsiento(asiento);
+   pasajeData.agregarPasaje(pasaje);
+   
+   Date inicio = paquete.getFechaInicio();
+   Date fin = paquete.getFechaFin();
+   
+   int cantidadPasajeros = calcularPasajerosTotal();
+   String temporada = paquete.getTemporada();
+   double precioTotal = calcularPrecioTotal();
+   
+   
+   
+   estadiaData.guardarEstadia(estadia);
+    clienteData.guardarCliente(cliente);
+   
+   Paquete nuevoPaquete = new Paquete(estadia,pasaje,menu,origen,destino,inicio,fin,temporada,cantidadPasajeros,medioPago,true,false,precioTotal);
+   paqData.guardarPaquete(nuevoPaquete);
+}
+
+private int calcularPasajerosTotal(){
+    int total;
+    if(jrbNO.isSelected()){
+    int mayores = (int) jsMayores.getValue();
+    int menores1 = (int) jsMenores.getValue();
+    int menores2 = (int) jsMenores2.getValue();
+    total = mayores + menores1 + menores2;
+    }else{
+      total = 1;
+    }
+    return total;
+}
+
+private double calcularPrecioTotal(){
+   int mayores = (int) jsMayores.getValue();
+    int menores1 = (int) jsMenores.getValue();
+    int menores2 = (int) jsMenores2.getValue();
+    double precioBase = paquete.getPrecioTotal();
+    double precioMayores = (mayores + menores1) * precioBase;
+    double precioMenores = (menores2 * precioBase) * 0.5;
+    double total = precioMayores + precioMenores;
+    return total;    
+}
+}
+
+

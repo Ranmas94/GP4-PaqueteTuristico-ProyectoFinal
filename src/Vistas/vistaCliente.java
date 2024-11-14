@@ -227,6 +227,7 @@ public static Cliente clienteSeleccionado;
           return;
       }else{
        guardar();
+       JOptionPane.showMessageDialog(this, "Datos personales guardados con éxito.");
       }
 
     }//GEN-LAST:event_jbGuardarActionPerformed

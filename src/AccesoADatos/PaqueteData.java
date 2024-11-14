@@ -140,6 +140,9 @@ public ArrayList<Paquete> mostrarPaquetes() {
             paquete.setPagado(rs.getBoolean("pagado"));
             paquete.setCancelado(rs.getBoolean("cancelado"));
             paquete.setPrecioTotal(rs.getDouble("precioTotal"));
+            
+            // Recuperar y asignar 'temporada'
+            paquete.setTemporada(rs.getString("temporada"));
 
             paquetes.add(paquete);
         }
@@ -149,6 +152,50 @@ public ArrayList<Paquete> mostrarPaquetes() {
     return paquetes;
 }
 
+
+public Paquete BuscarPaquete(int id) {
+    Paquete paquete = new Paquete();
+    String sql = "SELECT * FROM paquete WHERE idPaquete = ?";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                Estadia estadia = new Estadia();
+                Pasaje pasaje = new Pasaje();
+                MenuPension menu = new MenuPension();
+                Destino origen = new Destino();
+                Destino destino = new Destino();
+
+                estadia.setIdEstadia(rs.getInt("idEstadia"));
+                pasaje.setIdPasaje(rs.getInt("idPasaje"));
+                menu.setIdMenu(rs.getInt("idMenu"));
+                origen.setIdDestino(rs.getInt("origen"));
+                destino.setIdDestino(rs.getInt("destino"));
+
+                paquete.setIdPaquete(rs.getInt("idPaquete"));
+                paquete.setIdEstadia(estadia);
+                paquete.setIdPasaje(pasaje);
+                paquete.setIdMenu(menu);
+                paquete.setOrigen(origen);
+                paquete.setDestino(destino);
+                paquete.setFechaInicio(rs.getDate("fechaInicio"));
+                paquete.setFechaFin(rs.getDate("fechaFin"));
+                paquete.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+                paquete.setMedioPago(rs.getString("medioPago"));
+                paquete.setPagado(rs.getBoolean("pagado"));
+                paquete.setCancelado(rs.getBoolean("cancelado"));
+                paquete.setPrecioTotal(rs.getDouble("precioTotal"));
+                
+                // Recuperar y asignar 'temporada'
+                paquete.setTemporada(rs.getString("temporada"));
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al buscar paquete: " + ex.getMessage());
+    }
+    return paquete;
+}
 //estadisticas por temporada
 
   public List<DestinoEstadistica> obtenerEstadisticasPorTemporada(String temporada) {

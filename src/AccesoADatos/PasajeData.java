@@ -3,6 +3,7 @@ package AccesoADatos;
 
 import Entidades.Destino;
 import Entidades.Pasaje;
+import Entidades.Transporte;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -72,6 +73,42 @@ public void actualizarPasaje(Pasaje pasaje) {
     } catch (SQLException ex) {
         System.out.println("Error al actualizar el pasaje: " + ex.getMessage());
     }
+}
+
+
+// Método para buscar un pasaje por ID
+public Pasaje buscarPasajePorId(int idPasaje) {
+    String sql = "SELECT idPasaje, asiento, idTransporte, origen, destino FROM pasaje WHERE idPasaje = ?";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idPasaje);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Crear y llenar un objeto Pasaje
+            Pasaje pasaje = new Pasaje();
+            pasaje.setIdPasaje(rs.getInt("idPasaje"));
+            pasaje.setAsiento(rs.getInt("asiento"));
+
+            // Solo asignamos los IDs para Transporte y Destino
+            Transporte transporte = new Transporte();
+            transporte.setIdTransporte(rs.getInt("idTransporte"));
+            pasaje.setIdTransporte(transporte);
+
+            Destino origen = new Destino();
+            origen.setIdDestino(rs.getInt("origen"));
+            pasaje.setOrigen(origen);
+
+            Destino destino = new Destino();
+            destino.setIdDestino(rs.getInt("destino"));
+            pasaje.setDestino(destino);
+
+            return pasaje; // Devolver el objeto Pasaje
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error al buscar el pasaje: " + ex.getMessage());
+    }
+    return null; // Si no se encontró el pasaje
 }
 
 // Método para eliminar un pasaje por ID
