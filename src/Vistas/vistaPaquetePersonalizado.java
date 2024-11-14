@@ -702,6 +702,10 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
 
     private void jrbIndividualSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIndividualSIActionPerformed
         jbConfirmarPaquete.setEnabled(true);
+        bloquearCampos(panelCantPasajeros);
+        jsCantMayores.setEnabled(false);
+       jsMenores1.setEnabled(false);
+       jsMenores2.setEnabled(false);
         actualizarCosto();
        
     }//GEN-LAST:event_jrbIndividualSIActionPerformed
