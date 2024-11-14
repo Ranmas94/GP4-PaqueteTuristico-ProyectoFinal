@@ -15,6 +15,7 @@ import AccesoADatos.PasajeData;
 import AccesoADatos.TransporteData;
 import Entidades.Alojamiento;
 import Entidades.Cliente;
+import Entidades.ClientePaquete;
 import Entidades.Destino;
 import Entidades.Estadia;
 import Entidades.MenuPension;
@@ -1281,6 +1282,8 @@ private void crearNuevoPaquete(){
    
    Paquete nuevoPaquete = new Paquete(estadia,pasaje,menu,origen,destino,inicio,fin,temporada,cantidadPasajeros,medioPago,true,false,precioTotal);
    paqData.guardarPaquete(nuevoPaquete);
+   ClientePaquete clientePaquete = new ClientePaquete(cliente,nuevoPaquete);
+   clientePaqueteData.guardarClientePaquete(clientePaquete);
 }
 
 private int calcularPasajerosTotal(){
