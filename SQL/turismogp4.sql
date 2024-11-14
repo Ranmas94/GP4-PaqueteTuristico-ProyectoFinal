@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 23:42:49
+-- Tiempo de generación: 14-11-2024 a las 09:40:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -259,11 +259,19 @@ INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`, `documento`, `correo`,
 (4, 'Gabriela ', 'Hernandez', 29013341, '2665443292', 'Gabii11@gmail.c'),
 (5, 'Ana', 'Perez', 21652212, '2665218312', 'Anita1@hotmail.'),
 (6, 'Juan', 'Ramirez', 33988900, '2665981211', 'juan0033@gmail.'),
-(7, 'Pamela', 'Torres', 45326363, '2664119292', 'pamelaT@hotmail'),
-(8, 'l', 'l', 1, '1', 'l'),
-(9, 'lo', 'lo', 22, '44', 'lol'),
-(10, 'l', 'l', 1, '1', 'l'),
-(11, 'laa', 'laa', 11, '2', 'aaaaaaa');
+(7, 'Pamela', 'Torres', 45326363, '2664119292', 'pamelaT@hotmail');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente_paquete`
+--
+
+CREATE TABLE `cliente_paquete` (
+  `idClientePaquete` int(11) NOT NULL,
+  `idCliente` int(11) DEFAULT NULL,
+  `idPaquete` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -330,10 +338,11 @@ INSERT INTO `estadia` (`idEstadia`, `idAlojamiento`, `fechaCheckIn`, `fechaCheck
 (5, 185, '2025-07-20', '2025-07-26', 207000.00),
 (6, 186, '2025-03-28', '2025-04-01', 127600.00),
 (7, 4, '2025-06-20', '2025-06-23', 24000.00),
-(8, 69, '2024-11-02', '2024-11-03', 23000.00),
-(9, 16, '2024-11-02', '2024-11-29', 567000.00),
-(10, 3, '2024-11-02', '2024-11-14', 144000.00),
-(11, 3, '2024-11-02', '2024-11-11', 108000.00);
+(8, 183, '2025-03-28', '2025-04-03', 184200.00),
+(9, 29, '2025-07-17', '2025-07-22', 180000.00),
+(10, 184, '2025-01-06', '2025-01-14', 338240.00),
+(11, 185, '2025-07-20', '2025-07-26', 207000.00),
+(12, 1, '2024-11-08', '2024-11-09', 10100.00);
 
 -- --------------------------------------------------------
 
@@ -365,7 +374,6 @@ INSERT INTO `menu` (`idMenu`, `tipo`, `porcentaje`) VALUES
 
 CREATE TABLE `paquete` (
   `idPaquete` int(11) NOT NULL,
-  `idCliente` int(11) NOT NULL,
   `idEstadia` int(11) DEFAULT NULL,
   `idPasaje` int(11) DEFAULT NULL,
   `idMenu` int(11) NOT NULL,
@@ -385,18 +393,15 @@ CREATE TABLE `paquete` (
 -- Volcado de datos para la tabla `paquete`
 --
 
-INSERT INTO `paquete` (`idPaquete`, `idCliente`, `idEstadia`, `idPasaje`, `idMenu`, `origen`, `destino`, `fechaInicio`, `fechaFin`, `temporada`, `cantidadPasajeros`, `medioPago`, `pagado`, `cancelado`, `precioTotal`) VALUES
-(1, 1, 1, 1, 2, 1, 17, '2025-01-02', '2025-01-30', 'temporada_baja', 1, 'Mercado Pago', 1, 0, 550800.00),
-(2, 2, 2, 2, 3, 1, 8, '2025-07-16', '2025-07-23', 'temporada_alta', 1, 'Tarjeta de débito', 1, 0, 202650.00),
-(3, 3, 3, 3, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 75900.00),
-(4, 4, 4, 4, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Mercado Pago', 1, 0, 365404.80),
-(5, 5, 5, 5, 2, 1, 19, '2025-07-19', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 231540.00),
-(6, 6, 6, 6, 2, 1, 20, '2025-03-27', '2025-04-02', 'temporada_media', 1, 'Efectivo', 1, 0, 150552.00),
-(7, 7, 7, 7, 2, 1, 2, '2025-06-19', '2025-06-24', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 37740.00),
-(8, 8, 8, 8, 1, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 14, 'Efectivo', 1, 0, 884940.00),
-(9, 9, 9, 9, 4, 1, 4, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Efectivo', 1, 0, 58000.00),
-(10, 10, 10, 10, 4, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Tarjeta de crédito', 1, 0, 16720.00),
-(11, 11, 11, 11, 2, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Tarjeta de crédito', 1, 0, 12342.00);
+INSERT INTO `paquete` (`idPaquete`, `idEstadia`, `idPasaje`, `idMenu`, `origen`, `destino`, `fechaInicio`, `fechaFin`, `temporada`, `cantidadPasajeros`, `medioPago`, `pagado`, `cancelado`, `precioTotal`) VALUES
+(1, 1, 1, 2, 1, 17, '2025-01-02', '2025-01-30', 'temporada_baja', 1, 'Mercado Pago', 1, 1, 550800.00),
+(2, 2, 2, 3, 1, 8, '2025-07-16', '2025-07-23', 'temporada_alta', 1, 'Tarjeta de débito', 1, 1, 202650.00),
+(3, 3, 3, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 75900.00),
+(4, 4, 4, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Mercado Pago', 1, 0, 365404.80),
+(5, 5, 5, 2, 1, 19, '2025-07-19', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 231540.00),
+(6, 6, 6, 2, 1, 20, '2025-03-27', '2025-04-02', 'temporada_media', 1, 'Efectivo', 1, 0, 150552.00),
+(7, 7, 7, 2, 1, 2, '2025-06-19', '2025-06-24', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 37740.00),
+(8, 8, 8, 2, 1, 18, '2025-03-27', '2025-04-04', 'temporada_media', 1, 'Tarjeta de débito', 1, 0, 254447.16);
 
 -- --------------------------------------------------------
 
@@ -424,10 +429,11 @@ INSERT INTO `pasaje` (`idPasaje`, `asiento`, `idTransporte`, `origen`, `destino`
 (5, 37, 1, 1, 19),
 (6, 19, 1, 1, 20),
 (7, 31, 2, 1, 2),
-(8, 31, 1, 1, 1),
-(9, 5, 2, 1, 4),
-(10, 18, 1, 1, 1),
-(11, 37, 2, 1, 1);
+(8, 7, 2, 1, 18),
+(9, 18, 2, 1, 8),
+(10, 18, 1, 1, 21),
+(11, 1, 1, 1, 19),
+(12, 0, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -469,6 +475,14 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idCliente`);
 
 --
+-- Indices de la tabla `cliente_paquete`
+--
+ALTER TABLE `cliente_paquete`
+  ADD PRIMARY KEY (`idClientePaquete`),
+  ADD KEY `idCliente` (`idCliente`),
+  ADD KEY `idPaquete` (`idPaquete`);
+
+--
 -- Indices de la tabla `destino`
 --
 ALTER TABLE `destino`
@@ -496,8 +510,7 @@ ALTER TABLE `paquete`
   ADD KEY `idPasaje` (`idPasaje`),
   ADD KEY `idMenu` (`idMenu`),
   ADD KEY `origen` (`origen`),
-  ADD KEY `fk_destino_paqt` (`destino`),
-  ADD KEY `idCliente` (`idCliente`);
+  ADD KEY `fk_destino_paqt` (`destino`);
 
 --
 -- Indices de la tabla `pasaje`
@@ -528,19 +541,25 @@ ALTER TABLE `alojamiento`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente_paquete`
+--
+ALTER TABLE `cliente_paquete`
+  MODIFY `idClientePaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `destino`
 --
 ALTER TABLE `destino`
-  MODIFY `idDestino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idDestino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `estadia`
 --
 ALTER TABLE `estadia`
-  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -552,13 +571,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
-  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `transporte`
@@ -577,6 +596,13 @@ ALTER TABLE `alojamiento`
   ADD CONSTRAINT `fk_destino_aloj` FOREIGN KEY (`idDestino`) REFERENCES `destino` (`idDestino`);
 
 --
+-- Filtros para la tabla `cliente_paquete`
+--
+ALTER TABLE `cliente_paquete`
+  ADD CONSTRAINT `cliente_paquete_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
+  ADD CONSTRAINT `cliente_paquete_ibfk_2` FOREIGN KEY (`idPaquete`) REFERENCES `paquete` (`idPaquete`);
+
+--
 -- Filtros para la tabla `estadia`
 --
 ALTER TABLE `estadia`
@@ -588,7 +614,6 @@ ALTER TABLE `estadia`
 ALTER TABLE `paquete`
   ADD CONSTRAINT `fk_destino_paqt` FOREIGN KEY (`destino`) REFERENCES `destino` (`idDestino`),
   ADD CONSTRAINT `fk_estadia_pqt` FOREIGN KEY (`idEstadia`) REFERENCES `estadia` (`idEstadia`),
-  ADD CONSTRAINT `fk_idCliente_pqt` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
   ADD CONSTRAINT `fk_menu_pqt` FOREIGN KEY (`idMenu`) REFERENCES `menu` (`idMenu`),
   ADD CONSTRAINT `fk_origen_pqt` FOREIGN KEY (`origen`) REFERENCES `destino` (`idDestino`),
   ADD CONSTRAINT `fk_pasaje_pqt` FOREIGN KEY (`idPasaje`) REFERENCES `pasaje` (`idPasaje`);
