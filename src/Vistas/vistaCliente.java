@@ -314,7 +314,7 @@ public void guardar(){
         
         medioPago = (String) jcbMedioPago.getSelectedItem();
         
-        Cliente cli = new Cliente(nombre,apellido,dni,correo,telefono);
+        Cliente cli = new Cliente(nombre,apellido,dni,telefono,correo);
         clienteSeleccionado = cli;
         jbResumen.setEnabled(true);
         jbGuardar.setEnabled(false);
