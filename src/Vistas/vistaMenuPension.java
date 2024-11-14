@@ -79,7 +79,8 @@ MenuData menuData = new MenuData();
         tfCosto.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("PRECIO     $");
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("AUMENTO");
 
         jcbtipoMenu.setBackground(new java.awt.Color(255, 255, 255));
         jcbtipoMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -102,6 +103,7 @@ MenuData menuData = new MenuData();
         jlSeleccionar.setIconTextGap(10);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("PENSIÓN");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

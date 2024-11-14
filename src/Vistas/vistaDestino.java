@@ -29,6 +29,7 @@ public static Date fechInicio;
 public static Date fechFin;
 public static String temporada;
 private DestinoData destData = new DestinoData();
+public boolean datosValidos = false;
     /**
      * Creates new form vistaDestino
      */
@@ -220,17 +221,24 @@ private DestinoData destData = new DestinoData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-       if(validarCamposVacios(contenedor)){
-           JOptionPane.showMessageDialog(this, "Debe llenar todos los datos");
-           return;
-       }else{
-        guardar();
+       if (validarCamposVacios(contenedor)) {
+        JOptionPane.showMessageDialog(this, "Debe llenar todos los datos");
+        return;
+    }
 
-       vistaEstadia v = new vistaEstadia();
-       v.setVisible(true);
-       Menu.escritorio.add(v);
-       this.dispose();
-       }
+
+    guardar();
+
+  
+    if (datosValidos) {
+        vistaEstadia v = new vistaEstadia();
+        v.setVisible(true);
+        Menu.escritorio.add(v);
+        this.dispose();
+    }
+           
+       
+       
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
 
@@ -277,31 +285,39 @@ private boolean validarCamposVacios(JPanel jpanel) {
     return false; // No hay campos vacíos
 }
 
-private void guardar(){
-    try{
-     java.util.Date fechainicio = fechaInicio.getDate();
-       java.util.Date fechafin = fechaFin.getDate();
-       if(validarCamposVacios(contenedor)){
-           JOptionPane.showMessageDialog(this, "Debe seleccionar todos los campos");
-           return;
-       }else  if(fechainicio.after(fechafin)){
-           JOptionPane.showMessageDialog(this, "Debe seleccionar fechas válidas.");
-           return;
-       }else{
-       origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
-       destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
-       fechInicio =  fechainicio;
-       fechFin = fechafin;
-       temporada();
-       }
-       
-       
-       origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
-       destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
-    }catch(NullPointerException ex){
-     JOptionPane.showMessageDialog(this, "Error al intentar guardar datos.");
+private void guardar() {
+    try {
+        java.util.Date fechainicio = fechaInicio.getDate();
+        java.util.Date fechafin = fechaFin.getDate();
+         datosValidos = false;
+        if (validarCamposVacios(contenedor)) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar todos los campos");
+           
+            return;
+        }
+        
+        // Validar que la fecha de inicio no sea posterior a la fecha de fin
+        if (fechainicio == null || fechafin == null || fechainicio.after(fechafin)) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha valida");
+         
+            return; 
+        }
+        
+        // Asignar valores si las fechas son correctas
+        origenSeleccionado = (Destino) cbOrigen.getSelectedItem();
+        destinoSeleccionado = (Destino) cbDestino.getSelectedItem();
+        fechInicio = fechainicio;
+        fechFin = fechafin;
+        
+     
+        temporada();
+        datosValidos = true;
+    } catch (NullPointerException ex) {
+        JOptionPane.showMessageDialog(this, "Error al intentar guardar datos.");
+        
     }
 }
+
 
 private void temporada() {
     // Convertimos Date a LocalDate

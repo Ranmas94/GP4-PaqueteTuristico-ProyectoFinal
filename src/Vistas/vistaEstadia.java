@@ -385,6 +385,7 @@ private void cargarComboBoxAlojamiento(){
    
    if(lista.isEmpty()){
        JOptionPane.showMessageDialog(this, "No hay alojamientos disponibles.");
+       
    }else{
    for(Alojamiento alo : lista){ //el 1 se intercambia por getDestino.
        jcbAlojamiento.addItem(alo);
@@ -453,7 +454,7 @@ private void cargarComboBoxAlojamiento(){
      if (validarCamposVacios(contenedor)) {
          JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
          return;
-     } else if (fechInicio.compareTo(fechaCheckIn) > 0 || fechFin.compareTo(fechaCheckOut) > 0 || fechFin.before(fechaCheckOut) || fechaCheckOut.before(fechaCheckIn)) {
+     } else if (fechFin.before(fechaCheckOut) || fechaCheckOut.before(fechaCheckIn)) {
          JOptionPane.showMessageDialog(this, "Ingrese una fecha válida.");
          return;
 

@@ -227,7 +227,7 @@ public static Cliente clienteSeleccionado;
           return;
       }else{
        guardar();
-       JOptionPane.showMessageDialog(this, "Datos personales guardados con éxito.");
+       
       }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -318,11 +318,12 @@ public void guardar(){
         clienteSeleccionado = cli;
         jbResumen.setEnabled(true);
         jbGuardar.setEnabled(false);
+        JOptionPane.showMessageDialog(this, "Datos personales guardados con éxito.");
        }catch(NullPointerException ex){
            JOptionPane.showMessageDialog(this,"Debe llenar todos los campos.");
        }catch(NumberFormatException ex){
            JOptionPane.showMessageDialog(this, "Ingrese datos válidos");
-           limpiarCampos(contenedor);
+          
        }
 }
 }
