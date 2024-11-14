@@ -61,11 +61,11 @@ public class Menu extends javax.swing.JFrame {
         itemDestino = new javax.swing.JMenuItem();
         itemMenu = new javax.swing.JMenuItem();
         itemTransporte = new javax.swing.JMenuItem();
+        itemCancelar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         itemEstadisticaTemporada = new javax.swing.JMenuItem();
         itemEstadisticaMes = new javax.swing.JMenuItem();
         itemPaquetesComprados = new javax.swing.JMenuItem();
-        itemCancelar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -308,6 +308,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(itemTransporte);
 
+        itemCancelar.setText("Cancelar paquete");
+        itemCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCancelarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemCancelar);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Datos");
@@ -335,14 +343,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(itemPaquetesComprados);
-
-        itemCancelar.setText("Cancelar paquete");
-        itemCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemCancelarActionPerformed(evt);
-            }
-        });
-        jMenu2.add(itemCancelar);
 
         jMenuBar1.add(jMenu2);
 
