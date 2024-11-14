@@ -62,7 +62,7 @@ public void guardarPaquete(Paquete paquete) {
         ResultSet rs = ps.getGeneratedKeys();
         if (rs.next()) {
             paquete.setIdPaquete(rs.getInt(1));
-            JOptionPane.showMessageDialog(null, "Paquete guardado con éxito.");
+           
         }
         ps.close();
         rs.close();

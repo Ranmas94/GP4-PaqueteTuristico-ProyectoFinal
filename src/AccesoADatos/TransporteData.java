@@ -38,7 +38,7 @@ public class TransporteData {
                 }
             }
 
-            JOptionPane.showMessageDialog(null, "Transporte agregado con éxito");
+            
         } catch (SQLException ex) {
             System.out.println("Error al agregar el transporte: " + ex.getMessage());
         }

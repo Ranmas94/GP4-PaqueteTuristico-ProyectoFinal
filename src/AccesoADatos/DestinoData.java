@@ -39,7 +39,7 @@ public class DestinoData {
             ResultSet rs = ps.getGeneratedKeys();
             while (rs.next()) {
                 destino.setIdDestino(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Destino guardado con éxito.");
+                
             }
 
             ps.close();

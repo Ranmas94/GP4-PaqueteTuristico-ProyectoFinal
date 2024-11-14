@@ -46,6 +46,7 @@ private boolean modificable = false;
         jbSalir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 102, 102));
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrativo");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

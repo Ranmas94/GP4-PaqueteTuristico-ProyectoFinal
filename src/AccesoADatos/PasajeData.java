@@ -42,7 +42,7 @@ public void agregarPasaje(Pasaje pasaje) {
         ResultSet rs = ps.getGeneratedKeys(); 
             if (rs.next()) {
                 pasaje.setIdPasaje(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Pasaje agregado con éxito");
+                
             }
         
 

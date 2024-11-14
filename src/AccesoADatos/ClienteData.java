@@ -40,7 +40,7 @@ public class ClienteData {
             ResultSet rs = ps.getGeneratedKeys();
             while(rs.next()){
                 cliente.setIdCliente(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Cliente guardado con éxito.");
+                
             }
             
             ps.close();

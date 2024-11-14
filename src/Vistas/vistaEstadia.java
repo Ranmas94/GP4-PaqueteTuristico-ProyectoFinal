@@ -449,19 +449,18 @@ private void cargarComboBoxAlojamiento(){
  private void guardar(){
       Date fechaCheckIn =  CheckIn.getDate();
         Date fechaCheckOut = CheckOut.getDate();
-        
-        
-        if(validarCamposVacios(contenedor) ){
-            JOptionPane.showMessageDialog(this,"Todos los campos deben estar llenos.");
-            return;
-        }else if(fechInicio.after(fechaCheckIn) || fechFin.before(fechaCheckOut)){
-             JOptionPane.showMessageDialog(this,"Ingrese una fecha valida.");
-            return;
   
-}           else{
-                   jbSiguiente.setEnabled(true);
-            JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
-            
+     if (validarCamposVacios(contenedor)) {
+         JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
+         return;
+     } else if (fechInicio.compareTo(fechaCheckIn) > 0 || fechFin.compareTo(fechaCheckOut) > 0 || fechFin.before(fechaCheckOut) || fechaCheckOut.before(fechaCheckIn)) {
+         JOptionPane.showMessageDialog(this, "Ingrese una fecha válida.");
+         return;
+
+     } else {
+         jbSiguiente.setEnabled(true);
+         JOptionPane.showMessageDialog(this, "Datos agregados al paquete.");
+
             Alojamiento aloj = (Alojamiento) jcbAlojamiento.getSelectedItem();
             alojamientoSeleccionado = alData.buscarAlojamientoID(aloj.getIdAlojamiento());
             

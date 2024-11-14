@@ -31,7 +31,7 @@ public class MenuData {
             
             if (rs.next()) {
                 menu.setIdMenu(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Menu guardado");
+               
             }
             
             rs.close();

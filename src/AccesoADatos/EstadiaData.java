@@ -40,7 +40,7 @@ public class EstadiaData {
              ResultSet rs = ps.getGeneratedKeys();
              while (rs.next()) {
                estadia.setIdEstadia(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Estadia guardada con éxito.");
+                
             }
             ps.close();
             rs.close();

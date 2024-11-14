@@ -498,11 +498,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbIndividualSI.setBackground(new java.awt.Color(23, 91, 129));
         jrbIndividualSI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualSI.setText("SI");
-        jrbIndividualSI.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jrbIndividualSIItemStateChanged(evt);
-            }
-        });
         jrbIndividualSI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbIndividualSIActionPerformed(evt);
@@ -512,11 +507,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         jrbIndividualNo.setBackground(new java.awt.Color(23, 91, 129));
         jrbIndividualNo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jrbIndividualNo.setText("NO");
-        jrbIndividualNo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jrbIndividualNoItemStateChanged(evt);
-            }
-        });
         jrbIndividualNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbIndividualNoActionPerformed(evt);
@@ -630,7 +620,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contenedorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +633,8 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
                                 .addComponent(tfCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(panelCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contenedorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 1016, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -728,31 +718,40 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
-        if(validarCamposVacios(contenedorInfo)){
-            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos.");
-            return;
-        }else{
-            confirmarCambios();
-            JOptionPane.showMessageDialog(this, "Se confirmaron los cambios en el paquete.");
-            jbConfirmar.setEnabled(false);
-            bloquearCampos(contenedorInfo);
-            
-        }
-       jrbIndividualSI.setEnabled(true);
-       jrbIndividualNo.setEnabled(true);
-        paqueteModificado = true;
-        jbConfirmar.setEnabled(false);
       
-       
-        actualizarCosto();
+    try {
+        java.util.Date inicio = jdCheckin.getDate();
+        java.util.Date fin = jdCheckout.getDate();
+
+        if (inicio == null || fin == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione fechas válidas.");
+            return;
+        }
+
+        double total = Double.parseDouble(tfCostoEstadia.getText());
+        alojamientoSeleccionado = alData.buscarAlojamientoNombre(String.valueOf(jcbEstadia.getSelectedItem()));
+        estadiaSeleccionada = new Estadia(alojamientoSeleccionado, inicio, fin, total);
+
+        String tipoMenu = (String) jcbMenu.getSelectedItem();
+        menuSeleccionado = menuData.buscarMenuPorTipo(tipoMenu);
+
+        String tipoTransporte = (String) jcbTransporte.getSelectedItem();
+        transporteSeleccionado = tranData.obtenerTransportePorTipo(tipoTransporte);
+
+        int asiento = pasajeSeleccionado.getAsiento();
+        pasajeSeleccionado = new Pasaje(pasajeSeleccionado.getIdPasaje(), transporteSeleccionado, origenSeleccionado, destinoSeleccionado, asiento);
+
+    } catch (NullPointerException ex) {
+        JOptionPane.showMessageDialog(this, "Error. Hay datos en NULL. " + ex.getMessage());
+    } catch (ClassCastException | NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar datos. " + ex.getMessage());
+    }
+        actualizarCosto(); 
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jbConfirmarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarPaqueteActionPerformed
        crearPaquete();
-      actualizarCosto();
-        
-        
-       
+      actualizarCosto(); 
     }//GEN-LAST:event_jbConfirmarPaqueteActionPerformed
 
     private void jsCantMayoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsCantMayoresStateChanged
@@ -768,16 +767,9 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         actualizarCosto();
     }//GEN-LAST:event_jsMenores2StateChanged
 
-    private void jrbIndividualSIItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualSIItemStateChanged
-        actualizarCosto();
-    }//GEN-LAST:event_jrbIndividualSIItemStateChanged
-
-    private void jrbIndividualNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbIndividualNoItemStateChanged
-        actualizarCosto();      
-    }//GEN-LAST:event_jrbIndividualNoItemStateChanged
-
     private void jbDescartarPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarPaquete1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Paquete descartado.");
+        dispose();
     }//GEN-LAST:event_jbDescartarPaquete1ActionPerformed
 
     private void jdCheckinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jdCheckinKeyReleased
