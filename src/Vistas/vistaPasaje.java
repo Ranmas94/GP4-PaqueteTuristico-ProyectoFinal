@@ -319,15 +319,18 @@ private void cargarComboBox(){
 
  
  private void cargarDatos(){
+     String tipo = (String) comboTipo.getSelectedItem();
+     if(tipo.equalsIgnoreCase("ninguno")){
+         txtAsiento.setText("0");
+         
+     }else{
       Random random = new Random();
         txtAsiento.setText(String.valueOf(random.nextInt(40) + 1)); // Genera un número entre 1 y 40);
         txtOrigen.setText(origenSeleccionado.toString());
         txtDestino.setText(destinoSeleccionado.toString());
-        
+     }  
  
 }
- 
- 
  
  
 private void actualizarCosto(String tipo){

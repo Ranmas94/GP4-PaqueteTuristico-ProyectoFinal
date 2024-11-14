@@ -74,10 +74,6 @@ public class vistaPaquetePersonalizado extends javax.swing.JInternalFrame {
         ButtonGroup grupoIndividual = new ButtonGroup();
         grupoIndividual.add(jrbIndividualSI);
         grupoIndividual.add(jrbIndividualNo);
-        
-        
-  
-        
         bloquearCampos(contenedorInfo);
        jrbIndividualSI.setEnabled(true);
        jrbIndividualNo.setEnabled(true);
