@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
+-- Tiempo de generación: 14-11-2024 a las 19:37:20
+=======
 -- Tiempo de generación: 14-11-2024 a las 14:21:05
+>>>>>>> 28e6d174af352d98874c1b5a5d8e52315489c39e
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -253,6 +257,26 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`, `documento`, `correo`, `telefono`) VALUES
+<<<<<<< HEAD
+(1, 'Juan ', 'Martinez', 13049699, 'hernandezchrist@hotmail.com', '2777121212'),
+(2, 'Pedro', 'Sanchez', 43840001, 'Sanches11@yahoo.com', '2665101021'),
+(3, 'José', 'Rodriguez', 40901232, 'josesitoR@hotmail.com', '2664001123'),
+(4, 'Gabriela ', 'Hernandez', 29013341, 'Gabii111@gmail.com', '2665443292'),
+(5, 'Ana', 'Perez', 21652212, 'Anita1@hotmail.com', '2665218312'),
+(6, 'Juan', 'Ramirez', 33988900, 'Juancito@gmail.com', '2665981211'),
+(7, 'Pamela', 'Torres', 45326363, 'PameTorres11@yahoo.com', '2664119292'),
+(8, 'Rocío', 'Cuevas', 1230012, 'Rocio00@gmail.com', '266500123'),
+(9, 'Marisol', 'Rawson', 43434300, 'Mari@gmail.com', '2665776611'),
+(10, 'Pedro', 'Matilla', 43840091, 'matilla@gmail.com', '2663737321'),
+(11, 'Lisa', 'Simpson', 43840092, 'lisa@gmail.com', '2665121212'),
+(12, 'Aldo', 'Geovanni', 98781232, 'Geo0101@yahoo.com', '2665717100'),
+(13, 'Maximiliano', 'Lopez', 20435423, 'maxiL@gmail.com', '2665121912'),
+(14, 'Ariel', 'Marquez', 33209121, 'Ariel11@gmail.com', '2664832193'),
+(15, 'Mariela', 'Torres', 29897712, 'MariTo1@yahoo.com', '2666711211'),
+(16, 'Penelope', 'Cuesta', 43999112, 'panpan@gmail.com', '2661991122'),
+(17, 'Facundo', 'Fuentes', 43990099, '00FuentesD@hotmail.com', '2661723133'),
+(18, 'Pedrito', 'Sanchez ', 12333312, 'pedro@gmail.com', '2667121211');
+=======
 (1, 'Juan ', 'Martinez', 13049699, '2664747474', 'hernandezchrist'),
 (2, 'Pedro', 'Sanchez', 43840001, '2665101021', ' kristin73@brow'),
 (3, 'José', 'Rodriguez', 40901232, '2664001123', 'heathersmith@bi'),
@@ -271,6 +295,7 @@ INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`, `documento`, `correo`,
 (16, 'lolo', 'lolo', 1, 'lolo', '1'),
 (17, 'lolo', 'lolo', 1, '1', 'lolo'),
 (18, 'Pedrito', 'Sanchez ', 123333, '74783', 'pedro@gmail.com');
+>>>>>>> 28e6d174af352d98874c1b5a5d8e52315489c39e
 
 -- --------------------------------------------------------
 
