@@ -48,6 +48,8 @@ TransporteData transData = new TransporteData();
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jPanel1.setBackground(new java.awt.Color(66, 139, 212));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

@@ -46,7 +46,6 @@ private DestinoData destData = new DestinoData();
         tfLugar = new javax.swing.JTextField();
         jbModificar = new javax.swing.JButton();
         jAgregar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -139,11 +138,6 @@ private DestinoData destData = new DestinoData();
             }
         });
 
-        jbEliminar.setBackground(new java.awt.Color(204, 204, 204));
-        jbEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jbEliminar.setForeground(new java.awt.Color(0, 0, 0));
-        jbEliminar.setText("Eliminar");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -161,12 +155,10 @@ private DestinoData destData = new DestinoData();
                         .addContainerGap()
                         .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
+                        .addGap(157, 157, 157)
                         .addComponent(jbModificar)
-                        .addGap(48, 48, 48)
-                        .addComponent(jAgregar)
                         .addGap(41, 41, 41)
-                        .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jAgregar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(jLabel1)))
@@ -190,10 +182,9 @@ private DestinoData destData = new DestinoData();
                         .addGap(15, 15, 15)))
                 .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -252,7 +243,6 @@ private DestinoData destData = new DestinoData();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JTextField tfCiudad;
     private javax.swing.JTextField tfID;

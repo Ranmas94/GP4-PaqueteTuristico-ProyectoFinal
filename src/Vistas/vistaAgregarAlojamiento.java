@@ -471,6 +471,7 @@ private void mostrarDatos(){
         limpiarCampos(contenedor);
     }catch(NumberFormatException ex){
        JOptionPane.showMessageDialog(this, "LLene el campo ID.");
+       jbBaja.setEnabled(false);
    }
 }
 
