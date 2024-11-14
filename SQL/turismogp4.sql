@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2024 a las 14:21:05
+-- Tiempo de generación: 14-11-2024 a las 20:08:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -47,10 +47,10 @@ CREATE TABLE `alojamiento` (
 --
 
 INSERT INTO `alojamiento` (`idAlojamiento`, `idDestino`, `nombre`, `direccion`, `capacidad`, `nroAmbientes`, `cama`, `banios`, `precioPorNoche`, `vigente`) VALUES
-(1, 1, 'Hotel Carsson', 'Maipú y Viamonte 541', 5, 4, 4, 2, 10100.00, 1),
+(1, 1, 'Hotel Carsson', 'Maipú y Viamonte 5400', 5, 4, 4, 2, 10100.00, 1),
 (2, 1, 'Hostal Circus', 'Carlos Calvo y Chacabuco 212', 5, 4, 2, 3, 22000.00, 1),
 (3, 1, 'Hotel Grand King', 'Lavalle y Florida 8891', 2, 1, 1, 1, 12000.00, 1),
-(4, 2, 'La Boca B&B.Posada', 'Falucho 999', 3, 3, 3, 2, 8000.00, 1),
+(4, 2, 'La Boca B&B.Posada', 'Falucho 999', 10, 3, 3, 2, 8000.00, 1),
 (5, 2, 'Hostal Ledezma', 'Caseros y Vicente 100', 4, 2, 3, 2, 10500.00, 1),
 (6, 2, 'Hostal Babel', '25 de Mayo y Avellaneda 1211', 2, 1, 2, 1, 11900.00, 1),
 (7, 2, 'Hotel Juan Manuel de Rosas', 'San Martin 1321', 4, 4, 4, 2, 20000.00, 1),
@@ -91,7 +91,7 @@ INSERT INTO `alojamiento` (`idAlojamiento`, `idDestino`, `nombre`, `direccion`, 
 (42, 13, 'Cabañas Sol y Sombra', 'Camino de las Cabañas 50', 3, 2, 2, 1, 24000.00, 1),
 (43, 14, 'Hostal El Nido', 'Calle del Nido 18', 5, 3, 4, 2, 14000.00, 1),
 (44, 14, 'Cabañas Rincón del Bosque', 'Sendero del Bosque 27', 1, 1, 1, 1, 21000.00, 1),
-(45, 14, 'Hotel Estrella Brillante', 'Avenida de las Estrellas 33', 5, 4, 5, 2, 26000.00, 1),
+(45, 14, 'Hotel Estrella Brillante', 'Avenida de las Estrellas 33', 5, 4, 5, 2, 26000.00, 0),
 (46, 15, 'Posada La Tranquilidad', 'Calle de la Paz 72', 2, 1, 1, 1, 19000.00, 1),
 (47, 15, 'Hostal Viaje Soñado', 'Calle de los Sueños 29', 2, 2, 2, 1, 15500.00, 1),
 (48, 15, 'Cabañas Refugio del Sol', 'Camino del Sol 11', 5, 4, 5, 2, 23000.00, 1),
@@ -253,24 +253,46 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idCliente`, `nombre`, `apellido`, `documento`, `correo`, `telefono`) VALUES
-(1, 'Juan ', 'Martinez', 13049699, '2664747474', 'hernandezchrist'),
-(2, 'Pedro', 'Sanchez', 43840001, '2665101021', ' kristin73@brow'),
-(3, 'José', 'Rodriguez', 40901232, '2664001123', 'heathersmith@bi'),
-(4, 'Gabriela ', 'Hernandez', 29013341, '2665443292', 'Gabii11@gmail.c'),
-(5, 'Ana', 'Perez', 21652212, '2665218312', 'Anita1@hotmail.'),
-(6, 'Juan', 'Ramirez', 33988900, '2665981211', 'juan0033@gmail.'),
-(7, 'Pamela', 'Torres', 45326363, '2664119292', 'pamelaT@hotmail'),
-(8, 'lolo', 'lolo', 123, '123', 'lolo'),
-(9, 'lourdes', 'escudero', 434343, '1234', 'lourdes@gmail.c'),
-(10, 'lolo', 'lolo', 1, '12', 'lol'),
-(11, 'lourdes', 'escudero', 1, '1', 'lourdes'),
-(12, 'lourdes', 'escudero', 1, 'l', 'l'),
-(13, 'lourdes', 'escudero', 1, '1', 'a'),
-(14, 'lourdes', 'escudero', 123, 'lor', '1'),
-(15, 'lolo', 'lolo', 2, '2', 'lol'),
-(16, 'lolo', 'lolo', 1, 'lolo', '1'),
-(17, 'lolo', 'lolo', 1, '1', 'lolo'),
-(18, 'Pedrito', 'Sanchez ', 123333, '74783', 'pedro@gmail.com');
+(1, 'Juan ', 'Martinez', 13049699, 'hernandezchrist@hotmail.com', '2777121212'),
+(2, 'Pedro', 'Sanchez', 43840001, 'Sanches11@yahoo.com', '2665101021'),
+(3, 'José', 'Rodriguez', 40901232, 'josesitoR@hotmail.com', '2664001123'),
+(4, 'Gabriela ', 'Hernandez', 29013341, 'Gabii111@gmail.com', '2665443292'),
+(5, 'Ana', 'Perez', 21652212, 'Anita1@hotmail.com', '2665218312'),
+(6, 'Juan', 'Ramirez', 33988900, 'Juancito@gmail.com', '2665981211'),
+(7, 'Pamela', 'Torres', 45326363, 'PameTorres11@yahoo.com', '2664119292'),
+(8, 'Rocío', 'Cuevas', 1230012, 'Rocio00@gmail.com', '266500123'),
+(9, 'Marisol', 'Rawson', 43434300, 'Mari@gmail.com', '2665776611'),
+(10, 'Pedro', 'Matilla', 43840091, 'matilla@gmail.com', '2663737321'),
+(11, 'Lisa', 'Simpson', 43840092, 'lisa@gmail.com', '2665121212'),
+(12, 'Aldo', 'Geovanni', 98781232, 'Geo0101@yahoo.com', '2665717100'),
+(13, 'Maximiliano', 'Lopez', 20435423, 'maxiL@gmail.com', '2665121912'),
+(14, 'Ariel', 'Marquez', 33209121, 'Ariel11@gmail.com', '2664832193'),
+(15, 'Mariela', 'Torres', 29897712, 'MariTo1@yahoo.com', '2666711211'),
+(16, 'Penelope', 'Cuesta', 43999112, 'panpan@gmail.com', '2661991122'),
+(17, 'Facundo', 'Fuentes', 43990099, '00FuentesD@hotmail.com', '2661723133'),
+(18, 'Pedrito', 'Sanchez ', 12333312, 'pedro@gmail.com', '2667121211'),
+(19, 'Leandro', 'Alem', 43840012, 'Leando@gmail.com', '2664747488'),
+(20, 'Lucia', 'Escobar', 33761191, 'lucia11@gmail.com', '2664747411'),
+(21, 'Esteban', 'Reyes', 43778211, 'Reyes00@hotmail.com', '2664747000'),
+(22, 'Roque', 'Robles', 23445234, 'mar@yahoo.com', '2664747949'),
+(23, 'Rosa', 'Leiva', 20209911, 'Rosita00@hotmail.com', '2664009212'),
+(24, 'Pedro', 'Pastor', 44332233, 'pastor00@yahoo.com', '2664747321'),
+(25, 'Martin', 'Mendez', 43991233, 'esculapio@yahoo.com', '2663000012'),
+(26, 'Andres', 'Cabrales', 45112219, 'Cabrales@hotmail.com', '266743981'),
+(27, 'Mariela', 'Esculapio', 45332111, 'correoFalso@gmail.com', '2664773391'),
+(28, 'Lupita', 'Mendez', 33871200, 'lulu@yahoo,com', '2667888888'),
+(29, 'Ester', 'Esposito', 45009232, 'ester66@gmail,com', '2664730211'),
+(30, 'Cecilia', 'Oros', 4300921, 'ceciO@gmail.com', '11223311'),
+(31, 'Pedro', 'Pensilvania', 99112212, 'pedrito00@yahoo,com', '2664737322'),
+(32, 'Jesus', 'Del valle', 2663727272, 'jesus@gmail,com', '2664747023'),
+(33, 'Maximiliano', 'Lorenzo', 45457722, 'max@gmail.com', '2661838399'),
+(34, 'Cristian', 'Lucero', 26457321, 'cristianCris@gmail.com', '266592112'),
+(35, 'Lourdes', 'Perez', 43438821, 'lolo@gmail.com', '2664212200'),
+(36, 'lucila', 'lopez', 232323, 'lolo@gmail.com', '266473732'),
+(37, 'Andrea', 'Suarez', 43730902, 'andrea@gmail.com', '2664737373'),
+(38, 'Ricardo', 'Flores', 4364772, 'Ricardo@gmail.com', '2664737011'),
+(39, 'Maria', 'Lucero', 43840092, 'lulu@hotmail.com', '2667323211'),
+(40, 'Leandro', 'Mano', 4343882, 'manman@hotmail.com', '32901222');
 
 -- --------------------------------------------------------
 
@@ -299,7 +321,29 @@ INSERT INTO `cliente_paquete` (`idClientePaquete`, `idCliente`, `idPaquete`) VAL
 (13, 15, 16),
 (14, 16, 17),
 (15, 17, 18),
-(16, 18, 19);
+(16, 18, 19),
+(17, 19, 20),
+(18, 20, 21),
+(19, 21, 22),
+(20, 22, 23),
+(21, 23, 24),
+(22, 24, 25),
+(23, 25, 26),
+(24, 26, 27),
+(25, 27, 28),
+(26, 28, 29),
+(27, 29, 30),
+(28, 30, 31),
+(29, 31, 32),
+(30, 32, 33),
+(31, 33, 34),
+(32, 34, 35),
+(33, 35, 36),
+(34, 36, 37),
+(35, 37, 38),
+(36, 38, 39),
+(37, 39, 40),
+(38, 40, 41);
 
 -- --------------------------------------------------------
 
@@ -381,7 +425,30 @@ INSERT INTO `estadia` (`idEstadia`, `idAlojamiento`, `fechaCheckIn`, `fechaCheck
 (20, 1, '2024-08-09', '2024-08-10', 10100.00),
 (21, 186, '2025-03-28', '2025-04-01', 127600.00),
 (22, 1, '2024-11-02', '2024-11-03', 10100.00),
-(23, 25, '2022-11-06', '2022-11-14', 248000.00);
+(23, 25, '2022-11-06', '2022-11-14', 248000.00),
+(24, 120, '2024-08-02', '2024-08-17', 480000.00),
+(25, 154, '2024-10-02', '2024-10-09', 154000.00),
+(26, 184, '2024-10-10', '2024-10-18', 338240.00),
+(27, 22, '2024-09-12', '2024-09-18', 138000.00),
+(28, 34, '2024-10-16', '2024-10-24', 160000.00),
+(29, 46, '2024-09-03', '2024-09-11', 152000.00),
+(30, 60, '2024-11-08', '2024-11-20', 348000.00),
+(31, 81, '2024-08-02', '2024-08-11', 189000.00),
+(32, 16, '2024-08-02', '2024-08-08', 126000.00),
+(33, 181, '2025-01-03', '2025-01-29', 520000.00),
+(34, 99, '2025-07-24', '2025-07-26', 56000.00),
+(35, 185, '2025-07-20', '2025-07-26', 207000.00),
+(36, 186, '2025-03-28', '2025-04-01', 127600.00),
+(37, 99, '2025-07-24', '2025-07-26', 56000.00),
+(38, 99, '2025-07-24', '2025-07-26', 56000.00),
+(39, 184, '2025-01-06', '2025-01-14', 338240.00),
+(40, 184, '2025-01-06', '2025-01-14', 338240.00),
+(41, 4, '2025-06-20', '2025-06-23', 24000.00),
+(42, 4, '2025-06-20', '2025-06-23', 24000.00),
+(43, 183, '2025-03-28', '2025-04-03', 184200.00),
+(44, 99, '2025-07-24', '2025-07-26', 56000.00),
+(45, 183, '2025-03-28', '2025-04-03', 184200.00),
+(46, 185, '2025-07-20', '2025-07-26', 207000.00);
 
 -- --------------------------------------------------------
 
@@ -436,7 +503,7 @@ INSERT INTO `paquete` (`idPaquete`, `idEstadia`, `idPasaje`, `idMenu`, `origen`,
 (1, 1, 1, 2, 1, 17, '2025-01-02', '2025-01-30', 'temporada_baja', 1, 'Mercado Pago', 1, 1, 550800.00),
 (2, 2, 2, 3, 1, 8, '2025-07-16', '2025-07-23', 'temporada_alta', 1, 'Tarjeta de débito', 1, 1, 202650.00),
 (3, 3, 3, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 1, 75900.00),
-(4, 4, 4, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Mercado Pago', 1, 0, 365404.80),
+(4, 4, 4, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Mercado Pago', 1, 1, 365404.80),
 (5, 5, 5, 2, 1, 19, '2025-07-19', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de crédito', 1, 0, 231540.00),
 (6, 6, 6, 2, 1, 20, '2025-03-27', '2025-04-02', 'temporada_media', 1, 'Efectivo', 1, 0, 150552.00),
 (7, 7, 7, 2, 1, 2, '2025-06-19', '2025-06-24', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 37740.00),
@@ -451,7 +518,29 @@ INSERT INTO `paquete` (`idPaquete`, `idEstadia`, `idPasaje`, `idMenu`, `origen`,
 (16, 20, 20, 1, 1, 1, '2024-08-08', '2024-08-10', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 11110.00),
 (17, 21, 21, 2, 1, 20, '2025-03-27', '2025-04-02', 'temporada_media', 1, 'Tarjeta de débito', 1, 0, 173134.80),
 (18, 22, 22, 1, 1, 1, '2024-11-01', '2024-11-30', 'temporada_media', 1, 'Tarjeta de débito', 1, 0, 12776.50),
-(19, 23, 23, 2, 1, 7, '2024-09-01', '2024-09-27', 'temporada_baja', 8, 'Tarjeta de débito', 1, 0, 3230295.12);
+(19, 23, 23, 2, 1, 7, '2024-09-01', '2024-09-27', 'temporada_baja', 8, 'Tarjeta de débito', 1, 0, 3230295.12),
+(20, 24, 24, 3, 1, 4, '2024-08-01', '2024-08-18', 'temporada_baja', 8, 'Tarjeta de débito', 1, 0, 7158375.00),
+(21, 25, 25, 2, 17, 6, '2024-10-01', '2024-10-10', 'temporada_media', 1, 'Mercado Pago', 1, 0, 226757.32),
+(22, 26, 26, 1, 15, 21, '2024-10-09', '2024-10-19', 'temporada_media', 5, 'Tarjeta de crédito', 1, 0, 3059739.45),
+(23, 27, 27, 2, 5, 5, '2024-09-11', '2024-09-19', 'temporada_baja', 3, 'Tarjeta de débito', 1, 0, 451227.60),
+(24, 28, 28, 2, 5, 10, '2024-10-15', '2024-10-25', 'temporada_media', 1, 'Tarjeta de débito', 1, 0, 225454.12),
+(25, 29, 29, 2, 6, 15, '2024-09-02', '2024-09-12', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 186981.30),
+(26, 30, 30, 3, 13, 8, '2024-11-07', '2024-11-21', 'temporada_media', 7, 'Tarjeta de crédito', 1, 0, 5166607.53),
+(27, 31, 31, 3, 5, 13, '2024-08-01', '2024-08-12', 'temporada_baja', 1, 'Tarjeta de crédito', 1, 0, 229810.35),
+(28, 32, 32, 1, 14, 4, '2024-08-01', '2024-08-10', 'temporada_baja', 6, 'Tarjeta de débito', 1, 0, 812040.00),
+(29, 33, 33, 2, 1, 17, '2025-01-02', '2025-01-30', 'temporada_baja', 8, 'Tarjeta de débito', 1, 0, 4406400.00),
+(30, 34, 34, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de débito', 1, 0, 98670.00),
+(31, 35, 35, 2, 1, 19, '2025-07-19', '2025-07-27', 'temporada_alta', 7, 'Efectivo', 1, 0, 2107014.00),
+(32, 36, 36, 2, 1, 20, '2025-03-27', '2025-04-02', 'temporada_media', 1, 'Tarjeta de débito', 1, 0, 173134.80),
+(33, 37, 37, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 8, 'Tarjeta de débito', 1, 0, 789360.00),
+(34, 38, 38, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 3, 'Efectivo', 1, 0, 296010.00),
+(35, 39, 39, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Efectivo', 1, 0, 365404.80),
+(36, 40, 40, 2, 1, 21, '2025-01-05', '2025-01-15', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 365404.80),
+(37, 42, 42, 2, 1, 2, '2025-06-19', '2025-06-24', 'temporada_baja', 1, 'Tarjeta de débito', 1, 0, 37740.00),
+(38, 43, 43, 2, 1, 18, '2025-03-27', '2025-04-04', 'temporada_media', 5, 'Tarjeta de débito', 1, 0, 1463071.17),
+(39, 44, 44, 4, 1, 15, '2025-07-23', '2025-07-27', 'temporada_alta', 1, 'Tarjeta de débito', 1, 0, 98670.00),
+(40, 45, 45, 2, 1, 18, '2025-03-27', '2025-04-04', 'temporada_media', 1, 'Tarjeta de débito', 1, 0, 292614.23),
+(41, 46, 46, 2, 1, 19, '2025-07-19', '2025-07-27', 'temporada_alta', 10, 'Tarjeta de débito', 1, 0, 2558517.00);
 
 -- --------------------------------------------------------
 
@@ -494,7 +583,30 @@ INSERT INTO `pasaje` (`idPasaje`, `asiento`, `idTransporte`, `origen`, `destino`
 (20, 0, 4, 1, 1),
 (21, 17, 1, 1, 20),
 (22, 0, 4, 1, 1),
-(23, 19, 1, 1, 7);
+(23, 19, 1, 1, 7),
+(24, 25, 1, 1, 4),
+(25, 8, 1, 17, 6),
+(26, 35, 2, 15, 21),
+(27, 14, 3, 5, 5),
+(28, 0, 2, 5, 10),
+(29, 16, 2, 6, 15),
+(30, 40, 3, 13, 8),
+(31, 15, 3, 5, 13),
+(32, 22, 3, 14, 4),
+(33, 5, 1, 1, 17),
+(34, 35, 2, 1, 15),
+(35, 10, 1, 1, 19),
+(36, 34, 1, 1, 20),
+(37, 36, 2, 1, 15),
+(38, 21, 2, 1, 15),
+(39, 22, 1, 1, 21),
+(40, 2, 1, 1, 21),
+(41, 1, 2, 1, 2),
+(42, 17, 2, 1, 2),
+(43, 27, 2, 1, 18),
+(44, 21, 2, 1, 15),
+(45, 14, 2, 1, 18),
+(46, 28, 1, 1, 19);
 
 -- --------------------------------------------------------
 
@@ -513,7 +625,7 @@ CREATE TABLE `transporte` (
 --
 
 INSERT INTO `transporte` (`idTransporte`, `tipo`, `costo`) VALUES
-(1, 'Avión', 20000.00),
+(1, 'Avión', 40000.00),
 (2, 'Colectivo', 13000.00),
 (3, 'Compartido', 8000.00),
 (4, 'Ninguno', 0.00);
@@ -602,13 +714,13 @@ ALTER TABLE `alojamiento`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente_paquete`
 --
 ALTER TABLE `cliente_paquete`
-  MODIFY `idClientePaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idClientePaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `destino`
@@ -620,7 +732,7 @@ ALTER TABLE `destino`
 -- AUTO_INCREMENT de la tabla `estadia`
 --
 ALTER TABLE `estadia`
-  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idEstadia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -632,13 +744,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
-  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `transporte`
